@@ -19,6 +19,7 @@ const UserSchema = new Schema({
   },
   profilepic: {
     type: String,
+    default: `./images/default.jpg`
   },
   country: {
     type: String,

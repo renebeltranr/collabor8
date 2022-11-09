@@ -1,8 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const db = require('./models/index');
-const router = require('./router/user.router');
-const session = require('express-session');
+const express = require("express");
+const cors = require("cors");
+const db = require("./models/index");
+const userRouter = require("./router/user.router");
+const collabRouter = require("./router/collab.router");
+const session = require("express-session");
 
 const PORT = 3001;
 const app = express();
@@ -23,13 +24,15 @@ const sid = {
   resave: false,
   cookie: {
     httpOnly: false,
-    secure: false
-  }
+    secure: false,
+  },
 };
 
 app.use(session(sid));
 
-app.use(router);
+app.use(userRouter);
+app.use('/collab', collabRouter);
+
 app.get('*', (req, res) => {
   res.status(404).send('404 not found');
 });

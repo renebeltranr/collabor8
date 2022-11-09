@@ -16,14 +16,85 @@ code {
 }
 
 .Navbar {
-  border:solid;
-  border-color:red;
+  border: solid;
+  border-color: red;
   height: 10vh;
-  display:flex;
+  display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 1em;
 }
 
-.mainTitle{
-  border:solid;
-  border-color:red; 
+.mainTitle {
+  border: solid;
+  border-color: red;
+}
+
+.sessionButtons {
+  border: solid;
+  border-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  border: solid;
+  border-color: red;
+  text-decoration: none;
+  color: black;
+  margin-left: 0.5em;
+}
+
+.dashboard {
+  border: solid;
+  border-color: red;
+  height: 90vh;
+}
+
+.default-btn {
+  color: black;
+}
+
+.home,.login,.logout,.profile,.register{
+  display:flex;
+  justify-content: center;
+  border: solid;
+  border-color: red;
+  padding: 2em;
+  height: 80vh;
+}
+
+.home{
+  flex-direction: column;
+  justify-content:start;
+}
+
+.myprofile{
+  border: solid;
+  border-color: red;
+  width:30vw;
+  padding:0.5em;
+}
+
+.mycollabs{
+  border: solid;
+  border-color: red;
+  width:70vw;
+  padding:0.5em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin:0;
+  padding:0.5em;
+}
+
+.collab{
+  border: solid;
+  border-color: red;
+}
+
+.collabsList{
+  border: solid;
+  border-color: red;
 }

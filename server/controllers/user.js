@@ -27,8 +27,8 @@ const create = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
+    const { username, password } = req.body;
+    const user = await User.findOne({ username: username });
     const validatedPass = await bcrypt.compare(password, user.password);
     if (!validatedPass) throw new Error();
     req.session.uid = user._id;
@@ -42,8 +42,9 @@ const login = async (req, res) => {
 
 const profile = async (req, res) => {
   try {
-    const { _id, firstName, lastName } = req.user;
-    const user = { _id, firstName, lastName };
+    const { _id, username, country, bio } = req.user;
+    console.log(bio)
+    const user = { _id, username, country, bio };
     res.status(200).send(user);
   } catch {
     res.status(404).send({ error, message: 'User not found' });
