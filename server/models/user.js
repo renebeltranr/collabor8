@@ -30,7 +30,7 @@ const UserSchema = new Schema({
     default: []
   },
   owncollabs: {
-    type: Array,
+    type: [{ type: Schema.Types.ObjectId, ref: 'Collab' }],
     default: []
   },
   othercollabs: {

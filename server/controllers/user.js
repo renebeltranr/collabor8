@@ -15,7 +15,6 @@ const create = async (req, res) => {
       ...req.body,
       password: hash,
     });
-    console.log(newUser);
     const user = await newUser.save();
     req.session.uid = user._id;
     res.status(201).send(user);
@@ -43,7 +42,6 @@ const login = async (req, res) => {
 const profile = async (req, res) => {
   try {
     const { _id, username, country, bio } = req.user;
-    console.log(bio)
     const user = { _id, username, country, bio };
     res.status(200).send(user);
   } catch {

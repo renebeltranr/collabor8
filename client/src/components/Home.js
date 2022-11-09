@@ -28,7 +28,7 @@ function Home(){
           {state.map((el) => {
             return (
               <Collab
-                owner={el.owner}
+                owner={el.owner.username}
                 name={el.name}
                 tracks={el.tracks}
               />

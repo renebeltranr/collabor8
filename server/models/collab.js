@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const CollabSchema = new Schema({ 
   owner: {
-    type: String,
+    type: Schema.Types.ObjectId, ref: 'User',
     required: true,
   },
   name: {
