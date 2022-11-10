@@ -3,9 +3,11 @@ const User = require('./../models/user');
 
 const create = async (req, res) => {
   try {
+    console.log(req.body)
     const newCollab = new Collab({
       owner: req.session.uid,
-      name: req.body.name,
+      name: req.body.name.name,
+      tracks: req.body.name.tracks
     });
     const cb = await newCollab.save();
     console.log("CB: ", cb)
@@ -29,4 +31,17 @@ const getAll = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll };
+const getUserCollabs = async (req, res) => {
+  try {
+    const uid = req.session.uid;
+    console.log(uid)
+    const cb = await Collab.find({owner: uid});
+    console.log(cb)
+    res.status(200).send(cb);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not user Collabs' });
+  }
+};
+
+module.exports = { create, getAll, getUserCollabs };

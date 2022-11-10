@@ -11,7 +11,7 @@ function Logout () {
     if (ctx.isAuthenticated) {
       apiService.logout();
       ctx.setIsAuthenticated(false);
-      navigate('/')
+      navigate('/');
     } else console.log("User already logged out")
   };
 
@@ -20,7 +20,9 @@ function Logout () {
     <div className='logout'>
       <h2>Are you sure you want to log out?</h2>
       <Link to="/">
-        <button className="default-btn">No</button>
+        <button className="default-btn">
+        No
+        </button>
       </Link>
       <button className="default-btn" onClick={() => handleClick()}>
         Yes

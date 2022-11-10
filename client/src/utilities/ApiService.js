@@ -72,4 +72,15 @@ apiService.newCollab = (cb) => {
     .catch((err) => console.log(err));
 };
 
+apiService.getUserCollabs = () => {
+  return fetch(`${URL}/collab/getUserCollabs`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 export default apiService;

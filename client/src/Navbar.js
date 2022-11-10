@@ -14,13 +14,21 @@ function Navbar() {
       <div className="sessionButtons">
         {ctx.isAuthenticated ? (
           <>
-            <Link to="/profile">Profile</Link>
-            <Link to="/logout">Logout</Link>
+            <Link to="/profile">
+            <button className="default-btn">Profile</button>
+            </Link>
+            <Link to="/logout">
+            <button className="default-btn">Logout</button>
+            </Link>
           </>
         ) : (
           <>
-            <Link to="/register">Register</Link>
-            <Link to="/login">Login</Link>
+            <Link to="/register">
+            <button className="default-btn">Register</button>
+            </Link>
+            <Link to="/login">
+            <button className="default-btn">Login</button>
+            </Link>
           </>
         )}
       </div>

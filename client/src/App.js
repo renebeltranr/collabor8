@@ -15,7 +15,6 @@ function App() {
   useEffect(() => {
     const getProfile = async () => {
       const userInfo = await apiService.profile();
-      console.log("USERINFO:", userInfo)
       if (userInfo !== undefined) {
         setIsAuthenticated(true)
       }
@@ -27,7 +26,7 @@ function App() {
     isAuthenticated: isAuthenticated,
     setIsAuthenticated: setIsAuthenticated
   }
-  
+
   return (
     <div className="App">
       <Router>
