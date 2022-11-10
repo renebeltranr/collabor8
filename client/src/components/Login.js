@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import apiService from "./../utilities/ApiService";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 function Login (){
-  const ctx = React.useContext(GlobalContext); 
+  const ctx = useContext(GlobalContext); 
   let navigate = useNavigate();
   const initialState = {
     username: "",

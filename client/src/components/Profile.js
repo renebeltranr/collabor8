@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import apiService from './../utilities/ApiService';
 import { Link } from 'react-router-dom';
 import CollabList from './CollabList';
-import Collab from './Collab';
+import ListedCollab from './ListedCollab';
 
 const initialState = {
   username: '',
   country: '',
   bio: '',
-  owncollabs: []
+  owncollabs: [],
 };
 
 function Profile () {
@@ -64,10 +64,12 @@ function Profile () {
         <CollabList>
           {owncollabs.map((el) => {
             return (
-              <Collab
+              <ListedCollab
                 owner={username}
                 name={el.name}
                 tracks={el.tracks}
+                _id={el._id}
+                key={el._id}
               />
             );
           })}

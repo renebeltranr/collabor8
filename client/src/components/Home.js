@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CollabList from './CollabList';
-import Collab from './Collab';
+import ListedCollab from './ListedCollab';
 import apiService from "./../utilities/ApiService";
 
 
@@ -27,10 +27,12 @@ function Home(){
       <CollabList>
           {state.map((el) => {
             return (
-              <Collab
+              <ListedCollab
                 owner={el.owner.username}
                 name={el.name}
                 tracks={el.tracks}
+                _id={el._id}
+                key={el._id}
               />
             );
           })}

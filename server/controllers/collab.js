@@ -34,14 +34,24 @@ const getAll = async (req, res) => {
 const getUserCollabs = async (req, res) => {
   try {
     const uid = req.session.uid;
-    console.log(uid)
     const cb = await Collab.find({owner: uid});
+    res.status(200).send(cb);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not get user Collabs' });
+  }
+};
+
+const getCollab = async (req, res) => {
+  try {
+    const cid = req.params;
+    const cb = await Collab.find({_id: cid.id}).populate('owner');
     console.log(cb)
     res.status(200).send(cb);
   } catch (error) {
     console.log(error)
-    res.status(400).send({ error, message: 'Could not user Collabs' });
+    res.status(400).send({ error, message: 'Could not get the Collab' });
   }
 };
 
-module.exports = { create, getAll, getUserCollabs };
+module.exports = { create, getAll, getUserCollabs, getCollab };

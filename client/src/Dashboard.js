@@ -1,13 +1,14 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-import Profile from './components/Profile';
-import Logout from './components/Logout';
-import Home from './components/Home';
-import NewCollab from './components/NewCollab';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import Logout from "./components/Logout";
+import Home from "./components/Home";
+import NewCollab from "./components/NewCollab";
+import {Collab} from "./components/Collab";
 
-const Dashboard = ({ setIsAuthenticated }) => {
+const Dashboard = ({ setIsAuthenticated, userId }) => {
   return (
     <div className="dashboard">
       <Routes>
@@ -24,11 +25,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
           path="/logout"
           element={<Logout setIsAuthenticated={setIsAuthenticated} />}
         />
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/collab/newCollab"
-          element={<NewCollab/>}
-        />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/collab/newCollab" element={<NewCollab />} />
+        <Route path="/collab/id/:id" element={<Collab userId={userId}/>} />
       </Routes>
     </div>
   );

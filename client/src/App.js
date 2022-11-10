@@ -6,17 +6,20 @@ import apiService from './utilities/ApiService';
 
 export const GlobalContext = React.createContext({
   isAuthenticated: false,
-  setIsAuthenticated: ()=>{}
+  setIsAuthenticated: ()=>{},
+  userId: '',
 });
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     const getProfile = async () => {
       const userInfo = await apiService.profile();
       if (userInfo !== undefined) {
         setIsAuthenticated(true)
+        setUserId(userInfo._id);
       }
     };
     getProfile();
@@ -24,7 +27,8 @@ function App() {
 
   const ctx = { 
     isAuthenticated: isAuthenticated,
-    setIsAuthenticated: setIsAuthenticated
+    setIsAuthenticated: setIsAuthenticated,
+    userId: userId
   }
 
   return (
@@ -32,7 +36,7 @@ function App() {
       <Router>
       <GlobalContext.Provider value={ctx}>
         <Navbar isAuthenticated={isAuthenticated} />
-        <Dashboard setIsAuthenticated={isAuthenticated} />
+        <Dashboard setIsAuthenticated={isAuthenticated} userId={userId} />
       </GlobalContext.Provider>
       </Router>
     </div>

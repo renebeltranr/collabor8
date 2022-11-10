@@ -62,13 +62,19 @@ a {
   margin-bottom: 2em;
 }
 
-.home,.login,.logout,.profile,.register,.newCollab{
+.home,.login,.logout,.profile,.register,.newCollab,.collab{
   display:flex;
   justify-content: center;
   border: solid;
   border-color: red;
   padding: 2em;
   height: 80vh;
+}
+
+.collab{
+  flex-direction: column;
+  justify-content:start;
+  width: 80vw;
 }
 
 .newCollab{
@@ -107,7 +113,7 @@ h1,h2,h3,h4,h5,h6 {
   padding:0.5em;
 }
 
-.collab{
+.listedCollab{
   border: solid;
   border-color: red;
 }
@@ -128,4 +134,13 @@ h1,h2,h3,h4,h5,h6 {
 
 .highlighted {
   color:red;
+}
+
+.collabName{
+  display:flex;
+  flex-direction: column;
+}
+
+.collabRecordBTN{
+  align-self: flex-end;
 }
