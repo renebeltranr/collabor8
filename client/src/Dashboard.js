@@ -6,7 +6,8 @@ import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import Home from "./components/Home";
 import NewCollab from "./components/NewCollab";
-import {Collab} from "./components/Collab";
+import { Collab } from "./components/Collab";
+import Record from "./components/Record";
 
 const Dashboard = ({ setIsAuthenticated, userId }) => {
   return (
@@ -25,9 +26,10 @@ const Dashboard = ({ setIsAuthenticated, userId }) => {
           path="/logout"
           element={<Logout setIsAuthenticated={setIsAuthenticated} />}
         />
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/collab/newCollab" element={<NewCollab />} />
-        <Route path="/collab/id/:id" element={<Collab userId={userId}/>} />
+        <Route path="/collab/id/:id" element={<Collab userId={userId} />} />
+        <Route path="/record/:id" element={<Record userId={userId} />} />
       </Routes>
     </div>
   );

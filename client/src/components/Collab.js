@@ -21,7 +21,7 @@ export const Collab = function () {
     const getCollab = async () => {
       const collabInfo = await apiService.getCollab(id);
       if (collabInfo) {
-        const { _id, name, tracks } = collabInfo[0];
+        const { name, tracks } = collabInfo[0];
         const user = collabInfo[0].owner;
         setState((prevState) => {
           return {
@@ -60,7 +60,7 @@ export const Collab = function () {
           title="test"
           width="300"
           height="300"
-          src={"https://www.youtube.com/embed/" + state.tracks[0]}
+          src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
         ></iframe>
       </div>
     </div>

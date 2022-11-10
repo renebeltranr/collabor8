@@ -79,7 +79,7 @@ function NewCollab(props) {
         title="test"
         width="420"
         height="315"
-        src={"https://www.youtube.com/embed/"+state.URL}
+        src={"https://www.youtube-nocookie.com/embed/"+state.URL}
       ></iframe>
     </div>
   );

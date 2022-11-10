@@ -6,8 +6,8 @@ const create = async (req, res) => {
     console.log(req.body)
     const newCollab = new Collab({
       owner: req.session.uid,
-      name: req.body.name.name,
-      tracks: req.body.name.tracks
+      name: req.body.name,
+      tracks: req.body.tracks
     });
     const cb = await newCollab.save();
     console.log("CB: ", cb)
@@ -54,4 +54,17 @@ const getCollab = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll, getUserCollabs, getCollab };
+const saveTrack = async (req, res) => {
+  try {
+    console.log(req.body)
+    const result = await Collab.findOne({_id: req.body.cid});
+    result.tracks.push(req.body.url);
+    const saveresult = await result.save()
+    res.status(201).send(saveresult);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not get the Collab' });
+  }
+};
+
+module.exports = { create, getAll, getUserCollabs, getCollab, saveTrack };

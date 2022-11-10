@@ -37,7 +37,6 @@ apiService.profile = () => {
     .catch((err) => console.log(err))
 };
 
-
 apiService.logout = () => {
   return fetch(`${URL}/logout`, {
     method: 'POST',
@@ -66,7 +65,7 @@ apiService.newCollab = (cb) => {
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({name: cb}),
+    body: JSON.stringify({cb}),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -89,6 +88,18 @@ apiService.getCollab = (id) => {
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+apiService.saveTrack = (data) => {
+  return fetch(`${URL}/collab/saveTrack`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({url: data.url, cid: data.cid}),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

@@ -6,8 +6,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border:solid;
-  border-color:red;
 }
 
 code {
@@ -16,8 +14,6 @@ code {
 }
 
 .Navbar {
-  border: solid;
-  border-color: red;
   height: 10vh;
   display: flex;
   flex-direction: row;
@@ -26,30 +22,19 @@ code {
   padding: 1em;
 }
 
-.mainTitle {
-  border: solid;
-  border-color: red;
-}
-
 .sessionButtons {
-  border: solid;
-  border-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 a {
-  border: solid;
-  border-color: red;
   text-decoration: none;
   color: black;
   margin-left: 0.5em;
 }
 
 .dashboard {
-  border: solid;
-  border-color: red;
   height: 90vh;
 }
 
@@ -62,85 +47,78 @@ a {
   margin-bottom: 2em;
 }
 
-.home,.login,.logout,.profile,.register,.newCollab,.collab{
-  display:flex;
+.home,
+.login,
+.logout,
+.profile,
+.register,
+.newCollab,
+.collab,
+.record {
+  display: flex;
   justify-content: center;
-  border: solid;
-  border-color: red;
   padding: 2em;
   height: 80vh;
 }
 
-.collab{
+.collab {
   flex-direction: column;
-  justify-content:start;
+  justify-content: start;
   width: 80vw;
 }
 
-.newCollab{
+.newCollab {
   flex-direction: column;
   align-items: center;
 }
 
-.home{
+.home {
   flex-direction: column;
-  justify-content:start;
+  justify-content: start;
 }
 
-.myprofile{
-  border: solid;
-  border-color: red;
-  width:30vw;
-  padding:1em;
+.myprofile {
+  width: 30vw;
+  padding: 1em;
 }
 
-.mycollabs{
-  border: solid;
-  border-color: red;
-  width:70vw;
-  padding:1em;
+.mycollabs {
+  width: 70vw;
+  padding: 1em;
 }
 
-.myCollabsHeader{
-  border: solid;
-  border-color: red;
+.myCollabsHeader {
   display: flex;
   justify-content: space-between;
 }
 
-h1,h2,h3,h4,h5,h6 {
-  margin:0;
-  padding:0.5em;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0.5em;
 }
 
-.listedCollab{
-  border: solid;
-  border-color: red;
-}
 
-.collabsList{
-  border: solid;
-  border-color: red;
-}
-
-.newCollabForm{
-  border: solid;
-  border-color: red;
-  display:flex;
+.newCollabForm {
+  display: flex;
   flex-direction: column;
   width: 60vw;
   justify-content: center;
 }
 
 .highlighted {
-  color:red;
+  color: red;
 }
 
-.collabName{
-  display:flex;
+.collabName {
+  display: flex;
   flex-direction: column;
 }
 
-.collabRecordBTN{
+.collabRecordBTN {
   align-self: flex-end;
 }
