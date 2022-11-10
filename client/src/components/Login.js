@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import auth from "../utilities/Auth";
+import React, { useState, useContext } from "react";
 import apiService from "./../utilities/ApiService";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../App";
 
-function Login (props){
+function Login (){
+  const ctx = React.useContext(GlobalContext); 
   let navigate = useNavigate();
   const initialState = {
     username: "",
@@ -28,8 +29,8 @@ function Login (props){
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      props.setIsAuthenticated(true);
-      auth.login(() => navigate("/profile"));
+      ctx.setIsAuthenticated(true);
+      navigate("/profile");
     }
   };
 

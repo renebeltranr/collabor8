@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from './App';
 
-function Navbar({ isAuthenticated }) {
+function Navbar() {
+  const ctx = React.useContext(GlobalContext); 
+
   return (
     <div className="Navbar">
       <Link to="/">
         <h1 className="mainTitle">Collabor8</h1>
       </Link>
+      <h4 className="subTitle">Play with fellow musicians all around the world!</h4>
       <div className="sessionButtons">
-        {isAuthenticated ? (
+        {ctx.isAuthenticated ? (
           <>
             <Link to="/profile">Profile</Link>
             <Link to="/logout">Logout</Link>

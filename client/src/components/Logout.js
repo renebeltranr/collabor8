@@ -1,20 +1,20 @@
 import React from 'react';
-import auth from '../utilities/Auth';
 import apiService from './../utilities/ApiService';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../App';
 
-function Logout (props) {
+function Logout () {
+  const ctx = React.useContext(GlobalContext); 
   let navigate = useNavigate();
   const handleClick = () => {
-    apiService.logout();
-    handleAuth();
+    if (ctx.isAuthenticated) {
+      apiService.logout();
+      ctx.setIsAuthenticated(false);
+      navigate('/')
+    } else console.log("User already logged out")
   };
 
-  const handleAuth = () => {
-    props.setIsAuthenticated(false);
-    auth.logout(() => navigate('/'));
-  };
 
   return (
     <div className='logout'>

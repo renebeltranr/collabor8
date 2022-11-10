@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import auth from "../utilities/Auth";
 import apiService from "./../utilities/ApiService";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../App";
 
 function NewCollab(props) {
   const initialState = {
     name: "",
   };
   const [state, setState] = useState(initialState);
+  const ctx = React.useContext(GlobalContext); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;

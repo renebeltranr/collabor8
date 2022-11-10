@@ -30,11 +30,13 @@ apiService.profile = () => {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   })
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .then((res) => res.json()
+    .then((json) => json))
+    .catch((err) => console.log(err))
 };
+
 
 apiService.logout = () => {
   return fetch(`${URL}/logout`, {

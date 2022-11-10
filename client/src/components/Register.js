@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import auth from '../utilities/Auth';
 import apiService from './../utilities/ApiService';
 import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../App';
 
 const initialState = {
   username: '',
@@ -9,7 +9,8 @@ const initialState = {
   country: '',
 };
 
-function Register (props) {
+function Register () {
+  const ctx = React.useContext(GlobalContext); 
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
 
@@ -30,8 +31,8 @@ function Register (props) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
-      props.setIsAuthenticated(true);
-      auth.login(() => navigate('/profile'));
+      ctx.setIsAuthenticated(true);
+      navigate('/profile');
     }
   };
 
