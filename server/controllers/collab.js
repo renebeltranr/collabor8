@@ -3,12 +3,13 @@ const User = require('./../models/user');
 
 const create = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log("BODYYYYYY", req.body)
     const newCollab = new Collab({
       owner: req.session.uid,
       name: req.body.name,
       tracks: req.body.tracks
     });
+    console.log("NEWCOLLAB HEREEEEEEEE:", newCollab)
     const cb = await newCollab.save();
     console.log("CB: ", cb)
     const user = await User.findById(req.session.uid);

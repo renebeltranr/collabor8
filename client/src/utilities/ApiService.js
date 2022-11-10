@@ -65,7 +65,7 @@ apiService.newCollab = (cb) => {
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({cb}),
+    body: JSON.stringify(cb)
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -76,7 +76,7 @@ apiService.getUserCollabs = () => {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -87,7 +87,7 @@ apiService.getCollab = (id) => {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -99,7 +99,7 @@ apiService.saveTrack = (data) => {
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url, cid: data.cid}),
+    body: JSON.stringify({url: data.url, cid: data.cid})
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

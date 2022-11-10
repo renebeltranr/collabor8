@@ -25,6 +25,7 @@ function NewCollab(props) {
       name: state.name,
       tracks: [state.URL]
     }
+    console.log("cb:", cb)
     const res = await apiService.newCollab(cb);
     if (res.error) {
       alert(`${res.message}`);
