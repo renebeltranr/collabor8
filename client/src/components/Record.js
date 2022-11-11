@@ -15,14 +15,24 @@ const initialState = {
 
 function Record() {
   const ctx = useContext(GlobalContext);
-  const [devices, setDevices] = useState([]);
+  const [audioDevices, setAudioDevices] = useState([]);
+  const [videoDevices, setVideoDevices] = useState([]);
+  const [selectedAudioDevice, setSelectedAudioDevice] = useState('');
+  const [selectedVideoDevice, setSelectedVideoDevice] = useState('');
   const [state, setState] = useState(initialState);
-  const [uploaded, setUploaded] = useState(false);
   const { id } = useParams();
   
+  function handleAudioSelection (e) {
+    setSelectedAudioDevice(e.target.value)
+  }
+  function handleVideoSelection (e) {
+    setSelectedVideoDevice(e.target.value)
+  }
+
   useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then((devs) => {
-      setDevices(devs.filter((d) => d.kind === "audioinput"));
+      setAudioDevices(devs.filter((d) => d.kind === "audioinput"));
+      setVideoDevices(devs.filter((d) => d.kind === "videoinput"));
     });
     const getCollab = async () => {
       const collabInfo = await apiService.getCollab(id);
@@ -48,9 +58,26 @@ function Record() {
   const stopButton = document.getElementById("stop");
   const submitButton = document.getElementById("submit");
   const player = document.getElementById("player");
+
+  function startHandler(){
+    let constraintObj = { 
+      audio: {deviceId: selectedAudioDevice}, 
+      video: { 
+          deviceId: selectedVideoDevice,
+          facingMode: "user", 
+          width: { min: 480, ideal: 480, max: 480 },
+          height: { min: 480, ideal: 480, max: 480 } 
+      } 
+  }; 
+    navigator.mediaDevices
+      .getUserMedia(constraintObj)
+      .then(handleSuccess);
+  }
   
   const handleSuccess = function (stream) {
-    const options = { mimeType: "audio/webm" };
+    const options = { 
+      mimeType: "audio/webm",
+      videoBitsPerSecond: 125000};
     const mediaRecorder = new MediaRecorder(stream, options);
     const chunks = [];
     mediaRecorder.addEventListener("dataavailable", function (e) {
@@ -79,19 +106,7 @@ function Record() {
     mediaRecorder.start();
   };
 
-  function startHandler(){
-    let constraintObj = { 
-      audio: true, 
-      video: { 
-          facingMode: "user", 
-          width: { min: 480, ideal: 480, max: 480 },
-          height: { min: 480, ideal: 480, max: 480 } 
-      } 
-  }; 
-    navigator.mediaDevices
-      .getUserMedia(constraintObj)
-      .then(handleSuccess);
-  }
+
 
   return (
     <div className="record">
@@ -100,12 +115,23 @@ function Record() {
         <span>@{state.user.username}</span>
         {ctx.userId === state.user._id ? (
           <div className="recordArea">
-            <h5>Select the device to record with:</h5>
-            <select name="devices" id="devices">
-              {devices.length
-                ? devices.map((d) => {
+            <h5>Select the devices to record with:</h5>
+            <select onChange={handleAudioSelection} name="audiodevices" id="devices">
+              {audioDevices.length
+                ? audioDevices.map((d) => {
                     return (
-                      <option key={d.label} value={d.label}>
+                      <option key={d.deviceId} value={d.deviceId}>
+                        {d.label}
+                      </option>
+                    );
+                  })
+                : null}
+            </select>
+            <select onChange={handleVideoSelection} name="videodevices" id="devices">
+              {videoDevices.length
+                ? videoDevices.map((d) => {
+                    return (
+                      <option key={d.deviceId} value={d.devideId}>
                         {d.label}
                       </option>
                     );
@@ -120,8 +146,8 @@ function Record() {
               submit to upload it to your Collab!
             </h6>
             <div className="recButtons">
-              <button id="stop">Stop</button>
-              <button id="submit">Submit</button>
+              <button className="default-btn" id="stop">Stop</button>
+              <button className="default-btn" id="submit">Submit</button>
             </div>
           </div>
         ) : (

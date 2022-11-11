@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import apiService from "./../utilities/ApiService";
-import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 function NewCollab(props) {
@@ -66,7 +65,7 @@ function NewCollab(props) {
             onChange={handleChange}
           />
           <button
-            className="form-submit"
+            className="default-btn"
             type="submit"
             disabled={validateForm()}
           >

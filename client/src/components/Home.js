@@ -18,12 +18,13 @@ function Home(){
 
   return (
     <div className='home'>
-      <h2>
+      <div className="homeTitle"><h2>
         MOST VIEWED COLLABS&nbsp;
         <span role="img">
           🏠
         </span>
       </h2>
+      </div>
       <CollabList>
           {state.map((el) => {
             return (

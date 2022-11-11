@@ -9,7 +9,7 @@ import NewCollab from "./components/NewCollab";
 import { Collab } from "./components/Collab";
 import Record from "./components/Record";
 
-const Dashboard = ({ setIsAuthenticated, userId }) => {
+const Dashboard = ({ isAuthenticated, setIsAuthenticated, userId }) => {
   return (
     <div className="dashboard">
       <Routes>
@@ -21,15 +21,30 @@ const Dashboard = ({ setIsAuthenticated, userId }) => {
           path="/login"
           element={<Login setIsAuthenticated={setIsAuthenticated} />}
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route 
+          path="/profile" 
+          element={<Profile isAuthenticated={isAuthenticated}/>} 
+        />
         <Route
           path="/logout"
           element={<Logout setIsAuthenticated={setIsAuthenticated} />}
         />
-        <Route path="/" element={<Home />} />
-        <Route path="/collab/newCollab" element={<NewCollab />} />
-        <Route path="/collab/id/:id" element={<Collab userId={userId} />} />
-        <Route path="/record/:id" element={<Record userId={userId} />} />
+        <Route 
+          path="/" 
+          element={<Home />} 
+        />
+        <Route 
+          path="/collab/newCollab" 
+          element={<NewCollab isAuthenticated={isAuthenticated}/>} 
+        />
+        <Route 
+          path="/collab/id/:id" 
+          element={<Collab userId={userId} />} 
+        />
+        <Route 
+          path="/record/:id" 
+          element={<Record isAuthenticated={isAuthenticated} userId={userId} />} 
+        />
       </Routes>
     </div>
   );

@@ -43,11 +43,9 @@ export const Collab = function () {
     navigate("/record/" + id);
   }
 
-  function handleAutoPlay() {
-    console.log(playAll)
+  function handlePlay() {
     for (let i = 0; i < playAll.length; i++) {
       playAll[i].play();
-      console.log( playAll[i].volume )
       playAll[i].volume = 0.9;
     }
   }
@@ -56,19 +54,24 @@ export const Collab = function () {
     <div className="collab">
       <div className="collabName">
         <h5>{state.name}</h5>
-        <span>@{state.user.username}</span>
+        <span>
+        <h6>@{state.user.username}</h6>
+        </span>
+        <div className="collabButtons">
+        <button className="default-btn" onClick={handlePlay}>Play</button>
         {ctx.userId === state.user._id ? (
-          <button className="collabRecordBTN" onClick={handleClick}>
+          <button className="default-btn" onClick={handleClick}>
             Record
           </button>
         ) : (
           <div></div>
         )}
+        </div>
       </div>
       <div className="collabTracks">
         {state.tracks.length === 1 ? (
           <iframe
-            title="test"
+            title="yt"
             width="300"
             height="300"
             src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
@@ -79,7 +82,7 @@ export const Collab = function () {
         {state.tracks.map((el) => {
           if (el[0] === "h" && el[1] === "t")
             return (
-              <video className="videoTrack" width="320" >
+              <video className="videoTrack" height="200" width="200" >
                 <source
                   src={el}
                   type="video/webm"
@@ -87,7 +90,6 @@ export const Collab = function () {
               </video>
             );
         })}
-        <button onClick={handleAutoPlay}>test</button>
       </div>
     </div>
   );

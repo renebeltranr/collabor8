@@ -36,7 +36,11 @@ function App() {
       <Router>
       <GlobalContext.Provider value={ctx}>
         <Navbar isAuthenticated={isAuthenticated} />
-        <Dashboard setIsAuthenticated={isAuthenticated} userId={userId} />
+        <Dashboard 
+        isAuthenticated={isAuthenticated} 
+        setIsAuthenticated={isAuthenticated} 
+        userId={userId} 
+        />
       </GlobalContext.Provider>
       </Router>
     </div>

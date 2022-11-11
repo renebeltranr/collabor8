@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import apiService from './../utilities/ApiService';
-import { Link } from 'react-router-dom';
 import CollabList from './CollabList';
 import ListedCollab from './ListedCollab';
+import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../App";
 
 const initialState = {
   username: '',
@@ -12,7 +13,9 @@ const initialState = {
 };
 
 function Profile () {
+  const navigate = useNavigate();
   const [state, setState] = useState(initialState);
+  const ctx = useContext(GlobalContext);
 
   const username = state.username || 'Noname';
   const country = state.country || 'Nowhere';
@@ -46,20 +49,22 @@ function Profile () {
     getProfile();
   }, []);
 
+  function goToNewCollab () {
+    navigate('/collab/newCollab');
+  }
+
   return (
     <div className="profile">
       <div className="myprofile">
-        <h2>My Profile</h2>
-        <h3>@{username}</h3>
-        <h4>{country}</h4>
-        <h4>{bio}</h4>
+      {ctx.isAuthenticated ? '✏️' : ''}<h3>My Profile</h3>
+        <h4>@{username}</h4>
+        <h5 contentEditable='true'>{country}</h5>
+        <h5 contentEditable='true'>{bio}</h5>
       </div>
       <div className="mycollabs">
         <div className="myCollabsHeader">
-        <h2> MY COLLABS</h2>
-          <Link to="/collab/newCollab">
-            <button className="default-btn">New Collab</button>
-          </Link>
+        <h3>My Collabs</h3>
+            <button onClick={goToNewCollab} className="default-btn">New Collab</button>
         </div>
         <CollabList>
           {owncollabs.map((el) => {
