@@ -16,6 +16,7 @@ export const Collab = function () {
   const ctx = useContext(GlobalContext);
   const [state, setState] = useState(initialState);
   const { id } = useParams();
+  const playAll = document.getElementsByClassName("videoTrack");
 
   useEffect(() => {
     const getCollab = async () => {
@@ -39,7 +40,16 @@ export const Collab = function () {
   }, []);
 
   function handleClick() {
-    navigate('/record/'+id);
+    navigate("/record/" + id);
+  }
+
+  function handleAutoPlay() {
+    console.log(playAll)
+    for (let i = 0; i < playAll.length; i++) {
+      playAll[i].play();
+      console.log( playAll[i].volume )
+      playAll[i].volume = 0.9;
+    }
   }
 
   return (
@@ -47,21 +57,37 @@ export const Collab = function () {
       <div className="collabName">
         <h5>{state.name}</h5>
         <span>@{state.user.username}</span>
-        {
-          ctx.userId === state.user._id 
-        ? 
-        <button className='collabRecordBTN' onClick={handleClick} >Record</button> 
-        : 
-        <div></div>
-        }
+        {ctx.userId === state.user._id ? (
+          <button className="collabRecordBTN" onClick={handleClick}>
+            Record
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
       <div className="collabTracks">
-        <iframe
-          title="test"
-          width="300"
-          height="300"
-          src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
-        ></iframe>
+        {state.tracks.length === 1 ? (
+          <iframe
+            title="test"
+            width="300"
+            height="300"
+            src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
+          ></iframe>
+        ) : (
+          ""
+        )}
+        {state.tracks.map((el) => {
+          if (el[0] === "h" && el[1] === "t")
+            return (
+              <video className="videoTrack" width="320" >
+                <source
+                  src={el}
+                  type="video/webm"
+                ></source>
+              </video>
+            );
+        })}
+        <button onClick={handleAutoPlay}>test</button>
       </div>
     </div>
   );

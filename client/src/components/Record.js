@@ -70,7 +70,6 @@ function Record() {
         result.then((data)=>{
           submitButton.disabled=true;
           console.log(data)
-          
           const ret = apiService.saveTrack({url: data.secure_url, cid: id});
           ret.then(data=>console.log(data))
         })
@@ -81,8 +80,16 @@ function Record() {
   };
 
   function startHandler(){
+    let constraintObj = { 
+      audio: true, 
+      video: { 
+          facingMode: "user", 
+          width: { min: 480, ideal: 480, max: 480 },
+          height: { min: 480, ideal: 480, max: 480 } 
+      } 
+  }; 
     navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
+      .getUserMedia(constraintObj)
       .then(handleSuccess);
   }
 
