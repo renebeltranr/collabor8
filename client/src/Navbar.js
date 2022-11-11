@@ -14,7 +14,7 @@ function Navbar() {
       <div className="sessionButtons">
         {ctx.isAuthenticated ? (
           <><div className="navButtons">
-            <Link to="/profile">
+            <Link to={`/profile/${ctx.username}`}>
             <button className="default-btn">Profile</button>
             </Link>
             <Link to="/logout">

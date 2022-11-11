@@ -30,7 +30,7 @@ function Login (){
       setState(initialState);
     } else {
       ctx.setIsAuthenticated(true);
-      navigate("/profile");
+      navigate(`/profile/${username}`);
     }
   };
 

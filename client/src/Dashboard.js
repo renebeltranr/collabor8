@@ -22,7 +22,7 @@ const Dashboard = ({ isAuthenticated, setIsAuthenticated, userId }) => {
           element={<Login setIsAuthenticated={setIsAuthenticated} />}
         />
         <Route 
-          path="/profile" 
+          path="/profile/:username" 
           element={<Profile isAuthenticated={isAuthenticated}/>} 
         />
         <Route

@@ -24,15 +24,16 @@ function Register () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password, country } = state;
-    const user = { username, password, country };
+    const { password, country } = state;
+    let lowerCaseUsername = state.username.toLowerCase();
+    const user = { username: lowerCaseUsername, password, country };
     const res = await apiService.register(user);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
       ctx.setIsAuthenticated(true);
-      navigate('/profile');
+      navigate(`/profile/${lowerCaseUsername}`);
     }
   };
 

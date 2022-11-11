@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('./../models/user');
 
 const create = async (req, res) => {
+  console.log(req.body)
   const { username, password } = req.body;
   const user = await User.findOne({ username: username });
   if (user)
@@ -41,6 +42,16 @@ const login = async (req, res) => {
 
 const profile = async (req, res) => {
   try {
+    const user = await User.findOne({username: req.params.username});
+    console.log(user)
+    res.status(200).send(user);
+  } catch {
+    res.status(404).send({ error, message: 'User not found' });
+  }
+};
+
+const me = async (req, res) => {
+  try {
     const { _id, username, country, bio, owncollabs } = req.user;
     const user = { _id, username, country, bio, owncollabs };
     res.status(200).send(user);
@@ -62,4 +73,4 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { create, login, profile, logout };
+module.exports = { create, login, profile, me, logout };

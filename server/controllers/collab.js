@@ -24,7 +24,7 @@ const create = async (req, res) => {
 
 const getAll = async (req, res) => {
   try {
-    const cb = await Collab.find().populate('owner');
+    const cb = await Collab.find().sort({tracks: -1}).populate('owner');
     res.status(200).send(cb);
   } catch (error) {
     console.log(error)
@@ -34,7 +34,7 @@ const getAll = async (req, res) => {
 
 const getUserCollabs = async (req, res) => {
   try {
-    const uid = req.session.uid;
+    const uid = req.params.id
     const cb = await Collab.find({owner: uid});
     res.status(200).send(cb);
   } catch (error) {

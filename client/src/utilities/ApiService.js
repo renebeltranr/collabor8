@@ -25,12 +25,24 @@ apiService.login = (user) => {
     .catch((err) => console.log(err));
 };
 
-apiService.profile = () => {
+apiService.profile = (username) => {
+  return fetch(`${URL}/profile/${username}`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json()
+    .then((json) => json))
+    .catch((err) => console.log(err))
+};
+
+apiService.me = () => {
   return fetch(`${URL}/me`, {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json()
     .then((json) => json))
@@ -71,10 +83,9 @@ apiService.newCollab = (cb) => {
     .catch((err) => console.log(err));
 };
 
-apiService.getUserCollabs = () => {
-  return fetch(`${URL}/collab/getUserCollabs`, {
+apiService.getUserCollabs = (id) => {
+  return fetch(`${URL}/collab/getUserCollabs/${id}`, {
     method: 'GET',
-    credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' }
   })
