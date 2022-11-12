@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import Navbar from "./Navbar";
 import Dashboard from './Dashboard';
 import { BrowserRouter as Router } from 'react-router-dom';
-import apiService from './utilities/ApiService';
+import authApiService from './utilities/authApiService';
 
 export const GlobalContext = React.createContext({
   isAuthenticated: false,
@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     const getProfile = async () => {
-      const userInfo = await apiService.me();
+      const userInfo = await authApiService.me();
       if (userInfo !== undefined) {
         setIsAuthenticated(true)
         setUserId(userInfo._id);
@@ -42,8 +42,9 @@ function App() {
         <Navbar isAuthenticated={isAuthenticated} username={username}/>
         <Dashboard 
         isAuthenticated={isAuthenticated} 
-        setIsAuthenticated={isAuthenticated} 
-        userId={userId} 
+        setIsAuthenticated={setIsAuthenticated} 
+        userId={userId}
+        username={username}
         />
       </GlobalContext.Provider>
       </Router>

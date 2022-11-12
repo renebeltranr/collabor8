@@ -68,4 +68,23 @@ const saveTrack = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll, getUserCollabs, getCollab, saveTrack };
+const deleteCollab = async (req, res) => {
+  try {
+    if(req.body.uid === req.session.uid) {
+      const result = await Collab.deleteOne({_id: req.params.cid});
+      if (result.deletedCount === 1){
+        const result2 = await User.update( { _id: req.body.uid }, 
+          { $pull: { owncollabs: req.params.cid } } )
+          if (result2.modifiedCount === 1) console.log('Collab successfully deleted');
+      }
+    } else {
+      throw new Error ("Not authorized")
+    }
+    res.sendStatus(201);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not delete the Collab' });
+  }
+};
+
+module.exports = { create, getAll, getUserCollabs, getCollab, deleteCollab, saveTrack };

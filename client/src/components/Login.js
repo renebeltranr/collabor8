@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import apiService from "./../utilities/ApiService";
+import authApiService from "../utilities/authApiService";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 
@@ -11,7 +11,6 @@ function Login (){
     password: "",
   };
   const [state, setState] = useState(initialState);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
@@ -24,7 +23,7 @@ function Login (){
     e.preventDefault();
     const { username, password } = state;
     const user = { username, password };
-    const res = await apiService.login(user);
+    const res = await authApiService.login(user);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
@@ -40,9 +39,9 @@ function Login (){
 
   return (
     <div className='login'>
-    <section>
+    <div className='loginFlex'>
       <h2>Login</h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="mainForm" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"
@@ -57,11 +56,11 @@ function Login (){
           value={state.password}
           onChange={handleChange}
         />
-        <button className="form-submit" type="submit" disabled={validateForm()}>
+        <button className="default-btn" type="submit" disabled={validateForm()}>
           &nbsp;Login&nbsp;
         </button>
       </form>
-    </section>
+    </div>
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CollabList from './CollabList';
 import ListedCollab from './ListedCollab';
-import apiService from "./../utilities/ApiService";
+import collabApiService from "../utilities/collabApiService";
 
 
 function Home(){
   const [state, setState] = useState([]);
 
   async function fetchCollabs() {
-    const res = await apiService.getCollabs();
+    const res = await collabApiService.getCollabs();
     setState(res);
   }
 

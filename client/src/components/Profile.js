@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import apiService from './../utilities/ApiService';
+import React, { useEffect, useState, useContext } from 'react';
+import authApiService from '../utilities/authApiService';
+import collabApiService from '../utilities/collabApiService';
 import CollabList from './CollabList';
 import ListedCollab from './ListedCollab';
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,17 +15,14 @@ const initialState = {
 
 function Profile () {
   const navigate = useNavigate();
+  const { username } = useParams();
+  initialState.username = username;
   const [state, setState] = useState(initialState);
   const ctx = useContext(GlobalContext);
-  const { username } = useParams();
-  const user = state.username || 'Noname';
-  const country = state.country || 'Nowhere';
-  const bio = state.bio || 'Nothing';
-  const owncollabs = state.owncollabs || []
 
   useEffect(() => {
     const getProfile = async () => {
-      const userInfo = await apiService.profile(username);
+      const userInfo = await authApiService.profile(username);
       if (userInfo) {
         const { username, country, bio, _id } = userInfo;
         setState((prevState) => {
@@ -35,7 +33,7 @@ function Profile () {
             bio,
           };
         });
-        const test = await apiService.getUserCollabs(_id);
+        const test = await collabApiService.getUserCollabs(_id);
         setState(prevState => {
           return {
             ...prevState,
@@ -47,7 +45,7 @@ function Profile () {
       }
     };
     getProfile();
-  }, []);
+  }, [username]);
 
   function goToNewCollab () {
     navigate('/collab/newCollab');
@@ -65,18 +63,18 @@ function Profile () {
     <div className="profile">
       <div className="myprofile">
       {ctx.username === username ? <h6>✏️ Click on the fields to edit ✏️</h6> : ''}<h3>Profile</h3>
-        <h4>@{user}</h4>
-        <h5 contentEditable={ctx.username === username} onBlur={handleCountryUpdate}>{country}</h5>
-        <h5 contentEditable={ctx.username === username} onBlur={handleBioUpdate}>{bio}</h5>
+        <h4>@{state.username}</h4>
+        <h5 contentEditable={ctx.username === username} onBlur={handleCountryUpdate}>{state.country}</h5>
+        <h5 contentEditable={ctx.username === username} onBlur={handleBioUpdate}>{state.bio}</h5>
       </div>
       <div className="mycollabs">
         <div className="myCollabsHeader">
-        <h3>@{user} Collabs</h3>
-        </div>
+        <h3>@{state.username} Collabs</h3>
         {ctx.username === username ? <button onClick={goToNewCollab} className="default-btn">New Collab</button> : ''}
-        {owncollabs.length > 0 ? 
+        </div>
+        {state.owncollabs.length > 0 ? 
         <CollabList>
-          {owncollabs.map((el) => {
+          {state.owncollabs.map((el) => {
             return (
               <ListedCollab
                 owner={username}

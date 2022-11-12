@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import apiService from "./../utilities/ApiService";
+import collabApiService from "../utilities/collabApiService";
 import { GlobalContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 function NewCollab(props) {
+  const navigate = useNavigate();
   const initialState = {
     name: "",
     URL: "",
@@ -24,13 +26,13 @@ function NewCollab(props) {
       name: state.name,
       tracks: [state.URL]
     }
-    console.log("cb:", cb)
-    const res = await apiService.newCollab(cb);
+    const res = await collabApiService.newCollab(cb);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
       console.log("collab created successfully: ", cb);
+      navigate(`/profile/${ctx.username}`)
     }
   };
 
@@ -42,6 +44,7 @@ function NewCollab(props) {
     <div className="newCollab">
         <h3>Create your New Collab</h3>
         <form className="newCollabForm" onSubmit={handleSubmit}>
+        <div className="newCollabName">
           <h5>Pick a cool Collab name. Other users will see it!</h5>
           <input
             className="default-input"
@@ -51,6 +54,8 @@ function NewCollab(props) {
             value={state.username}
             onChange={handleChange}
           />
+          </div>
+          <div className="newCollabVid">
           <h5>
             Paste the code you find in a Youtube's video URL that will serve as a base track for your
             Collab.
@@ -64,6 +69,11 @@ function NewCollab(props) {
             value={state.URL}
             onChange={handleChange}
           />
+
+        <h5>
+            Once you see your Youtube Video embeded on the player, you're ready to create it!
+          </h5>
+          </div>
           <button
             className="default-btn"
             type="submit"
@@ -71,9 +81,6 @@ function NewCollab(props) {
           >
             &nbsp;Create&nbsp;
           </button>
-        <h5>
-            Once you see your Youtube Video embeded on the player, you're ready to create it!
-          </h5>
         </form>
       <iframe 
         title="test"

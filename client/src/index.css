@@ -1,6 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
+  width: 100vw;
   font-family:'Courier New', Courier, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,7 +34,7 @@ a {
 }
 
 .dashboard {
-  height: 90vh;
+  height: 85vh;
 }
 
 .default-btn {
@@ -62,7 +63,7 @@ a {
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-  margin-left: 1em;
+  margin: 1em;
 }
 
 .button-31:hover,
@@ -72,7 +73,50 @@ a {
 
 .default-input {
   width: 15rem;
-  margin-bottom: 2em;
+}
+
+.dashboard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.loginFlex{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
+  padding:1.5em;
+  max-height: 10em;
+}
+
+.logoutFlex{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
+  padding:1.5em;
+  max-height: 10em;
+  justify-content: space-evenly;
+}
+
+.logoutButtons{
+  display: flex;
+  justify-content:center;
+}
+
+.registerFlex{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
+  padding:1.5em;
+  max-height: 10em;
+}
+
+.mainForm{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .home,
@@ -87,23 +131,33 @@ a {
   justify-content: center;
   padding: 2em;
   height: 75vh;
+  width: 70vw;
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
 }
 
 .collab {
   flex-direction: column;
   justify-content: start;
   width: 80vw;
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
 }
 
 .collabList{
   overflow-y: scroll;
-
   padding:1.5em;
+}
+
+.collabTracks{
+  margin-top:1em;
+}
+.collabButtons{
+  margin-top:1em;
+  margin-bottom:1em;
 }
 
 .newCollab {
   flex-direction: column;
-  align-items: center;
+  align-items: start;
 }
 
 .home {
@@ -114,14 +168,14 @@ a {
 .myprofile {
   width: 30vw;
   padding: 1em;
-  box-shadow: 2px 2px 3px 2px rgba(204, 204, 204, 0.5);
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
   margin-right: 2em;
 }
 
 .mycollabs {
   width: 70vw;
   padding: 1em;
-  box-shadow: 2px 2px 3px 2px rgba(204, 204, 204, 0.5);
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
   overflow: scroll
 }
 
@@ -138,7 +192,7 @@ a {
 }
 
 .listedCollab{
-  box-shadow: 2px 2px 3px 2px rgba(204, 204, 204, 0.5);
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
   padding: 1em;
   margin-bottom: 1em;
 }
@@ -153,12 +207,15 @@ h6 {
   padding: 0.5em;
 }
 
-
 .newCollabForm {
   display: flex;
   flex-direction: column;
   width: 60vw;
   justify-content: center;
+}
+
+.newCollabName,.newCollabVid{
+  margin:0.5em;
 }
 
 .highlighted {
@@ -172,4 +229,24 @@ h6 {
 
 .collabRecordBTN {
   align-self: flex-end;
+}
+
+.selfListen{
+  margin:1em;
+}
+
+.deviceSelect{
+  margin: 1.5em;
+}
+
+.recButtons{
+  margin:1.5em
+}
+
+.recordArea{
+  box-shadow: 2px 2px 2px 2px rgba(204, 204, 204, 0.5);
+}
+
+.baseTrack{
+  margin:1em;
 }

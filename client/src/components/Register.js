@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiService from './../utilities/ApiService';
+import authApiService from '../utilities/authApiService';
 import { useNavigate } from 'react-router-dom';
 import { GlobalContext } from '../App';
 
@@ -27,7 +27,7 @@ function Register () {
     const { password, country } = state;
     let lowerCaseUsername = state.username.toLowerCase();
     const user = { username: lowerCaseUsername, password, country };
-    const res = await apiService.register(user);
+    const res = await authApiService.register(user);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
@@ -45,9 +45,9 @@ function Register () {
 
   return (
     <div className='register'>
-    <section>
+    <div className='registerFlex'>
       <h2>Register</h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="mainForm" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"
@@ -69,11 +69,11 @@ function Register () {
           value={state.firstName}
           onChange={handleChange}
         />
-        <button className="form-submit" type="submit" disabled={validateForm()}>
+        <button className="default-btn" type="submit" disabled={validateForm()}>
           &nbsp;Register&nbsp;
         </button>
       </form>
-    </section>
+    </div>
     </div>
   );
 };
