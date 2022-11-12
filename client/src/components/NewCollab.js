@@ -82,12 +82,14 @@ function NewCollab(props) {
             &nbsp;Create&nbsp;
           </button>
         </form>
+        <div className='videoDiv'>
       <iframe 
         title="test"
-        width="420"
-        height="315"
+        width="300"
+        height="200"
         src={"https://www.youtube-nocookie.com/embed/"+state.URL}
       ></iframe>
+    </div>
     </div>
   );
 }
