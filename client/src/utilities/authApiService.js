@@ -59,4 +59,16 @@ authApiService.logout = () => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 };
+
+authApiService.updateProfile = (data) => {
+  return fetch(`${URL}/profileupdate/${data.id}`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 export default authApiService;

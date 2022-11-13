@@ -7,6 +7,7 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #3A86FF;
 }
 
 .Navbar {
@@ -17,6 +18,7 @@ body {
   align-items: center;
   padding: 1em;
   box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.5);
+  background-color: white;
 }
 
 .sessionButtons {
@@ -28,7 +30,9 @@ body {
 .homeTitle {
   display: flex;
   justify-content: center;
-  color: rgba( 255, 255, 255, 1 );
+  color: rgb(236, 236, 236);
+  position: sticky;
+  top: 0;
 }
 
 a {
@@ -37,38 +41,38 @@ a {
 }
 
 .default-btn {
-    appearance: button;
-    backface-visibility: hidden;
-    background-color: #8338EC;
-    border-radius: 6px;
-    border-width: 0;
-    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
-    font-size: 80%;
-    line-height: 1.15;
-    padding: 0.7em;
-    outline: none;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    text-transform: none;
-    transform: translateZ(0);
-    transition: all .2s,box-shadow .08s ease-in;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .default-btn:disabled {
-    cursor: default;
-  }
-  
-  .default-btn:hover {
-    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
-  }
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #8338EC;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
+  font-size: 80%;
+  line-height: 1.15;
+  padding: 0.7em;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s, box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.default-btn:disabled {
+  cursor: default;
+}
+
+.default-btn:hover {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
 
 .default-input {
   width: 15rem;
@@ -127,7 +131,7 @@ a {
 .record {
   display: flex;
   justify-content: center;
-  padding: 2em;
+  padding: 1em;
   height: 70vh;
   width: 65vw;
 }
@@ -155,21 +159,24 @@ a {
   justify-content: space-between;
 }
 
-.collabCard{
-  padding:1em;
+.collabCard {
+  padding: 1em;
   max-height: 75vh;
 }
 
-#login-btn, #register-btn{
+#login-btn,
+#register-btn {
   margin-top: 1em;
 }
+
 .newCollab {
   flex-direction: column;
   align-items: start;
   overflow-y: scroll;
 }
-.videoDiv{
-  align-self:center;
+
+.videoDiv {
+  align-self: center;
 }
 
 .home {
@@ -180,8 +187,8 @@ a {
 .myprofile {
   width: 30vw;
   padding: 1em;
-  margin:1em;
-  align-self:start;
+  margin: 1em;
+  align-self: start;
 }
 
 .mycollabs {
@@ -193,25 +200,24 @@ a {
 .myCollabsHeader {
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   padding: 1em;
 }
 
 .newCollabForm,
 .myCollabsHeader,
-.listedCollab, 
+.listedCollab,
 .myprofile,
 .collabCard,
 .loginFlex,
 .record,
 .registerFlex,
-.logoutFlex
-{
-  background: rgba( 255, 255, 255, 0.7 );
-  box-shadow: 0 2px 8px 0 rgba( 31, 38, 135, 0.37 );
-  -webkit-backdrop-filter: blur( 9.5px );
+.logoutFlex {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+  -webkit-backdrop-filter: blur(9.5px);
   border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border: 1px solid rgba(255, 255, 255, 0.18);
 
 }
 
@@ -236,7 +242,7 @@ h6 {
   flex-direction: column;
   width: 60vw;
   justify-content: center;
-  align-self:center;
+  align-self: center;
 }
 
 .newCollabName,
