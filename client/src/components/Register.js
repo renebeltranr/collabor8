@@ -69,7 +69,7 @@ function Register () {
           value={state.firstName}
           onChange={handleChange}
         />
-        <button className="default-btn" type="submit" disabled={validateForm()}>
+        <button id="register-btn" className="default-btn" type="submit" disabled={validateForm()}>
           &nbsp;Register&nbsp;
         </button>
       </form>

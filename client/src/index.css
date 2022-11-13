@@ -36,14 +36,10 @@ a {
   color: black;
 }
 
-.dashboard {
-  height: 85vh;
-}
-
 .default-btn {
     appearance: button;
     backface-visibility: hidden;
-    background-color: rgb(58,134,255);
+    background-color: #8338EC;
     border-radius: 6px;
     border-width: 0;
     box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
@@ -66,11 +62,11 @@ a {
     touch-action: manipulation;
   }
   
-  .button-9:disabled {
+  .default-btn:disabled {
     cursor: default;
   }
   
-  .button-9:focus {
+  .default-btn:hover {
     box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
   }
 
@@ -83,7 +79,8 @@ a {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background: rgb(94, 156, 255);
+  background: #3A86FF;
+  height: 85vh;
 }
 
 .loginFlex {
@@ -103,7 +100,7 @@ a {
 
 .logoutButtons {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly
 }
 
 .registerFlex {
@@ -163,7 +160,7 @@ a {
   max-height: 75vh;
 }
 
-#login-btn{
+#login-btn, #register-btn{
   margin-top: 1em;
 }
 .newCollab {
@@ -206,7 +203,9 @@ a {
 .myprofile,
 .collabCard,
 .loginFlex,
-.record
+.record,
+.registerFlex,
+.logoutFlex
 {
   background: rgba( 255, 255, 255, 0.7 );
   box-shadow: 0 2px 8px 0 rgba( 31, 38, 135, 0.37 );

@@ -62,7 +62,7 @@ function Profile () {
   return (
     <div className="profile">
       <div className="myprofile">
-      {ctx.username === username ? <h6>✏️ Click on the fields to edit ✏️</h6> : ''}<h3>Profile</h3>
+      {ctx.username === username ? <h6>✏️ Click on the fields to edit ✏️</h6> : ''}
         <h4>@{state.username}</h4>
         <h5 contentEditable={ctx.username === username} onBlur={handleCountryUpdate}>{state.country}</h5>
         <h5 contentEditable={ctx.username === username} onBlur={handleBioUpdate}>{state.bio}</h5>
