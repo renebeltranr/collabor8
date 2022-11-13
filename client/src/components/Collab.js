@@ -59,6 +59,7 @@ export const Collab = function () {
 
   return (
     <div className="collab">
+    <div className="collabCard">
       <div className="collabName">
         <h5>{state.name}</h5>
         <span>
@@ -88,7 +89,7 @@ export const Collab = function () {
           <iframe
             title="yt"
             width="300"
-            height="300"
+            height="200"
             src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
           ></iframe>
           </>
@@ -103,6 +104,7 @@ export const Collab = function () {
               </video>
             );
         })}
+      </div>
       </div>
     </div>
   );

@@ -42,8 +42,8 @@ function NewCollab(props) {
 
   return (
     <div className="newCollab">
-        <h3>Create your New Collab</h3>
         <form className="newCollabForm" onSubmit={handleSubmit}>
+        <h3>Create your New Collab</h3>
         <div className="newCollabName">
           <h5>Pick a cool Collab name. Other users will see it!</h5>
           <input
@@ -85,8 +85,8 @@ function NewCollab(props) {
         <div className='videoDiv'>
       <iframe 
         title="test"
-        width="300"
-        height="200"
+        width="190"
+        height="110"
         src={"https://www.youtube-nocookie.com/embed/"+state.URL}
       ></iframe>
     </div>

@@ -167,7 +167,7 @@ function Record() {
           <div></div>
         )}
       
-      <div className="baseTrack">
+      <div className="baseTrackAndVid">
         <ReactPlayer
           id="baseTrack"
           title="test"
@@ -175,6 +175,12 @@ function Record() {
           height="180"
           url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
           onStart={startHandler}
+        />
+                <ReactPlayer
+          title="test"
+          width="420"
+          height="180"
+          url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
         />
       </div>
     </div>

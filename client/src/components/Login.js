@@ -56,7 +56,7 @@ function Login (){
           value={state.password}
           onChange={handleChange}
         />
-        <button className="default-btn" type="submit" disabled={validateForm()}>
+        <button id="login-btn" className="default-btn" type="submit" disabled={validateForm()}>
           &nbsp;Login&nbsp;
         </button>
       </form>
