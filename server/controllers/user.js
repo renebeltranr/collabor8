@@ -50,6 +50,25 @@ const profile = async (req, res) => {
   }
 };
 
+const profileUpdate = async (req, res) => {
+  try {
+    const uid = req.params.id;
+    if (uid === req.body._id) {
+      let dataToUpdate = {};
+      if (req.body.country) dataToUpdate.country = req.body.country;
+      if (req.body.bio) dataToUpdate.bio = req.body.bio;
+      const result = await User.findOneAndUpdate({_id: uid}, dataToUpdate, {new: true});
+      result.password = undefined;
+      res.status(201).send(result);
+    } else {
+      throw new Error();
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Error updating profile' });
+  }
+};
+
 const me = async (req, res) => {
   try {
     const { _id, username, country, bio, owncollabs } = req.user;
@@ -73,4 +92,4 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { create, login, profile, me, logout };
+module.exports = { create, login, profile, me, logout, profileUpdate };

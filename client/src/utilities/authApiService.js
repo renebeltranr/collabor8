@@ -60,12 +60,13 @@ authApiService.logout = () => {
     .catch((err) => console.log(err));
 };
 
-authApiService.updateProfile = (data) => {
-  return fetch(`${URL}/profileupdate/${data.id}`, {
+authApiService.profileUpdate = (data) => {
+  return fetch(`${URL}/profileupdate/${data._id}`, {
     method: 'PUT',
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

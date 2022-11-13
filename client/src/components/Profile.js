@@ -51,12 +51,14 @@ function Profile () {
     navigate('/collab/newCollab');
   }
 
-  function handleCountryUpdate(e) {
+  async function handleCountryUpdate(e) {
     console.log(e.target.innerText)
+    const result = await authApiService.profileUpdate({_id: ctx.userId, country: e.target.innerText});
   }
 
-  function handleBioUpdate(e) {
+  async function handleBioUpdate(e) {
     console.log(e.target.innerText)
+    const result = await authApiService.profileUpdate({_id: ctx.userId, bio: e.target.innerText});
   }
 
   return (

@@ -22,6 +22,7 @@ function Record() {
   const [state, setState] = useState(initialState);
   const { id } = useParams();
 
+
   function handleAudioSelection(e) {
     setSelectedAudioDevice(e.target.value);
   }
@@ -97,7 +98,10 @@ function Record() {
           submitButton.disabled = true;
           console.log(data);
           const ret = collabApiService.saveTrack({ url: data.secure_url, cid: id });
-          ret.then((data) => console.log(data));
+          ret.then((data) => {
+            console.log(data)
+          }
+            );
         })
         .catch((err) => console.log(err));
     });
