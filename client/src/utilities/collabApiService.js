@@ -57,6 +57,42 @@ collabApiService.saveTrack = (data) => {
     .catch((err) => console.log(err));
 };
 
+collabApiService.acceptTrack = (data) => {
+  return fetch(`${URL}/collab/id/${data.cid}/acceptTrack`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({url: data.url})
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+collabApiService.denyTrack = (data) => {
+  return fetch(`${URL}/collab/id/${data.cid}/denyTrack`, {
+    method: 'DELETE',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({url: data.url})
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+collabApiService.deleteTrack = (data) => {
+  return fetch(`${URL}/collab/id/${data.cid}/deleteTrack`, {
+    method: 'DELETE',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({url: data.url})
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 collabApiService.deleteCollab = (data) => {
   return fetch(`${URL}/collab/delete/${data.cid}`, {
     method: 'DELETE',

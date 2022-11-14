@@ -15,6 +15,7 @@ const initialState = {
 
 function Record() {
   const ctx = useContext(GlobalContext);
+  const navigate = useNavigate();
   const [audioDevices, setAudioDevices] = useState([]);
   const [videoDevices, setVideoDevices] = useState([]);
   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
@@ -84,14 +85,15 @@ function Record() {
     mediaRecorder.addEventListener("dataavailable", function (e) {
       if (e.data.size > 0) chunks.push(e.data);
     });
+    stopButton.addEventListener("click", function () {
+      mediaRecorder.stop();
+    });
     mediaRecorder.addEventListener("stop", function () {
       let blob = new Blob(chunks);
       let audioURL = window.URL.createObjectURL(blob);
       audioPlayer.src = audioURL;
       videoPlayer.src = audioURL;
-    });
-    stopButton.addEventListener("click", function () {
-      mediaRecorder.stop();
+      submitButton.disabled = false;
     });
 
     submitButton.addEventListener("click", function () {
@@ -101,7 +103,7 @@ function Record() {
           submitButton.disabled = true;
           const ret = collabApiService.saveTrack({ url: data.secure_url, cid: id, username: ctx.username });
           ret.then((data) => {
-            console.log(data)
+            navigate(`/collab/id/${id}`)
           }
             );
         })
@@ -160,10 +162,10 @@ function Record() {
               <button className="default-btn" id="stop">
                 Stop
               </button>
-              <button className="default-btn" id="submit">
+              {(<button className="default-btn" id="submit">
                 Submit
-              </button>
-              {ctx.userId !== state.user._id ? <h6>*Keep in mind the owner will review your submission and will not be accepted right away.</h6> : ''}
+              </button>)}
+              {ctx.userId !== state.user._id ? <h6>*Keep in mind the owner will need to review your submission and should not be accepted right away.</h6> : ''}
             </div>
             <div className="selfListen">
               <h6>Listen to your recorded track before submitting</h6>

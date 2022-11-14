@@ -61,6 +61,26 @@ export const Collab = function () {
     navigate(`/profile/${ctx.username}`);
   }
 
+  async function acceptTrack(url) {
+    console.log(url)
+    const result = await collabApiService.acceptTrack({url: url, cid: id})
+    if (result) window.location.reload()
+  }
+  async function denyTrack(url) {
+    console.log(url)
+    const result = await collabApiService.denyTrack({url: url, cid: id})
+    if (result) window.location.reload()
+  }
+  async function deleteTrack(url) {
+    console.log(url)
+    const result = await collabApiService.deleteTrack({url: url, cid: id})
+    if (result) window.location.reload()
+  }
+
+  function goToUser(id) {
+    navigate('/profile/'+id);
+  }
+
   return (
     <div className="collab">
       <div className="collabCard">
@@ -96,7 +116,7 @@ export const Collab = function () {
             )}
           </div>
 
-          <div>{collab.pendingtracks.length > 0 && collab.pendingtracks.find(el => el.username === ctx.username) ? <h6>You have already submitted tracks for review in this Collab</h6> : ''}</div>
+          <div>{collab.pendingtracks.length > 0 && collab.pendingtracks.find(el => el.username === ctx.username) ? <h6>*You already have submitted tracks pending review</h6> : ''}</div>
         </div>
         {collab.tracks.length === 1 ? (
           <h6>There's no user tracks, be the first one to collaborate!</h6>
@@ -125,12 +145,14 @@ export const Collab = function () {
                   <video className="trackPlayer" height="200" width="200">
                     <source src={el.url} type="video/webm"></source>
                   </video>
-                    <div className="userOnTrack">@{el.username}</div>
+                    <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
+                    <div className="pendingButtons">
+                    <button onClick={()=>deleteTrack(el.url)} id="denyTrack" className="default-btn">X</button>
+                    </div>
                 </div>
               );
           })}
           
-
           {(collab.pendingtracks.length > 0 &&  ctx.userId === collab.user._id) ? collab.pendingtracks.map((el) => {
             if (el.url && el.url[0] === "h" && el.url[1] === "t")
               return (
@@ -138,8 +160,12 @@ export const Collab = function () {
                   <video className="trackPlayer" height="200" width="200">
                     <source src={el.url} type="video/webm"></source>
                   </video>
-                    <div className="trackStatus">Pending track</div>
-                    <div className="userOnTrack">@{el.username}</div>
+                    <div className="trackStatus"><h6>Pending track</h6></div>
+                    <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
+                    <div className="pendingButtons">
+                    <button onClick={()=>acceptTrack(el.url)} id="acceptTrack" className="default-btn">OK</button>
+                    <button onClick={()=>denyTrack(el.url)} id="denyTrack" className="default-btn">X</button>
+                    </div>
                 </div>
               );
           }) : ''}

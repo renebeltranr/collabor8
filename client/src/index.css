@@ -310,3 +310,9 @@ h6 {
   top: 1em;
   left: 1em;
 }
+
+.pendingButtons {
+  position:absolute;
+  top: 1em;
+  right: 1em;
+}

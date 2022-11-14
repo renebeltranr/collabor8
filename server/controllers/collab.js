@@ -69,6 +69,70 @@ const saveTrack = async (req, res) => {
   }
 };
 
+const acceptTrack = async (req, res) => {
+  try {
+    const result = await Collab.findOne({_id: req.params.id});
+    if (result.owner.valueOf() === req.session.uid) {
+      let trackToDelete;
+      result.pendingtracks.forEach(el => {
+        if(el.url === req.body.url) {
+          result.tracks.push(el)
+          trackToDelete = el;
+        }
+      })
+      result.pendingtracks = result.pendingtracks.filter(el => el != trackToDelete);
+      const savedResult = await result.save()
+      res.status(201).send(savedResult);
+    } else {
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not accept the track' });
+  }
+};
+
+const denyTrack = async (req, res) => {
+  try {
+    const result = await Collab.findOne({_id: req.params.id});
+    if (result.owner.valueOf() === req.session.uid) {
+      let trackToDelete;
+      result.pendingtracks.forEach(el => {
+        if(el.url === req.body.url) {
+          trackToDelete = el;
+        }
+      })
+      result.pendingtracks = result.pendingtracks.filter(el => el != trackToDelete);
+      const savedResult = await result.save()
+      res.status(201).send(savedResult);
+    } else {
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not delete the track' });
+  }
+};
+
+const deleteTrack = async (req, res) => {
+  try {
+    const result = await Collab.findOne({_id: req.params.id});
+    if (result.owner.valueOf() === req.session.uid) {
+      let trackToDelete;
+      result.tracks.forEach(el => {
+        if(el.url === req.body.url) {
+          trackToDelete = el;
+        }
+      })
+      result.tracks = result.tracks.filter(el => el != trackToDelete);
+      const savedResult = await result.save()
+      res.status(201).send(savedResult);
+    } else {
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not delete the track' });
+  }
+};
+
 const deleteCollab = async (req, res) => {
   try {
     if(req.body.uid === req.session.uid) {
@@ -88,4 +152,4 @@ const deleteCollab = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll, getUserCollabs, getCollab, deleteCollab, saveTrack };
+module.exports = { create, getAll, getUserCollabs, getCollab, deleteCollab, saveTrack, acceptTrack, denyTrack, deleteTrack };
