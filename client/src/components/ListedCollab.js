@@ -18,10 +18,11 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
         {tracks.map((el) => {
           if (el.url)
             return (
-                <img
+                <img 
+                  className="listedPictures"
                   key={el.url}
-                  width="80"
-                  height="80"
+                  width="120"
+                  height="120"
                   alt=""
                   src={
                     el.url[el.url.length - 1] === "m"
@@ -32,7 +33,7 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
             );
         })}
       </div>
-                <div className="createdAt"><h6>{moment(createdAt).format("h:mm a - MMMM Do YYYY")}</h6></div>
+                <div className="createdAt"><h6 className="dateStyle">{moment(createdAt).format("MMMM Do YYYY")}</h6></div>
     </div>
   );
 }

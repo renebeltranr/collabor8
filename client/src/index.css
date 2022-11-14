@@ -143,8 +143,8 @@ a {
 }
 
 .collabList {
+  margin-top:1em;
   overflow-y: scroll;
-  padding: 1.5em;
 }
 
 .collabTracks {
@@ -185,8 +185,12 @@ a {
 }
 
 .videoTrack {
+  display:flex;
   position:relative;
+  margin:0.5em;
+  box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
 }
+
 
 .home {
   flex-direction: column;
@@ -196,13 +200,12 @@ a {
 .myprofile {
   width: 30vw;
   padding: 1em;
-  margin: 1em;
   align-self: start;
+  margin-right: 1em;
 }
 
 .mycollabs {
   width: 70vw;
-  padding: 1em;
   overflow: scroll
 }
 
@@ -302,11 +305,19 @@ h6 {
 }
 
 .userOnTrack {
-  position:absolute;
-  color:white;
-  bottom: 1em;
-  right: 1em;
+  position: absolute;
+  color: white;
+  bottom: 1.5em;
+  left: 0.5em;
 }
+
+.volumeSlider{
+  position: absolute;
+  color: white;
+  left: 0.5em;
+  bottom:0.5em;
+}
+
 .trackStatus {
   position:absolute;
   color:white;
@@ -322,5 +333,16 @@ h6 {
 
 .createdAt{
   align-self:flex-end;
-  
+  font-style: italic;
+  color: rgb(93, 93, 93);
+}
+
+.dateStyle{
+  margin-top:1.5em;
+  padding:0;
+}
+
+.listedPictures{
+  margin:0.5em;
+  box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
 }
