@@ -146,9 +146,9 @@ export const Collab = function () {
                     <source src={el.url} type="video/webm"></source>
                   </video>
                     <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
-                    <div className="pendingButtons">
+                    {ctx.userId === collab.user._id ? <div className="pendingButtons">
                     <button onClick={()=>deleteTrack(el.url)} id="denyTrack" className="default-btn">X</button>
-                    </div>
+                    </div> : ''}
                 </div>
               );
           })}

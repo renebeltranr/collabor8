@@ -30,7 +30,7 @@ body {
 .homeTitle {
   display: flex;
   justify-content: center;
-  color: rgb(236, 236, 236);
+  color: rgb(0, 0, 0);
   position: sticky;
   top: 0;
 }
@@ -221,7 +221,8 @@ a {
 .loginFlex,
 .record,
 .registerFlex,
-.logoutFlex {
+.logoutFlex,
+.homeTitle {
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
   -webkit-backdrop-filter: blur(9.5px);
@@ -231,6 +232,8 @@ a {
 }
 
 .listedCollab {
+  display:flex;
+  flex-direction: column;
   box-shadow: 1px 1px 1px 1px rgba(86, 86, 86, 0.5);
   padding: 1em;
   margin-bottom: 1em;
@@ -315,4 +318,9 @@ h6 {
   position:absolute;
   top: 1em;
   right: 1em;
+}
+
+.createdAt{
+  align-self:flex-end;
+  
 }

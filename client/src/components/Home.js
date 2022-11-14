@@ -23,12 +23,9 @@ function Home(){
 
   return (
     <div className='home'>
-      <div className="homeTitle"><h2>
-        MOST VIEWED COLLABS&nbsp;
-        <span role="img">
-          🏠
-        </span>
-      </h2>
+      <div className="homeTitle"><h3>
+        LATEST COLLABS
+      </h3>
       </div>
       <CollabList>
           {state.map((el) => {
@@ -39,6 +36,7 @@ function Home(){
                 tracks={el.tracks}
                 _id={el._id}
                 key={el._id}
+                createdAt={el.createdAt}
               />
             );
           })}

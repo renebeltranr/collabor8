@@ -90,6 +90,7 @@ function Profile () {
                 tracks={el.tracks}
                 _id={el._id}
                 key={el._id}
+                createdAt={el.createdAt}
               />
             );
           })
