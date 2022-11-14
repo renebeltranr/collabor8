@@ -145,7 +145,7 @@ export const Collab = function () {
                   <video className="trackPlayer" height="240" width="240">
                     <source src={el.url} type="video/webm"></source>
                   </video>
-                    <input className="volumeSlider" type="range" orient="vertical" min="0" max="100" id="volume-slider"></input>
+                    <input className="volumeSlider" type="range" min="0" max="100" value={el.volume}></input>
                     <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
                     {ctx.userId === collab.user._id ? <div className="pendingButtons">
                     <button onClick={()=>deleteTrack(el.url)} id="denyTrack" className="default-btn">X</button>
@@ -161,7 +161,7 @@ export const Collab = function () {
                   <video className="trackPlayer" height="240" width="240">
                     <source src={el.url} type="video/webm"></source>
                   </video>
-                  <input className="volumeSlider" type="range" orient="vertical" min="0" max="100" id="volume-slider"></input>
+                  <input className="volumeSlider" type="range" min="0" max="100" value={el.volume}></input>
                     <div className="trackStatus"><h6>Pending track</h6></div>
                     <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
                     <div className="pendingButtons">
