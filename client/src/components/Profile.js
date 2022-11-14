@@ -52,13 +52,19 @@ function Profile () {
   }
 
   async function handleCountryUpdate(e) {
-    console.log(e.target.innerText)
-    const result = await authApiService.profileUpdate({_id: ctx.userId, country: e.target.innerText});
+    try {
+      await authApiService.profileUpdate({_id: ctx.userId, country: e.target.innerText});
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function handleBioUpdate(e) {
-    console.log(e.target.innerText)
-    const result = await authApiService.profileUpdate({_id: ctx.userId, bio: e.target.innerText});
+    try {
+      await authApiService.profileUpdate({_id: ctx.userId, bio: e.target.innerText});
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

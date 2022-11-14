@@ -18,7 +18,12 @@ function ListedCollab({ owner, name, tracks, _id}) {
         </Link>
         <div className="collabTracks">
         {tracks.map(el => {
-          if (el.length >20) return (<img key={el} width='80' height='80' alt='' src={el.slice(0,-4)+'jpg'}></img>)
+          if (el.url) return (<img 
+          key={el.url} 
+          width='80' 
+          height='80' 
+          alt='' 
+          src={el.url[el.url.length-1] === 'm' ? el.url.slice(0,-4)+'jpg' : el.url.slice(0,-3)+'jpg'}></img>)
         })}
         </div>
       </div>

@@ -3,9 +3,10 @@ import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 
-const initialState = {
+const initialCollabState = {
   name: "",
   tracks: [],
+  pendingtracks: [],
   user: {
     username: "",
   },
@@ -14,21 +15,22 @@ const initialState = {
 export const Collab = function () {
   let navigate = useNavigate();
   const ctx = useContext(GlobalContext);
-  const [state, setState] = useState(initialState);
+  const [collab, setCollab] = useState(initialCollabState);
   const { id } = useParams();
-  const playAll = document.getElementsByClassName("videoTrack");
+  const playAll = document.getElementsByClassName("trackPlayer");
 
   useEffect(() => {
     const getCollab = async () => {
       const collabInfo = await collabApiService.getCollab(id);
       if (collabInfo) {
-        const { name, tracks } = collabInfo[0];
+        const { name, tracks, pendingtracks } = collabInfo[0];
         const user = collabInfo[0].owner;
-        setState((prevState) => {
+        setCollab((prevState) => {
           return {
             ...prevState,
             name,
             tracks,
+            pendingtracks,
             user,
           };
         });
@@ -51,60 +53,97 @@ export const Collab = function () {
 
   async function handleDelete() {
     //add confirmation before deletion
-    console.log()
-    const deletion = await collabApiService.deleteCollab({uid: state.user._id , cid: id})
+    const deletion = await collabApiService.deleteCollab({
+      uid: collab.user._id,
+      cid: id,
+    });
     console.log(deletion);
-    navigate(`/profile/${ctx.username}`)
+    navigate(`/profile/${ctx.username}`);
   }
 
   return (
     <div className="collab">
-    <div className="collabCard">
-      <div className="collabName">
-        <h5>{state.name}</h5>
-        <span>
-          <h6>@{state.user.username}</h6>
-        </span>
-        <div className="collabButtons">
-          <button className="default-btn" onClick={handlePlay}>
-            Play
-          </button>
-          {ctx.userId === state.user._id ? (<>
-            <button className="default-btn" onClick={handleClick}>
-              Record
+      <div className="collabCard">
+        <div className="collabName">
+          <h5>{collab.name}</h5>
+          <span>
+            <h6>@{collab.user.username}</h6>
+          </span>
+          <div className="collabButtons">
+            <button className="default-btn" onClick={handlePlay}>
+              Play
             </button>
-            <button className="default-btn" onClick={handleDelete}>
-              Delete
-            </button>
-            </>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      </div>
-      {state.tracks.length === 1 ? <h6>There's no user tracks, be the first one to collaborate!</h6> : ''}
-      <div className="collabTracks">
-        {state.tracks.length === 1 ? (<>
+            {ctx.userId === collab.user._id ? (
+              <>
+                <button className="default-btn" onClick={handleClick}>
+                  Record
+                </button>
+                <button className="default-btn" onClick={handleDelete}>
+                  Delete
+                </button>
+              </>
+            ) : (
+              <div></div>
+            )}
+            {ctx.userId !== collab.user._id ? (
+              <>
+                <button className="default-btn" onClick={handleClick}>
+                  Submit Recording
+                </button>
+              </>
+            ) : (
+              <div></div>
+            )}
+          </div>
 
-          <iframe
-            title="yt"
-            width="300"
-            height="200"
-            src={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
-          ></iframe>
-          </>
+          <div>{collab.pendingtracks.length > 0 && collab.pendingtracks.find(el => el.username === ctx.username) ? <h6>You have already submitted tracks for review in this Collab</h6> : ''}</div>
+        </div>
+        {collab.tracks.length === 1 ? (
+          <h6>There's no user tracks, be the first one to collaborate!</h6>
         ) : (
           ""
         )}
-        {state.tracks.map((el) => {
-          if (el[0] === "h" && el[1] === "t")
-            return (
-              <video className="videoTrack" height="200" width="200">
-                <source src={el} type="video/webm"></source>
-              </video>
-            );
-        })}
-      </div>
+        <div className="collabTracks">
+          {collab.tracks.length === 1 ? (
+            <>
+              <iframe
+                title="yt"
+                width="300"
+                height="200"
+                src={
+                  "https://www.youtube-nocookie.com/embed/" + collab.tracks[0]
+                }
+              ></iframe>
+            </>
+          ) : (
+            ""
+          )}
+          {collab.tracks.map((el) => {
+            if (el.url && el.url[0] === "h" && el.url[1] === "t")
+              return (
+                <div className="videoTrack">
+                  <video className="trackPlayer" height="200" width="200">
+                    <source src={el.url} type="video/webm"></source>
+                  </video>
+                    <div className="userOnTrack">@{el.username}</div>
+                </div>
+              );
+          })}
+          
+
+          {(collab.pendingtracks.length > 0 &&  ctx.userId === collab.user._id) ? collab.pendingtracks.map((el) => {
+            if (el.url && el.url[0] === "h" && el.url[1] === "t")
+              return (
+                <div className="videoTrack">
+                  <video className="trackPlayer" height="200" width="200">
+                    <source src={el.url} type="video/webm"></source>
+                  </video>
+                    <div className="trackStatus">Pending track</div>
+                    <div className="userOnTrack">@{el.username}</div>
+                </div>
+              );
+          }) : ''}
+        </div>
       </div>
     </div>
   );

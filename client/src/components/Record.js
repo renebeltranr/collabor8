@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 import ReactPlayer from "react-player/lazy";
-import { upAudioToCloudinary } from "../utilities/Cloudinary";
+import { upVideoToCloudinary } from "../utilities/Cloudinary";
 
 const initialState = {
   name: "",
@@ -57,7 +57,8 @@ function Record() {
 
   const stopButton = document.getElementById("stop");
   const submitButton = document.getElementById("submit");
-  const player = document.getElementById("player");
+  const audioPlayer = document.getElementById("audioPlayer");
+  const videoPlayer = document.getElementById("videoPlayer");
 
   function startHandler() {
     let constraintObj = {
@@ -79,25 +80,26 @@ function Record() {
     };
     const mediaRecorder = new MediaRecorder(stream, options);
     const chunks = [];
+  
     mediaRecorder.addEventListener("dataavailable", function (e) {
       if (e.data.size > 0) chunks.push(e.data);
     });
     mediaRecorder.addEventListener("stop", function () {
       let blob = new Blob(chunks);
       let audioURL = window.URL.createObjectURL(blob);
-      player.src = audioURL;
+      audioPlayer.src = audioURL;
+      videoPlayer.src = audioURL;
     });
     stopButton.addEventListener("click", function () {
       mediaRecorder.stop();
     });
+
     submitButton.addEventListener("click", function () {
-      console.log("submitting audio: ", chunks[0]);
-      const result = upAudioToCloudinary(chunks[0]);
+      const result = upVideoToCloudinary(chunks[0]);
       result
         .then((data) => {
           submitButton.disabled = true;
-          console.log(data);
-          const ret = collabApiService.saveTrack({ url: data.secure_url, cid: id });
+          const ret = collabApiService.saveTrack({ url: data.secure_url, cid: id, username: ctx.username });
           ret.then((data) => {
             console.log(data)
           }
@@ -110,7 +112,7 @@ function Record() {
 
   return (
     <div className="record">
-        {ctx.userId === state.user._id ? (
+        {ctx.userId ? (
           <div className="recordArea">
             <div className="deviceSelect">
       <div className="collabName">
@@ -161,30 +163,30 @@ function Record() {
               <button className="default-btn" id="submit">
                 Submit
               </button>
+              {ctx.userId !== state.user._id ? <h6>*Keep in mind the owner will review your submission and will not be accepted right away.</h6> : ''}
             </div>
             <div className="selfListen">
               <h6>Listen to your recorded track before submitting</h6>
-              <audio id="player" controls></audio>
+              <audio id="audioPlayer" controls></audio>
             </div>
           </div>
         ) : (
           <div></div>
         )}
-      
       <div className="baseTrackAndVid">
         <ReactPlayer
           id="baseTrack"
           title="test"
-          width="420"
+          width="180"
           height="180"
           url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
           onStart={startHandler}
         />
-                <ReactPlayer
+        <video controls
+          id="videoPlayer"
           title="test"
-          width="420"
+          width="180"
           height="180"
-          url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
         />
       </div>
     </div>

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from './App';
 
 function Navbar() {
   const ctx = React.useContext(GlobalContext); 
+
+  useEffect(()=>{}, [ctx])
 
   return (
     <div className="Navbar">
@@ -14,7 +16,7 @@ function Navbar() {
       <div className="sessionButtons">
         {ctx.isAuthenticated ? (
             <>
-            <Link to={`/profile/${ctx.username}`}>
+            <Link to={ctx.username ? `/profile/${ctx.username}` : `/`}>
             <button className="default-btn">Profile</button>
             </Link>
             <Link to="/logout">

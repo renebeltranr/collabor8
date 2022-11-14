@@ -149,6 +149,11 @@ a {
 
 .collabTracks {
   margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: 50vh;
+  justify-content: center;
 }
 
 .collabButtons {
@@ -177,6 +182,10 @@ a {
 
 .videoDiv {
   align-self: center;
+}
+
+.videoTrack {
+  position:relative;
 }
 
 .home {
@@ -287,4 +296,17 @@ h6 {
 
 .baseTrack {
   margin: 1em;
+}
+
+.userOnTrack {
+  position:absolute;
+  color:white;
+  bottom: 1em;
+  right: 1em;
+}
+.trackStatus {
+  position:absolute;
+  color:white;
+  top: 1em;
+  left: 1em;
 }

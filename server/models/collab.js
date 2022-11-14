@@ -16,8 +16,13 @@ const CollabSchema = new Schema({
     type: Array,
     default: [],
     required: true,
+  },
+  pendingtracks: {
+    type: Array,
+    default: [],
+    required: true,
   }
-}); 
+}, { timestamps: true });
 
 module.exports = mongoose.model('Collab', CollabSchema);
 

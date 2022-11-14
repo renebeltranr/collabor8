@@ -1,7 +1,7 @@
 import {} from 'cloudinary-react';
 import axios from 'axios';
 
-export const upAudioToCloudinary = async (blob) => {
+export const upVideoToCloudinary = async (blob) => {
   const url = 'https://api.cloudinary.com/v1_1/dvyn9lzkf/upload';
   let cloudinaryData = {};
   const formData = new FormData();

@@ -4,11 +4,11 @@ import Dashboard from './Dashboard';
 import { BrowserRouter as Router } from 'react-router-dom';
 import authApiService from './utilities/authApiService';
 
-export const GlobalContext = React.createContext({
+export const GlobalContext = createContext({
   isAuthenticated: false,
   setIsAuthenticated: ()=>{},
   userId: '',
-  username: ''
+  username: '',
 });
 
 function App() {
@@ -23,6 +23,9 @@ function App() {
         setIsAuthenticated(true)
         setUserId(userInfo._id);
         setUsername(userInfo.username);
+      }
+      else {
+        console.log("Couldn't retrieve user info")
       }
     };
     getProfile();
@@ -39,12 +42,12 @@ function App() {
     <div className="App">
       <Router>
       <GlobalContext.Provider value={ctx}>
-        <Navbar isAuthenticated={isAuthenticated} username={username}/>
+        <Navbar isAuthenticated={ctx.isAuthenticated} username={ctx.username}/>
         <Dashboard 
-        isAuthenticated={isAuthenticated} 
-        setIsAuthenticated={setIsAuthenticated} 
-        userId={userId}
-        username={username}
+          isAuthenticated={ctx.isAuthenticated} 
+          setIsAuthenticated={ctx.setIsAuthenticated} 
+          userId={ctx.userId}
+          username={ctx.username}
         />
       </GlobalContext.Provider>
       </Router>

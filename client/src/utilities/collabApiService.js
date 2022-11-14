@@ -51,7 +51,7 @@ collabApiService.saveTrack = (data) => {
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url, cid: data.cid})
+    body: JSON.stringify({url: data.url, cid: data.cid, username: data.username})
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

@@ -44,7 +44,6 @@ const getCollab = async (req, res) => {
   try {
     const cid = req.params;
     const cb = await Collab.find({_id: cid.id}).populate('owner');
-    console.log(cb)
     res.status(200).send(cb);
   } catch (error) {
     console.log(error)
@@ -55,12 +54,18 @@ const getCollab = async (req, res) => {
 const saveTrack = async (req, res) => {
   try {
     const result = await Collab.findOne({_id: req.body.cid});
-    result.tracks.push(req.body.url);
-    const saveresult = await result.save()
-    res.status(201).send(saveresult);
+    if (result.owner.valueOf() === req.session.uid) {
+      result.tracks.push({url: req.body.url, owner: req.session.uid, volume:100, username: req.body.username});
+      const saveresult = await result.save()
+      res.status(201).send(saveresult);
+    } else {
+      result.pendingtracks.push({url: req.body.url, owner: req.session.uid, volume:100, username: req.body.username});
+      const saveresult = await result.save();
+      res.status(201).send(saveresult);
+    }
   } catch (error) {
     console.log(error)
-    res.status(400).send({ error, message: 'Could not get the Collab' });
+    res.status(400).send({ error, message: 'Could not save the Collab' });
   }
 };
 

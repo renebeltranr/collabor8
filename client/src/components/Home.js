@@ -13,7 +13,6 @@ function Home(){
     const res = await collabApiService.getCollabs();
     setState(res);
     setTimeout(() =>{setIsLoading(false)}, 700)
-    
   }
 
   useEffect(() => {
