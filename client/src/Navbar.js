@@ -10,9 +10,11 @@ function Navbar() {
   return (
     <div className="Navbar">
       <Link to="/">
-        <h1 className="mainTitle">Collabor8</h1>
+      <div className="logoContainer">
+        <img className="logo" src="/navLogo.png" alt='Collabor8'/>
+      </div>
       </Link>
-      <h5 className="subTitle">Play with fellow musicians from all over the world!</h5>
+      {/* <h5 className="subTitle">Play with fellow musicians from all over the world!</h5> */}
       <div className="sessionButtons">
         {ctx.isAuthenticated ? (
             <>

@@ -7,7 +7,7 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #3A86FF;
+  background-color: #6b6cfb;
 }
 
 .Navbar {
@@ -18,7 +18,7 @@ body {
   align-items: center;
   padding: 1em;
   box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.5);
-  background-color: white;
+  background-color: #f9f9f9;
 }
 
 .sessionButtons {
@@ -43,7 +43,7 @@ a {
 .default-btn {
   appearance: button;
   backface-visibility: hidden;
-  background-color: #8338EC;
+  background-color: #60a0c7;
   border-radius: 6px;
   border-width: 0;
   box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
@@ -84,7 +84,7 @@ a {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background: #3A86FF;
+  background: #6b6cfb;
   height: 85vh;
 }
 
@@ -120,6 +120,15 @@ a {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.logoContainer{
+  height:auto;
+}
+
+.logo {
+  max-height: 13vh;
+  object-fit: fill;
 }
 
 .home,
@@ -224,7 +233,7 @@ a {
 .registerFlex,
 .logoutFlex,
 .homeTitle {
-  background: rgba(255, 255, 255, 0.7);
+  background: #f9f9f9;
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
   -webkit-backdrop-filter: blur(9.5px);
   border-radius: 10px;
@@ -304,21 +313,21 @@ h6 {
 
 .userOnTrack {
   position: absolute;
-  color: white;
+  color: #f9f9f9;
   bottom: 1.5em;
   left: 0.5em;
 }
 
 .volumeSlider{
   position: absolute;
-  color: white;
+  color: #f9f9f9;
   left: 0.5em;
   bottom:0.5em;
 }
 
 .trackStatus {
   position:absolute;
-  color:white;
+  color:#f9f9f9;
   top: 1em;
   left: 1em;
 }
