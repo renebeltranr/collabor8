@@ -57,6 +57,18 @@ collabApiService.saveTrack = (data) => {
     .catch((err) => console.log(err));
 };
 
+collabApiService.saveSettings = (data) => {
+  return fetch(`${URL}/collab/id/${data.cid}/saveSettings`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data.collab)
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 collabApiService.acceptTrack = (data) => {
   return fetch(`${URL}/collab/id/${data.cid}/acceptTrack`, {
     method: 'PUT',

@@ -45,6 +45,7 @@ const getCollab = async (req, res) => {
     const cid = req.params;
     const cb = await Collab.find({_id: cid.id}).populate('owner');
     cb[0].owner.password = undefined;
+    console.log(cb)
     res.status(200).send(cb);
   } catch (error) {
     console.log(error)
@@ -67,6 +68,20 @@ const saveTrack = async (req, res) => {
   } catch (error) {
     console.log(error)
     res.status(400).send({ error, message: 'Could not save the Collab' });
+  }
+};
+
+const saveSettings = async (req, res) => {
+  try {
+    const result = await Collab.findOne({_id: req.params.id});
+    if (result.owner.valueOf() === req.session.uid) {
+      result.tracks = req.body.tracks;
+      const saveresult = await result.save();
+      res.status(201).send(saveresult);
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ error, message: 'Could not save the settings' });
   }
 };
 
@@ -153,4 +168,4 @@ const deleteCollab = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll, getUserCollabs, getCollab, deleteCollab, saveTrack, acceptTrack, denyTrack, deleteTrack };
+module.exports = { create, getAll, getUserCollabs, getCollab, deleteCollab, saveTrack, acceptTrack, denyTrack, deleteTrack, saveSettings };

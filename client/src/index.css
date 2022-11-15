@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap');
 
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #6b6cfb;
@@ -30,7 +30,6 @@ body {
 .homeTitle {
   display: flex;
   justify-content: center;
-  color: rgb(0, 0, 0);
   position: sticky;
   top: 0;
 }
@@ -127,7 +126,7 @@ a {
 }
 
 .logo {
-  max-height: 13vh;
+  max-height: 14vh;
   object-fit: fill;
 }
 
@@ -143,7 +142,8 @@ a {
   justify-content: center;
   padding: 1em;
   height: 70vh;
-  width: 65vw;
+  width: 70vw;
+  overflow-y: scroll;
 }
 
 .collab {
@@ -234,6 +234,7 @@ a {
 .logoutFlex,
 .homeTitle {
   background: #f9f9f9;
+  color:#60a0c7;
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
   -webkit-backdrop-filter: blur(9.5px);
   border-radius: 10px;
@@ -257,6 +258,7 @@ h5,
 h6 {
   margin: 0;
   padding: 0.5em;
+  color:#60a0c7
 }
 
 .newCollabForm {
@@ -314,15 +316,15 @@ h6 {
 .userOnTrack {
   position: absolute;
   color: #f9f9f9;
-  bottom: 1.5em;
-  left: 0.5em;
+  bottom: 2.5em;
+  left: 1em;
 }
 
 .volumeSlider{
   position: absolute;
   color: #f9f9f9;
-  left: 0.5em;
-  bottom:0.5em;
+  left: 1em;
+  bottom:1em;
 }
 
 .trackStatus {

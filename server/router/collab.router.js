@@ -12,5 +12,6 @@ router.put('/id/:id/acceptTrack', collabController.acceptTrack);
 router.delete('/id/:id/denyTrack', authWare, collabController.denyTrack);
 router.delete('/id/:id/deleteTrack', authWare, collabController.deleteTrack);
 router.post('/saveTrack', authWare, collabController.saveTrack);
+router.put('/id/:id/saveSettings', collabController.saveSettings);
 
 module.exports = router;

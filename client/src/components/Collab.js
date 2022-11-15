@@ -1,7 +1,7 @@
 import collabApiService from "../utilities/collabApiService";
 import VolumeSlider from "./VolumeSlider";
 import { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { GlobalContext } from "../App";
 
 const initialCollabState = {
@@ -53,6 +53,12 @@ export const Collab = function () {
     }
   }
 
+  function handlePause() {
+    for (let i = 0; i < playAll.length; i++) {
+      playAll[i].pause();
+    }
+  }
+
   async function handleDelete() {
     //add confirmation before deletion
     const deletion = await collabApiService.deleteCollab({
@@ -64,23 +70,23 @@ export const Collab = function () {
   }
 
   async function acceptTrack(url) {
-    console.log(url);
     const result = await collabApiService.acceptTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
   async function denyTrack(url) {
-    console.log(url);
     const result = await collabApiService.denyTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
   async function deleteTrack(url) {
-    console.log(url);
     const result = await collabApiService.deleteTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
   async function handleSaveSettings() {
-    console.log(collab);
-    //const result = await collabApiService.acceptTrack({ url: url, cid: id });
+    const result = await collabApiService.saveSettings({
+      cid: id,
+      collab: collab,
+    });
+    if (result) window.location.reload();
   }
 
   function goToUser(id) {
@@ -93,11 +99,16 @@ export const Collab = function () {
         <div className="collabName">
           <h5>{collab.name}</h5>
           <span>
-            <h6>@{collab.user.username}</h6>
+            <Link to={"/profile/" + collab.user.username}>
+              <h6>@{collab.user.username}</h6>
+            </Link>
           </span>
           <div className="collabButtons">
             <button className="default-btn" onClick={handlePlay}>
               Play
+            </button>
+            <button className="default-btn" onClick={handlePause}>
+              Pause
             </button>
             {ctx.userId === collab.user._id ? (
               <>
@@ -107,7 +118,11 @@ export const Collab = function () {
                 <button className="default-btn" onClick={handleDelete}>
                   Delete
                 </button>
-                <button id="saveSettings" className="default-btn" onClick={handleSaveSettings}>
+                <button
+                  id="saveSettings"
+                  className="default-btn"
+                  onClick={handleSaveSettings}
+                >
                   Save Settings
                 </button>
               </>
@@ -158,11 +173,16 @@ export const Collab = function () {
             if (el.url && el.url[0] === "h" && el.url[1] === "t")
               return (
                 <div className="videoTrack">
-                  <video id={'t'+String(trackCounter)} className="trackPlayer" height="240" width="240">
+                  <video
+                    id={"t" + String(trackCounter)}
+                    className="trackPlayer"
+                    height="240"
+                    width="240"
+                  >
                     <source src={el.url} type="video/webm"></source>
                   </video>
                   <VolumeSlider
-                    id ={'t'+String(trackCounter)}
+                    id={"t" + String(trackCounter)}
                     volume={el.volume}
                     setCollab={setCollab}
                     url={el.url}
@@ -172,10 +192,10 @@ export const Collab = function () {
                       goToUser(el.username);
                     }}
                     className="userOnTrack"
-                  >@{el.username}
+                  >
+                    @{el.username}
                   </div>
-                    <div hidden>{trackCounter++}
-                    </div>
+                  <div hidden>{trackCounter++}</div>
                   {ctx.userId === collab.user._id ? (
                     <div className="pendingButtons">
                       <button
@@ -198,11 +218,16 @@ export const Collab = function () {
                 if (el.url && el.url[0] === "h" && el.url[1] === "t")
                   return (
                     <div className="videoTrack">
-                      <video className="trackPlayer" height="240" width="240">
+                      <video 
+                      id={"p" + String(trackCounter)}
+                      className="trackPlayer" 
+                      height="240" 
+                      width="240">
                         <source src={el.url} type="video/webm"></source>
                       </video>
                       <VolumeSlider
-                        volume={el.volume}
+                        id={"p" + String(trackCounter)}
+                        volume={0}
                         setCollab={setCollab}
                         url={el.url}
                       />

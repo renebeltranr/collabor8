@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function VolumeSlider({ volume, setCollab, url, id }) {
   const [currentVolume, setCurrentVolume] = useState(String(volume));
-
+  
+  useEffect(()=>{
+    const track = document.getElementById(String(id));
+    if (track) track.volume=currentVolume/100;
+  }, [currentVolume])
 
   function handleVolumeChange(e) {
     setCurrentVolume(e.target.value);
     const track = document.getElementById(String(id));
+    console.log(track)
     track.volume=currentVolume/100;
+    if (id[0]==='t') {
     setCollab((prevState) => {
       const moddedTracks = prevState.tracks.map((el) => {
         if (el.url === url) {
-          el.volume = e.target.value;
+          el.volume = Number(e.target.value);
         }
         return el;
       });
@@ -19,7 +25,8 @@ function VolumeSlider({ volume, setCollab, url, id }) {
         ...prevState,
         tracks: moddedTracks
       };
-    });
+    })
+  };
   }
 
   return (

@@ -1,7 +1,7 @@
 .spinnerContainer {
   display: grid;
   place-items: center;
-  background: #3A86FF;
+  background-color: #6b6cfb;
   height: 100%;
   width: 100%;
   position: absolute;
