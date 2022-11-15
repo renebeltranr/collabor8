@@ -1,4 +1,5 @@
 import collabApiService from "../utilities/collabApiService";
+import VolumeSlider from "./VolumeSlider";
 import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
@@ -18,6 +19,7 @@ export const Collab = function () {
   const [collab, setCollab] = useState(initialCollabState);
   const { id } = useParams();
   const playAll = document.getElementsByClassName("trackPlayer");
+  let trackCounter = 0;
 
   useEffect(() => {
     const getCollab = async () => {
@@ -62,23 +64,27 @@ export const Collab = function () {
   }
 
   async function acceptTrack(url) {
-    console.log(url)
-    const result = await collabApiService.acceptTrack({url: url, cid: id})
-    if (result) window.location.reload()
+    console.log(url);
+    const result = await collabApiService.acceptTrack({ url: url, cid: id });
+    if (result) window.location.reload();
   }
   async function denyTrack(url) {
-    console.log(url)
-    const result = await collabApiService.denyTrack({url: url, cid: id})
-    if (result) window.location.reload()
+    console.log(url);
+    const result = await collabApiService.denyTrack({ url: url, cid: id });
+    if (result) window.location.reload();
   }
   async function deleteTrack(url) {
-    console.log(url)
-    const result = await collabApiService.deleteTrack({url: url, cid: id})
-    if (result) window.location.reload()
+    console.log(url);
+    const result = await collabApiService.deleteTrack({ url: url, cid: id });
+    if (result) window.location.reload();
+  }
+  async function handleSaveSettings() {
+    console.log(collab);
+    //const result = await collabApiService.acceptTrack({ url: url, cid: id });
   }
 
   function goToUser(id) {
-    navigate('/profile/'+id);
+    navigate("/profile/" + id);
   }
 
   return (
@@ -101,6 +107,9 @@ export const Collab = function () {
                 <button className="default-btn" onClick={handleDelete}>
                   Delete
                 </button>
+                <button id="saveSettings" className="default-btn" onClick={handleSaveSettings}>
+                  Save Settings
+                </button>
               </>
             ) : (
               <div></div>
@@ -116,7 +125,14 @@ export const Collab = function () {
             )}
           </div>
 
-          <div>{collab.pendingtracks.length > 0 && collab.pendingtracks.find(el => el.username === ctx.username) ? <h6>*You already have submitted tracks pending review</h6> : ''}</div>
+          <div>
+            {collab.pendingtracks.length > 0 &&
+            collab.pendingtracks.find((el) => el.username === ctx.username) ? (
+              <h6>*You already have submitted tracks pending review</h6>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
         {collab.tracks.length === 1 ? (
           <h6>There's no user tracks, be the first one to collaborate!</h6>
@@ -142,35 +158,85 @@ export const Collab = function () {
             if (el.url && el.url[0] === "h" && el.url[1] === "t")
               return (
                 <div className="videoTrack">
-                  <video className="trackPlayer" height="240" width="240">
+                  <video id={'t'+String(trackCounter)} className="trackPlayer" height="240" width="240">
                     <source src={el.url} type="video/webm"></source>
                   </video>
-                    <input className="volumeSlider" type="range" min="0" max="100" value={el.volume}></input>
-                    <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
-                    {ctx.userId === collab.user._id ? <div className="pendingButtons">
-                    <button onClick={()=>deleteTrack(el.url)} id="denyTrack" className="default-btn">X</button>
-                    </div> : ''}
+                  <VolumeSlider
+                    id ={'t'+String(trackCounter)}
+                    volume={el.volume}
+                    setCollab={setCollab}
+                    url={el.url}
+                  />
+                  <div
+                    onClick={() => {
+                      goToUser(el.username);
+                    }}
+                    className="userOnTrack"
+                  >@{el.username}
+                  </div>
+                    <div hidden>{trackCounter++}
+                    </div>
+                  {ctx.userId === collab.user._id ? (
+                    <div className="pendingButtons">
+                      <button
+                        onClick={() => deleteTrack(el.url)}
+                        id="denyTrack"
+                        className="default-btn"
+                      >
+                        X
+                      </button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               );
           })}
-          
-          {(collab.pendingtracks.length > 0 &&  ctx.userId === collab.user._id) ? collab.pendingtracks.map((el) => {
-            if (el.url && el.url[0] === "h" && el.url[1] === "t")
-              return (
-                <div className="videoTrack">
-                  <video className="trackPlayer" height="240" width="240">
-                    <source src={el.url} type="video/webm"></source>
-                  </video>
-                  <input className="volumeSlider" type="range" min="0" max="100" value={el.volume}></input>
-                    <div className="trackStatus"><h6>Pending track</h6></div>
-                    <div onClick={()=>{goToUser(el.username)}} className="userOnTrack">@{el.username}</div>
-                    <div className="pendingButtons">
-                    <button onClick={()=>acceptTrack(el.url)} id="acceptTrack" className="default-btn">OK</button>
-                    <button onClick={()=>denyTrack(el.url)} id="denyTrack" className="default-btn">X</button>
+
+          {collab.pendingtracks.length > 0 && ctx.userId === collab.user._id
+            ? collab.pendingtracks.map((el) => {
+                if (el.url && el.url[0] === "h" && el.url[1] === "t")
+                  return (
+                    <div className="videoTrack">
+                      <video className="trackPlayer" height="240" width="240">
+                        <source src={el.url} type="video/webm"></source>
+                      </video>
+                      <VolumeSlider
+                        volume={el.volume}
+                        setCollab={setCollab}
+                        url={el.url}
+                      />
+                      <div className="trackStatus">
+                        <h6>Pending track</h6>
+                      </div>
+                      <div
+                        onClick={() => {
+                          goToUser(el.username);
+                        }}
+                        className="userOnTrack"
+                      >
+                        @{el.username}
+                      </div>
+                      <div className="pendingButtons">
+                        <button
+                          onClick={() => acceptTrack(el.url)}
+                          id="acceptTrack"
+                          className="default-btn"
+                        >
+                          OK
+                        </button>
+                        <button
+                          onClick={() => denyTrack(el.url)}
+                          id="denyTrack"
+                          className="default-btn"
+                        >
+                          X
+                        </button>
+                      </div>
                     </div>
-                </div>
-              );
-          }) : ''}
+                  );
+              })
+            : ""}
         </div>
       </div>
     </div>

@@ -44,6 +44,7 @@ const getCollab = async (req, res) => {
   try {
     const cid = req.params;
     const cb = await Collab.find({_id: cid.id}).populate('owner');
+    cb[0].owner.password = undefined;
     res.status(200).send(cb);
   } catch (error) {
     console.log(error)

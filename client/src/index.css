@@ -54,6 +54,7 @@ a {
   font-size: 80%;
   line-height: 1.15;
   padding: 0.7em;
+  margin: 0.4em;
   outline: none;
   overflow: hidden;
   position: relative;
@@ -160,8 +161,6 @@ a {
   margin-top: 1em;
   margin-bottom: 1em;
   display: flex;
-  width: 12em;
-  justify-content: space-between;
 }
 
 .collabCard {
