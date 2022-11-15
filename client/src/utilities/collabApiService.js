@@ -1,12 +1,12 @@
-const URL = 'http://localhost:3001';
+const URL = "http://localhost:3001";
 const collabApiService = {};
 
 collabApiService.getCollabs = () => {
   return fetch(`${URL}/collab/getAll`, {
-    method: 'GET',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -14,11 +14,11 @@ collabApiService.getCollabs = () => {
 
 collabApiService.newCollab = (cb) => {
   return fetch(`${URL}/collab/newCollab`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(cb)
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(cb),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -26,9 +26,9 @@ collabApiService.newCollab = (cb) => {
 
 collabApiService.getUserCollabs = (id) => {
   return fetch(`${URL}/collab/getUserCollabs/${id}`, {
-    method: 'GET',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' }
+    method: "GET",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -36,10 +36,10 @@ collabApiService.getUserCollabs = (id) => {
 
 collabApiService.getCollab = (id) => {
   return fetch(`${URL}/collab/id/${id}`, {
-    method: 'GET',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' }
+    method: "GET",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -47,11 +47,15 @@ collabApiService.getCollab = (id) => {
 
 collabApiService.saveTrack = (data) => {
   return fetch(`${URL}/collab/saveTrack`, {
-    method: 'POST',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url, cid: data.cid, username: data.username})
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      url: data.url,
+      cid: data.cid,
+      username: data.username,
+    }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -59,11 +63,11 @@ collabApiService.saveTrack = (data) => {
 
 collabApiService.saveSettings = (data) => {
   return fetch(`${URL}/collab/id/${data.cid}/saveSettings`, {
-    method: 'PUT',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data.collab)
+    method: "PUT",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data.collab),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -71,11 +75,11 @@ collabApiService.saveSettings = (data) => {
 
 collabApiService.acceptTrack = (data) => {
   return fetch(`${URL}/collab/id/${data.cid}/acceptTrack`, {
-    method: 'PUT',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url})
+    method: "PUT",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url: data.url }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -83,11 +87,11 @@ collabApiService.acceptTrack = (data) => {
 
 collabApiService.denyTrack = (data) => {
   return fetch(`${URL}/collab/id/${data.cid}/denyTrack`, {
-    method: 'DELETE',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url})
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url: data.url }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -95,11 +99,11 @@ collabApiService.denyTrack = (data) => {
 
 collabApiService.deleteTrack = (data) => {
   return fetch(`${URL}/collab/id/${data.cid}/deleteTrack`, {
-    method: 'DELETE',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({url: data.url})
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url: data.url }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -107,11 +111,11 @@ collabApiService.deleteTrack = (data) => {
 
 collabApiService.deleteCollab = (data) => {
   return fetch(`${URL}/collab/delete/${data.cid}`, {
-    method: 'DELETE',
-    credentials: 'include',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({uid: data.uid})
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ uid: data.uid }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

@@ -10,8 +10,9 @@ function Logout() {
   const handleClick = async () => {
     if (ctx.isAuthenticated) {
       const logout = await authApiService.logout();
-      console.log(logout)
       ctx.setIsAuthenticated(false);
+      ctx.setUserId("");
+      ctx.setUsername("");
       navigate("/");
     } else console.log("User already logged out");
   };
@@ -22,7 +23,7 @@ function Logout() {
   return (
     <div className="logout">
       <div className="logoutFlex">
-          <h4>Are you sure you want to log out?</h4>
+        <h4>Are you sure you want to log out?</h4>
         <div className="logoutButtons">
           <button className="default-btn" onClick={() => handleClick()}>
             Yes

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import moment from 'moment';
+import moment from "moment";
 
 function ListedCollab({ owner, name, tracks, _id, createdAt }) {
   return (
@@ -18,22 +18,26 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
         {tracks.map((el) => {
           if (el.url)
             return (
-                <img 
-                  className="listedPictures"
-                  key={el.url}
-                  width="120"
-                  height="120"
-                  alt=""
-                  src={
-                    el.url[el.url.length - 1] === "m"
-                      ? el.url.slice(0, -4) + "jpg"
-                      : el.url.slice(0, -3) + "jpg"
-                  }
-                ></img>
+              <img
+                className="listedPictures"
+                key={el.url}
+                width="160"
+                height="160"
+                alt=""
+                src={
+                  el.url[el.url.length - 1] === "m"
+                    ? el.url.slice(0, -4) + "jpg"
+                    : el.url.slice(0, -3) + "jpg"
+                }
+              ></img>
             );
         })}
       </div>
-                <div className="createdAt"><h6 className="dateStyle">{moment(createdAt).format("MMMM Do YYYY")}</h6></div>
+      <div className="createdAt">
+        <h6 className="dateStyle">
+          {moment(createdAt).format("MMMM Do YYYY")}
+        </h6>
+      </div>
     </div>
   );
 }

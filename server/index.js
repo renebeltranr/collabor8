@@ -9,16 +9,16 @@ const PORT = 3001;
 const app = express();
 
 const corsConfig = {
-  origin: 'http://localhost:3000',
+  origin: "http://localhost:3000",
   credentials: true,
 };
 
 app.use(cors(corsConfig));
 app.use(express.json());
 
-const cookieSecret = 'SuperSecurePassword';
+const cookieSecret = "SuperSecurePassword";
 const sid = {
-  name: 'sid',
+  name: "sid",
   secret: cookieSecret,
   saveUninitialized: false,
   resave: false,
@@ -31,10 +31,10 @@ const sid = {
 app.use(session(sid));
 
 app.use(userRouter);
-app.use('/collab', collabRouter);
+app.use("/collab", collabRouter);
 
-app.get('*', (req, res) => {
-  res.status(404).send('404 not found');
+app.get("*", (req, res) => {
+  res.status(404).send("404 not found");
 });
 
 app.listen(PORT, (err) => {

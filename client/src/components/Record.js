@@ -1,4 +1,4 @@
-import collabApiService from '../utilities/collabApiService';
+import collabApiService from "../utilities/collabApiService";
 import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
@@ -22,7 +22,6 @@ function Record() {
   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
   const [state, setState] = useState(initialState);
   const { id } = useParams();
-
 
   function handleAudioSelection(e) {
     setSelectedAudioDevice(e.target.value);
@@ -77,11 +76,12 @@ function Record() {
   const handleSuccess = function (stream) {
     const options = {
       mimeType: "audio/webm",
-      videoBitsPerSecond: 125000,
+      AudioBitsPerSecond: 256000,
+      videoBitsPerSecond: 256000,
     };
     const mediaRecorder = new MediaRecorder(stream, options);
     const chunks = [];
-  
+
     mediaRecorder.addEventListener("dataavailable", function (e) {
       if (e.data.size > 0) chunks.push(e.data);
     });
@@ -101,11 +101,14 @@ function Record() {
       result
         .then((data) => {
           submitButton.disabled = true;
-          const ret = collabApiService.saveTrack({ url: data.secure_url, cid: id, username: ctx.username });
+          const ret = collabApiService.saveTrack({
+            url: data.secure_url,
+            cid: id,
+            username: ctx.username,
+          });
           ret.then((data) => {
-            navigate(`/collab/id/${id}`)
-          }
-            );
+            navigate(`/collab/id/${id}`);
+          });
         })
         .catch((err) => console.log(err));
     });
@@ -114,13 +117,13 @@ function Record() {
 
   return (
     <div className="record">
-        {ctx.userId ? (
-          <div className="recordArea">
-            <div className="deviceSelect">
-      <div className="collabName">
-        <h5>{state.name}</h5>
-        <h6>@{state.user.username}</h6>
-        </div>
+      {ctx.userId ? (
+        <div className="recordArea">
+          <div className="deviceSelect">
+            <div className="collabName">
+              <h5>{state.name}</h5>
+              <h6>@{state.user.username}</h6>
+            </div>
             <h5>Select the devices to record with:</h5>
             <select
               onChange={handleAudioSelection}
@@ -152,29 +155,38 @@ function Record() {
                   })
                 : null}
             </select>
-            </div>
-            <h5>
-              Play the video to start recording. Once you're done, press the
-              Stop button to listen to the preview. If you're happy with it,
-              press submit to upload it to your Collab!
-            </h5>
-            <div className="recButtons">
-              <button className="default-btn" id="stop">
-                Stop
-              </button>
-              {(<button className="default-btn" id="submit">
-                Submit
-              </button>)}
-              {ctx.userId !== state.user._id ? <h6>*Keep in mind the owner will need to review your submission and should not be accepted right away.</h6> : ''}
-            </div>
-            <div className="selfListen">
-              <h6>Listen to your recorded track before submitting</h6>
-              <audio id="audioPlayer" controls></audio>
-            </div>
           </div>
-        ) : (
-          <div></div>
-        )}
+          <h5>
+            Play the video to start recording. Once you're done, press the Stop
+            button to listen to the preview. If you're happy with it, press
+            submit to upload it to your Collab!
+          </h5>
+          <div className="recButtons">
+            <button className="default-btn" id="stop">
+              Stop
+            </button>
+            {
+              <button className="default-btn" id="submit">
+                Submit
+              </button>
+            }
+            {ctx.userId !== state.user._id ? (
+              <h6>
+                *Keep in mind the owner will need to review your submission and
+                should not be accepted right away.
+              </h6>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="selfListen">
+            <h6>Listen to your recorded track before submitting</h6>
+            <audio id="audioPlayer" controls></audio>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
       <div className="baseTrackAndVid">
         <ReactPlayer
           id="baseTrack"
@@ -184,7 +196,8 @@ function Record() {
           url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
           onStart={startHandler}
         />
-        <video controls
+        <video
+          controls
           id="videoPlayer"
           title="test"
           width="180"

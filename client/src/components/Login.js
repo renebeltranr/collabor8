@@ -3,8 +3,8 @@ import authApiService from "../utilities/authApiService";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 
-function Login (){
-  const ctx = useContext(GlobalContext); 
+function Login() {
+  const ctx = useContext(GlobalContext);
   let navigate = useNavigate();
   const initialState = {
     username: "",
@@ -29,6 +29,8 @@ function Login (){
       setState(initialState);
     } else {
       ctx.setIsAuthenticated(true);
+      ctx.setUserId(res._id);
+      ctx.setUsername(res.username);
       navigate(`/profile/${username}`);
     }
   };
@@ -38,31 +40,36 @@ function Login (){
   };
 
   return (
-    <div className='login'>
-    <div className='loginFlex'>
-      <h2>Login</h2>
-      <form className="mainForm" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="username"
-          name="username"
-          value={state.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          value={state.password}
-          onChange={handleChange}
-        />
-        <button id="login-btn" className="default-btn" type="submit" disabled={validateForm()}>
-          &nbsp;Login&nbsp;
-        </button>
-      </form>
-    </div>
+    <div className="login">
+      <div className="loginFlex">
+        <h2>Login</h2>
+        <form className="mainForm" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="username"
+            name="username"
+            value={state.username}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            value={state.password}
+            onChange={handleChange}
+          />
+          <button
+            id="login-btn"
+            className="default-btn"
+            type="submit"
+            disabled={validateForm()}
+          >
+            &nbsp;Login&nbsp;
+          </button>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
 export default Login;

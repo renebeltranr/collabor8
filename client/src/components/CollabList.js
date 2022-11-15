@@ -1,7 +1,7 @@
 function CollabList({ children }) {
   return (
     <>
-      <div className="collabList">{ children }</div>
+      <div className="collabList">{children}</div>
     </>
   );
 }

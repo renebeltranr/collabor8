@@ -24,15 +24,15 @@ function NewCollab(props) {
     e.preventDefault();
     const cb = {
       name: state.name,
-      tracks: [state.URL]
-    }
+      tracks: [state.URL],
+    };
     const res = await collabApiService.newCollab(cb);
     if (res.error) {
       alert(`${res.message}`);
       setState(initialState);
     } else {
       console.log("collab created successfully: ", cb);
-      navigate(`/profile/${ctx.username}`)
+      navigate(`/profile/${ctx.username}`);
     }
   };
 
@@ -42,7 +42,7 @@ function NewCollab(props) {
 
   return (
     <div className="newCollab">
-        <form className="newCollabForm" onSubmit={handleSubmit}>
+      <form className="newCollabForm" onSubmit={handleSubmit}>
         <h3>Create your New Collab</h3>
         <div className="newCollabName">
           <h5>Pick a cool Collab name. Other users will see it!</h5>
@@ -54,12 +54,15 @@ function NewCollab(props) {
             value={state.username}
             onChange={handleChange}
           />
-          </div>
-          <div className="newCollabVid">
+        </div>
+        <div className="newCollabVid">
           <h5>
-            Paste the code you find in a Youtube's video URL that will serve as a base track for your
-            Collab.
-            Example: <p>https://www.youtube.com/watch?v=<span className='highlighted'>OS8taasZl8k</span></p>
+            Paste the code you find in a Youtube's video URL that will serve as
+            a base track for your Collab. Example:{" "}
+            <p>
+              https://www.youtube.com/watch?v=
+              <span className="highlighted">OS8taasZl8k</span>
+            </p>
           </h5>
           <input
             className="default-input"
@@ -70,26 +73,23 @@ function NewCollab(props) {
             onChange={handleChange}
           />
 
-        <h5>
-            Once you see your Youtube Video embeded on the player, you're ready to create it!
+          <h5>
+            Once you see your Youtube Video embeded on the player, you're ready
+            to create it!
           </h5>
-          </div>
-          <button
-            className="default-btn"
-            type="submit"
-            disabled={validateForm()}
-          >
-            &nbsp;Create&nbsp;
-          </button>
-        </form>
-        <div className='videoDiv'>
-      <iframe 
-        title="test"
-        width="190"
-        height="110"
-        src={"https://www.youtube-nocookie.com/embed/"+state.URL}
-      ></iframe>
-    </div>
+        </div>
+        <button className="default-btn" type="submit" disabled={validateForm()}>
+          &nbsp;Create&nbsp;
+        </button>
+      </form>
+      <div className="videoDiv">
+        <iframe
+          title="test"
+          width="190"
+          height="110"
+          src={"https://www.youtube-nocookie.com/embed/" + state.URL}
+        ></iframe>
+      </div>
     </div>
   );
 }

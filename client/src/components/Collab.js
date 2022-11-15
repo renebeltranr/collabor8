@@ -65,7 +65,6 @@ export const Collab = function () {
       uid: collab.user._id,
       cid: id,
     });
-    console.log(deletion);
     navigate(`/profile/${ctx.username}`);
   }
 
@@ -218,11 +217,12 @@ export const Collab = function () {
                 if (el.url && el.url[0] === "h" && el.url[1] === "t")
                   return (
                     <div className="videoTrack">
-                      <video 
-                      id={"p" + String(trackCounter)}
-                      className="trackPlayer" 
-                      height="240" 
-                      width="240">
+                      <video
+                        id={"p" + String(trackCounter)}
+                        className="trackPlayer"
+                        height="240"
+                        width="240"
+                      >
                         <source src={el.url} type="video/webm"></source>
                       </video>
                       <VolumeSlider
@@ -232,7 +232,7 @@ export const Collab = function () {
                         url={el.url}
                       />
                       <div className="trackStatus">
-                        <h6>Pending track</h6>
+                        <h5>Pending track</h5>
                       </div>
                       <div
                         onClick={() => {

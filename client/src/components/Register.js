@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import authApiService from '../utilities/authApiService';
-import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from '../App';
+import React, { useState } from "react";
+import authApiService from "../utilities/authApiService";
+import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../App";
 
 const initialState = {
-  username: '',
-  password: '',
-  country: '',
+  username: "",
+  password: "",
+  country: "",
 };
 
-function Register () {
-  const ctx = React.useContext(GlobalContext); 
+function Register() {
+  const ctx = React.useContext(GlobalContext);
   const navigate = useNavigate();
   const [state, setState] = useState(initialState);
 
@@ -38,44 +38,47 @@ function Register () {
   };
 
   const validateForm = () => {
-    return (
-      !state.username || !state.password || !state.country
-    );
+    return !state.username || !state.password || !state.country;
   };
 
   return (
-    <div className='register'>
-    <div className='registerFlex'>
-      <h2>Register</h2>
-      <form className="mainForm" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="username"
-          name="username"
-          value={state.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          value={state.password}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder="Spain"
-          name="country"
-          value={state.firstName}
-          onChange={handleChange}
-        />
-        <button id="register-btn" className="default-btn" type="submit" disabled={validateForm()}>
-          &nbsp;Register&nbsp;
-        </button>
-      </form>
-    </div>
+    <div className="register">
+      <div className="registerFlex">
+        <h2>Register</h2>
+        <form className="mainForm" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="username"
+            name="username"
+            value={state.username}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            value={state.password}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="Spain"
+            name="country"
+            value={state.firstName}
+            onChange={handleChange}
+          />
+          <button
+            id="register-btn"
+            className="default-btn"
+            type="submit"
+            disabled={validateForm()}
+          >
+            &nbsp;Register&nbsp;
+          </button>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
 export default Register;

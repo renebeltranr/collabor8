@@ -21,32 +21,32 @@ const Dashboard = ({ isAuthenticated, setIsAuthenticated, userId }) => {
           path="/login"
           element={<Login setIsAuthenticated={setIsAuthenticated} />}
         />
-        <Route 
-          path="/profile/:username" 
-          element={<Profile isAuthenticated={isAuthenticated}/>} 
-        />
-        <Route 
-          path="/" 
-          element={<Home />} 
-        />
-        <Route 
-          path="/collab/id/:id" 
-          element={<Collab userId={userId} />} 
-        />
-        {isAuthenticated ? (<>
-        <Route 
-          path="/collab/newCollab" 
-          element={<NewCollab isAuthenticated={isAuthenticated}/>} 
-        />
         <Route
-          path="/logout"
-          element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+          path="/profile/:username"
+          element={<Profile isAuthenticated={isAuthenticated} />}
         />
-        <Route 
-          path="/record/:id" 
-          element={<Record isAuthenticated={isAuthenticated} userId={userId} />} 
-        />
-        </>) : <></>}
+        <Route path="/" element={<Home />} />
+        <Route path="/collab/id/:id" element={<Collab userId={userId} />} />
+        {isAuthenticated ? (
+          <>
+            <Route
+              path="/collab/newCollab"
+              element={<NewCollab isAuthenticated={isAuthenticated} />}
+            />
+            <Route
+              path="/logout"
+              element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route
+              path="/record/:id"
+              element={
+                <Record isAuthenticated={isAuthenticated} userId={userId} />
+              }
+            />
+          </>
+        ) : (
+          <></>
+        )}
       </Routes>
     </div>
   );
