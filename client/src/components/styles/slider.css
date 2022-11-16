@@ -1,14 +1,14 @@
-input[type=range] {
+.volumeSlider {
   height: 0.1em;
   -webkit-appearance: none;
   width: 60%;
 }
 
-input[type=range]:focus {
+.volumeSlider:focus {
   outline: none;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+.volumeSlider::-webkit-slider-runnable-track {
   width: 60%;
   height: 0.5em;
   cursor: pointer;
@@ -17,7 +17,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 5px;
 }
 
-input[type=range]::-webkit-slider-thumb {
+.volumeSlider::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
   height: 2em;
@@ -29,11 +29,11 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -11px;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+.volumeSlider:focus::-webkit-slider-runnable-track {
   background: #60a0c7;
 }
 
-input[type=range]::-moz-range-track {
+.volumeSlider::-moz-range-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
@@ -43,7 +43,7 @@ input[type=range]::-moz-range-track {
   border: 1px solid #000000;
 }
 
-input[type=range]::-moz-range-thumb {
+.volumeSlider::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
   height: 30px;
@@ -53,7 +53,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type=range]::-ms-track {
+.volumeSlider::-ms-track {
   width: 100%;
   height: 10px;
   cursor: pointer;
@@ -62,21 +62,21 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-input[type=range]::-ms-fill-lower {
+.volumeSlider::-ms-fill-lower {
   background: #60a0c7;
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #000000;
 }
 
-input[type=range]::-ms-fill-upper {
+.volumeSlider::-ms-fill-upper {
   background: #60a0c7;
   border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 1px 1px 1px #000000;
 }
 
-input[type=range]::-ms-thumb {
+.volumeSlider::-ms-thumb {
   margin-top: 1px;
   box-shadow: 1px 1px 1px #000000;
   border: 1px solid #000000;
@@ -87,10 +87,10 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 
-input[type=range]:focus::-ms-fill-lower {
+.volumeSlider:focus::-ms-fill-lower {
   background: #60a0c7;
 }
 
-input[type=range]:focus::-ms-fill-upper {
+.volumeSlider:focus::-ms-fill-upper {
   background: #60a0c7;
 }

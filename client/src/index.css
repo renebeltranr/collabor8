@@ -8,6 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #6b6cfb;
+  overflow:hidden;
 }
 
 .Navbar {
@@ -161,8 +162,7 @@ a {
   margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
-  overflow-y: scroll;
-  max-height: 50vh;
+  max-height: 40vh;
   justify-content: center;
 }
 

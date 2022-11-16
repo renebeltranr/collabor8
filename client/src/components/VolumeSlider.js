@@ -13,6 +13,7 @@ function VolumeSlider({ volume, setCollab, url, id }) {
     setCurrentVolume(e.target.value);
     const track = document.getElementById(String(id));
     track.volume = currentVolume / 100;
+    //
     if (id[0] === "t") {
       setCollab((prevState) => {
         const moddedTracks = prevState.tracks.map((el) => {
