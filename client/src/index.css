@@ -1,134 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap");
 
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #6b6cfb;
-  overflow:hidden;
-}
-
-.Navbar {
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-  box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.5);
-  background-color: #f9f9f9;
-}
-
-.sessionButtons {
-  display: flex;
-  justify-content: space-around;
-  width: 8em;
-}
-
-.homeTitle {
-  display: flex;
-  justify-content: center;
-  position: sticky;
-  top: 0;
+  overflow: hidden;
 }
 
 a {
   text-decoration: none;
   color: black;
-}
-
-.default-btn {
-  appearance: button;
-  backface-visibility: hidden;
-  background-color: #60a0c7;
-  border-radius: 6px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, sans-serif;
-  font-size: 80%;
-  line-height: 1.15;
-  padding: 0.7em;
-  margin: 0.4em;
-  outline: none;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all .2s, box-shadow .08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.default-btn:disabled {
-  cursor: default;
-}
-
-.default-btn:hover {
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
-}
-
-.default-input {
-  width: 15rem;
-}
-
-.dashboard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
-}
-
-.loginFlex {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5em;
-  max-height: 10em;
-}
-
-.logoutFlex {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5em;
-  max-height: 10em;
-  justify-content: space-evenly;
-}
-
-.logoutButtons {
-  display: flex;
-  justify-content: space-evenly
-}
-
-.registerFlex {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5em;
-  max-height: 10em;
-}
-
-.mainForm {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.logoContainer{
-  height:auto;
-}
-
-.logo {
-  max-height: 14vh;
-  object-fit: fill;
 }
 
 .home,
@@ -154,7 +39,7 @@ a {
 }
 
 .collabList {
-  margin-top:1em;
+  margin-top: 1em;
   overflow-y: scroll;
 }
 
@@ -193,15 +78,10 @@ a {
 }
 
 .videoTrack {
-  display:flex;
-  position:relative;
-  margin:0.5em;
+  display: flex;
+  position: relative;
+  margin: 0.5em;
   box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
-}
-
-.home {
-  flex-direction: column;
-  justify-content: start;
 }
 
 .myprofile {
@@ -213,18 +93,9 @@ a {
 
 .mycollabs {
   width: 70vw;
-  overflow: scroll
+  overflow: scroll;
 }
 
-.myCollabsHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-}
-
-.newCollabForm,
-.myCollabsHeader,
 .listedCollab,
 .myprofile,
 .collabCard,
@@ -234,16 +105,15 @@ a {
 .logoutFlex,
 .homeTitle {
   background: #f9f9f9;
-  color:#60a0c7;
+  color: #60a0c7;
   box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
   -webkit-backdrop-filter: blur(9.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-
 }
 
 .listedCollab {
-  display:flex;
+  display: flex;
   flex-direction: column;
   box-shadow: 1px 1px 1px 1px rgba(86, 86, 86, 0.5);
   padding: 1em;
@@ -258,15 +128,7 @@ h5,
 h6 {
   margin: 0;
   padding: 0.5em;
-  color:#60a0c7
-}
-
-.newCollabForm {
-  display: flex;
-  flex-direction: column;
-  width: 60vw;
-  justify-content: center;
-  align-self: center;
+  color: #60a0c7;
 }
 
 .newCollabName,
@@ -281,6 +143,7 @@ h6 {
 .collabName {
   display: flex;
   flex-direction: column;
+  margin: 0.5em;
 }
 
 .collabRecordBTN {
@@ -306,7 +169,7 @@ h6 {
 }
 
 .recButtons {
-  margin: 1.5em
+  margin: 1.5em;
 }
 
 .baseTrack {
@@ -321,38 +184,31 @@ h6 {
   font-weight: bold;
 }
 
-.volumeSlider{
+.trackStatus {
   position: absolute;
   color: #f9f9f9;
-  left: 1em;
-  bottom:1em;
-}
-
-.trackStatus {
-  position:absolute;
-  color:#f9f9f9;
   top: 1em;
   left: 1em;
 }
 
 .pendingButtons {
-  position:absolute;
+  position: absolute;
   top: 1em;
   right: 1em;
 }
 
-.createdAt{
-  align-self:flex-end;
+.createdAt {
+  align-self: flex-end;
   font-style: italic;
   color: rgb(93, 93, 93);
 }
 
-.dateStyle{
-  margin-top:1.5em;
-  padding:0;
+.dateStyle {
+  margin-top: 1.5em;
+  padding: 0;
 }
 
-.listedPictures{
-  margin:0.5em;
+.listedPictures {
+  margin: 0.5em;
   box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
 }

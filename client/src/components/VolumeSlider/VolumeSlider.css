@@ -2,6 +2,10 @@
   height: 0.1em;
   -webkit-appearance: none;
   width: 60%;
+  position: absolute;
+  color: #f9f9f9;
+  left: 1em;
+  bottom: 1em;
 }
 
 .volumeSlider:focus {
@@ -23,7 +27,7 @@
   height: 2em;
   width: 1em;
   border-radius: 5px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
@@ -49,7 +53,7 @@
   height: 30px;
   width: 15px;
   border-radius: 5px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   cursor: pointer;
 }
 
@@ -83,7 +87,7 @@
   height: 30px;
   width: 15px;
   border-radius: 5px;
-  background: #F9F9F9;
+  background: #f9f9f9;
   cursor: pointer;
 }
 

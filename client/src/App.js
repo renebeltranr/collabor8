@@ -1,8 +1,17 @@
 import React, { useState, useEffect, createContext } from "react";
-import Navbar from "./Navbar";
-import Dashboard from "./Dashboard";
-import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+//import Dashboard from "./Dashboard";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import authApiService from "./utilities/authApiService";
+
+import Register from "./components/Register/Register";
+import Login from "./components/Login/Login";
+import Profile from "./components/Profile/Profile";
+import Home from "./components/Home/Home";
+import { Collab } from "./components/Collab/Collab";
+import NewCollab from "./components/NewCollab/NewCollab";
+import Logout from "./components/Logout/Logout";
+import Record from "./components/Record/Record";
 
 export const GlobalContext = createContext({
   isAuthenticated: false,
@@ -49,12 +58,42 @@ function App() {
             isAuthenticated={ctx.isAuthenticated}
             username={ctx.username}
           />
-          <Dashboard
-            isAuthenticated={ctx.isAuthenticated}
-            setIsAuthenticated={ctx.setIsAuthenticated}
-            userId={ctx.userId}
-            username={ctx.username}
-          />
+          <Routes>
+            <Route
+              path="/register"
+              element={<Register setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route
+              path="/login"
+              element={<Login setIsAuthenticated={setIsAuthenticated} />}
+            />
+            <Route
+              path="/profile/:username"
+              element={<Profile isAuthenticated={isAuthenticated} />}
+            />
+            <Route path="/" element={<Home />} />
+            <Route path="/collab/id/:id" element={<Collab userId={userId} />} />
+            {isAuthenticated ? (
+              <>
+                <Route
+                  path="/collab/newCollab"
+                  element={<NewCollab isAuthenticated={isAuthenticated} />}
+                />
+                <Route
+                  path="/logout"
+                  element={<Logout setIsAuthenticated={setIsAuthenticated} />}
+                />
+                <Route
+                  path="/record/:id"
+                  element={
+                    <Record isAuthenticated={isAuthenticated} userId={userId} />
+                  }
+                />
+              </>
+            ) : (
+              <></>
+            )}
+          </Routes>
         </GlobalContext.Provider>
       </Router>
     </div>

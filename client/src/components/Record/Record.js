@@ -1,9 +1,10 @@
-import collabApiService from "../utilities/collabApiService";
+import collabApiService from "../../utilities/collabApiService";
 import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../../App";
 import ReactPlayer from "react-player/lazy";
-import { upVideoToCloudinary } from "../utilities/Cloudinary";
+import { upVideoToCloudinary } from "../../utilities/Cloudinary";
+import "./Record.css";
 
 const initialState = {
   name: "",
@@ -116,93 +117,95 @@ function Record() {
   };
 
   return (
-    <div className="record">
-      {ctx.userId ? (
-        <div className="recordArea">
-          <div className="deviceSelect">
-            <div className="collabName">
-              <h5>{state.name}</h5>
-              <h6>@{state.user.username}</h6>
+    <div className="main">
+      <div className="record">
+        {ctx.userId ? (
+          <div className="recordArea">
+            <div className="deviceSelect">
+              <div className="collabName">
+                <h5>{state.name}</h5>
+                <h6>@{state.user.username}</h6>
+              </div>
+              <h5>Select the devices to record with:</h5>
+              <select
+                onChange={handleAudioSelection}
+                name="audiodevices"
+                id="devices"
+              >
+                {audioDevices.length
+                  ? audioDevices.map((d) => {
+                      return (
+                        <option key={d.deviceId} value={d.deviceId}>
+                          {d.label}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
+              <select
+                onChange={handleVideoSelection}
+                name="videodevices"
+                id="devices"
+              >
+                {videoDevices.length
+                  ? videoDevices.map((d) => {
+                      return (
+                        <option key={d.deviceId} value={d.devideId}>
+                          {d.label}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
             </div>
-            <h5>Select the devices to record with:</h5>
-            <select
-              onChange={handleAudioSelection}
-              name="audiodevices"
-              id="devices"
-            >
-              {audioDevices.length
-                ? audioDevices.map((d) => {
-                    return (
-                      <option key={d.deviceId} value={d.deviceId}>
-                        {d.label}
-                      </option>
-                    );
-                  })
-                : null}
-            </select>
-            <select
-              onChange={handleVideoSelection}
-              name="videodevices"
-              id="devices"
-            >
-              {videoDevices.length
-                ? videoDevices.map((d) => {
-                    return (
-                      <option key={d.deviceId} value={d.devideId}>
-                        {d.label}
-                      </option>
-                    );
-                  })
-                : null}
-            </select>
-          </div>
-          <h5>
-            Play the video to start recording. Once you're done, press the Stop
-            button to listen to the preview. If you're happy with it, press
-            submit to upload it to your Collab!
-          </h5>
-          <div className="recButtons">
-            <button className="default-btn" id="stop">
-              Stop
-            </button>
-            {
-              <button className="default-btn" id="submit">
-                Submit
+            <h5>
+              Play the video to start recording. Once you're done, press the
+              Stop button to listen to the preview. If you're happy with it,
+              press submit to upload it to your Collab!
+            </h5>
+            <div className="recButtons">
+              <button className="default-btn" id="stop">
+                Stop
               </button>
-            }
-            {ctx.userId !== state.user._id ? (
-              <h6>
-                *Keep in mind the owner will need to review your submission and
-                should not be accepted right away.
-              </h6>
-            ) : (
-              ""
-            )}
+              {
+                <button className="default-btn" id="submit">
+                  Submit
+                </button>
+              }
+              {ctx.userId !== state.user._id ? (
+                <h6>
+                  *Keep in mind the owner will need to review your submission
+                  and should not be accepted right away.
+                </h6>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="selfListen">
+              <h6>Listen to your recorded track before submitting</h6>
+              <audio id="audioPlayer" controls></audio>
+            </div>
           </div>
-          <div className="selfListen">
-            <h6>Listen to your recorded track before submitting</h6>
-            <audio id="audioPlayer" controls></audio>
-          </div>
+        ) : (
+          <div></div>
+        )}
+        <div className="baseTrackAndVid">
+          <ReactPlayer
+            id="baseTrack"
+            title="test"
+            width="180"
+            height="180"
+            url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
+            onStart={startHandler}
+          />
+          <video
+            controls
+            id="videoPlayer"
+            title="test"
+            width="180"
+            height="180"
+          />
         </div>
-      ) : (
-        <div></div>
-      )}
-      <div className="baseTrackAndVid">
-        <ReactPlayer
-          id="baseTrack"
-          title="test"
-          width="180"
-          height="180"
-          url={"https://www.youtube-nocookie.com/embed/" + state.tracks[0]}
-          onStart={startHandler}
-        />
-        <video
-          controls
-          id="videoPlayer"
-          title="test"
-          width="180"
-          height="180"
-        />
       </div>
     </div>
   );

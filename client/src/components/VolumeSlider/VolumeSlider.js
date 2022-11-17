@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./styles/slider.css";
+import "./VolumeSlider.css";
 
 function VolumeSlider({ volume, setCollab, url, id }) {
   const [currentVolume, setCurrentVolume] = useState(String(volume));
