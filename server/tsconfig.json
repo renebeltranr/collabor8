@@ -1,0 +1,15 @@
+{
+  "include": ["./src/**/*"],
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2020",
+    "moduleResolution": "node",
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+  },
+  "lib": ["es2021"]
+}

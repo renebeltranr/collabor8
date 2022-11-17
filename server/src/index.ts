@@ -1,3 +1,5 @@
+import { Handler, Error } from "./types/types";
+
 const express = require("express");
 const cors = require("cors");
 const db = require("./models/index");
@@ -16,10 +18,9 @@ const corsConfig = {
 app.use(cors(corsConfig));
 app.use(express.json());
 
-const cookieSecret = "SuperSecurePassword";
 const sid = {
   name: "sid",
-  secret: cookieSecret,
+  secret: "SuperSecretPassword",
   saveUninitialized: false,
   resave: false,
   cookie: {
@@ -33,11 +34,13 @@ app.use(session(sid));
 app.use(userRouter);
 app.use("/collab", collabRouter);
 
-app.get("*", (req, res) => {
+const notFound: Handler = (req, res) => {
   res.status(404).send("404 not found");
-});
+}
 
-app.listen(PORT, (err) => {
+app.get("*", notFound);
+
+app.listen(PORT, (err: Error) => {
   if (err) {
     console.log(`Server couldn't start. Error: ${err}`);
   } else {
