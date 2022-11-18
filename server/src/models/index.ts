@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const PORT = 27017;
 const NAME = "collabor8";
 const URI = `mongodb://127.0.0.1:${PORT}/${NAME}`;
@@ -10,4 +10,4 @@ const db = () => {
   mongoose.connection.on("Error connecting to DB", console.error);
 };
 
-module.exports = db;
+export default db;

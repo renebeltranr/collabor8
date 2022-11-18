@@ -1,6 +1,8 @@
-const router = require("express").Router();
-const collabController = require("./../controllers/collab");
-const authWare = require("./../middlewares/auth");
+import { Router } from "express";
+import collabController from "../controllers/collab";
+import authWare from "../middlewares/auth";
+
+const router: any =Router();
 
 router.post("/newCollab", authWare, collabController.create);
 router.get("/getAll", collabController.getAll);
@@ -14,4 +16,4 @@ router.delete("/id/:id/deleteTrack", authWare, collabController.deleteTrack);
 router.post("/saveTrack", authWare, collabController.saveTrack);
 router.put("/id/:id/saveSettings", collabController.saveSettings);
 
-module.exports = router;
+export default router;

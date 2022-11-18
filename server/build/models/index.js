@@ -1,13 +1,17 @@
 "use strict";
-const mongoose = require("mongoose");
-const PORT = 27017;
-const NAME = "collabor8";
-const URI = `mongodb://127.0.0.1:${PORT}/${NAME}`;
-const db = () => {
-    mongoose.connect(URI);
-    mongoose.connection.once("open", () => {
-        console.log(`DB Service listening on port ${PORT}`);
-    });
-    mongoose.connection.on("Error connecting to DB", console.error);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-module.exports = db;
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose_1 = __importDefault(require("mongoose"));
+var PORT = 27017;
+var NAME = "collabor8";
+var URI = "mongodb://127.0.0.1:".concat(PORT, "/").concat(NAME);
+var db = function () {
+    mongoose_1.default.connect(URI);
+    mongoose_1.default.connection.once("open", function () {
+        console.log("DB Service listening on port ".concat(PORT));
+    });
+    mongoose_1.default.connection.on("Error connecting to DB", console.error);
+};
+exports.default = db;

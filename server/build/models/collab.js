@@ -1,7 +1,11 @@
 "use strict";
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const CollabSchema = new Schema({
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose_1 = __importDefault(require("mongoose"));
+var Schema = mongoose_1.default.Schema;
+var CollabSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -9,7 +13,7 @@ const CollabSchema = new Schema({
     },
     name: {
         type: String,
-        default: `My new collab`,
+        default: "My new collab",
         required: true,
     },
     tracks: {
@@ -23,4 +27,4 @@ const CollabSchema = new Schema({
         required: true,
     },
 }, { timestamps: true });
-module.exports = mongoose.model("Collab", CollabSchema);
+exports.default = mongoose_1.default.model("Collab", CollabSchema);

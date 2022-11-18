@@ -1,11 +1,11 @@
-import { Handler, Error } from "./types/types";
+import {Handler, Error} from "./types/types";
 
-const express = require("express");
-const cors = require("cors");
-const db = require("./models/index");
-const userRouter = require("./router/user.router");
-const collabRouter = require("./router/collab.router");
-const session = require("express-session");
+import express from "express";
+import cors from "cors";
+import db from "./models/index";
+import userRouter from "./router/user.router";
+import collabRouter from "./router/collab.router";
+import session from "express-session";
 
 const PORT = 3001;
 const app = express();
@@ -40,11 +40,13 @@ const notFound: Handler = (req, res) => {
 
 app.get("*", notFound);
 
-app.listen(PORT, (err: Error) => {
+const serverDidntStart: any = (err: Error) => {
   if (err) {
     console.log(`Server couldn't start. Error: ${err}`);
   } else {
     console.log(`Server listening on port ${PORT}`);
     db();
   }
-});
+}
+
+app.listen(PORT, serverDidntStart);

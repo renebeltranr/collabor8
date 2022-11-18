@@ -1,7 +1,9 @@
-const Collab = require("./../models/collab");
-const User = require("./../models/user");
+import { Request, Response } from "express";
+import Collab from "../models/collab";
+import User from "../models/user";
+import { IUser } from "../types/types";
 
-const create = async (req, res) => {
+const create = async (req: Request, res: Response) => {
   try {
     const newCollab = new Collab({
       owner: req.session.uid,
@@ -9,9 +11,9 @@ const create = async (req, res) => {
       tracks: req.body.tracks,
     });
     const cb = await newCollab.save();
-    const user = await User.findById(req.session.uid);
+    const user = new User (await User.findById(req.session.uid) as IUser);
     user.owncollabs.push(cb._id);
-    const result = await user.save();
+    const result= await user.save();
     res.status(201).send(cb);
   } catch (error) {
     console.log(error);
@@ -19,7 +21,7 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req: Request, res: Response) => {
   try {
     const cb = await Collab.find().sort({ createdAt: -1 }).populate("owner");
     res.status(200).send(cb);
@@ -29,7 +31,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getUserCollabs = async (req, res) => {
+const getUserCollabs = async (req: Request, res: Response) => {
   try {
     const uid = req.params.id;
     const cb = await Collab.find({ owner: uid });
@@ -40,7 +42,7 @@ const getUserCollabs = async (req, res) => {
   }
 };
 
-const getCollab = async (req, res) => {
+const getCollab = async (req:Request, res: Response) => {
   try {
     const cid = req.params;
     const cb = await Collab.find({ _id: cid.id }).populate("owner");
@@ -184,7 +186,7 @@ const deleteCollab = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   create,
   getAll,
   getUserCollabs,

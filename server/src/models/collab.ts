@@ -1,6 +1,6 @@
 "use strict";
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const CollabSchema = new Schema(
   {
@@ -28,4 +28,4 @@ const CollabSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Collab", CollabSchema);
+export default mongoose.model("Collab", CollabSchema);
