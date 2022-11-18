@@ -14,12 +14,13 @@ import collabApiService from "../../utilities/collabApiService";
 import Spinner from "../Spinner/Spinner";
 import "./Home.css";
 function Home() {
-    const [state, setState] = useState([]); // need more descriptive name for this state
+    const [collabs, setCollabs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     function fetchCollabs() {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield collabApiService.getCollabs();
-            setState(res);
+            console.log(res);
+            setCollabs(res);
             setTimeout(() => {
                 setIsLoading(false);
             }, 700);
@@ -34,7 +35,7 @@ function Home() {
         React.createElement("div", { className: "home" },
             React.createElement("div", { className: "homeTitle" },
                 React.createElement("h3", null, "LATEST COLLABS")),
-            React.createElement(CollabList, null, state.map((el) => {
+            React.createElement(CollabList, null, collabs.map((el) => {
                 return (React.createElement(ListedCollab, { owner: el.owner.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
             })))));
 }
