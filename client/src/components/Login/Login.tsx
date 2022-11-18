@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext } from "react";
 import authApiService from "../../utilities/authApiService";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +67,7 @@ function Login() {
               type="submit"
               disabled={validateForm()}
             >
-              &nbsp;Login&nbsp;
+              Login
             </button>
           </form>
         </div>
