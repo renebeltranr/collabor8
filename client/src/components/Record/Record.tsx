@@ -1,27 +1,42 @@
 import collabApiService from "../../utilities/collabApiService";
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import ReactPlayer from "react-player/lazy";
 import { upVideoToCloudinary } from "../../utilities/Cloudinary";
 import "./Record.css";
+import { HTMLWithDisabled, HTMLWithSource, ICollab, IUser } from "../../utilities/types";
 
-const initialState = {
+const Iuser:IUser={
+  username: "",
+  password: undefined,
+  bio: "",
+  contry: "",
+  createdAt: "",
+  instruments: [],
+  othercollabs: [],
+  owncollabs: [],
+  profilepic: '',
+  updatedAt: '',
+  //__v: number;
+  _id: '',
+}
+
+const initialState:ICollab = {
   name: "",
   tracks: [],
-  user: {
-    username: "",
-  },
+  owner: Iuser,
 };
+
 
 function Record() {
   const ctx = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [audioDevices, setAudioDevices] = useState([]);
-  const [videoDevices, setVideoDevices] = useState([]);
+  const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
+  const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<ICollab>(initialState);
   const { id } = useParams();
 
   function handleAudioSelection(e) {
@@ -57,9 +72,9 @@ function Record() {
   }, [id]);
 
   const stopButton = document.getElementById("stop");
-  const submitButton = document.getElementById("submit");
-  const audioPlayer = document.getElementById("audioPlayer");
-  const videoPlayer = document.getElementById("videoPlayer");
+  const submitButton: HTMLWithDisabled = document.getElementById("submit") as HTMLWithDisabled;
+  const audioPlayer: HTMLWithSource = document.getElementById("audioPlayer") as HTMLWithSource;
+  const videoPlayer: HTMLWithSource = document.getElementById("videoPlayer") as HTMLWithSource;
 
   function startHandler() {
     let constraintObj = {
@@ -81,14 +96,16 @@ function Record() {
       videoBitsPerSecond: 256000,
     };
     const mediaRecorder = new MediaRecorder(stream, options);
-    const chunks = [];
+    const chunks: Array<any> = [];
 
     mediaRecorder.addEventListener("dataavailable", function (e) {
       if (e.data.size > 0) chunks.push(e.data);
     });
-    stopButton.addEventListener("click", function () {
+    
+    stopButton?.addEventListener("click", function () {
       mediaRecorder.stop();
     });
+    
     mediaRecorder.addEventListener("stop", function () {
       let blob = new Blob(chunks);
       let audioURL = window.URL.createObjectURL(blob);
@@ -124,7 +141,7 @@ function Record() {
             <div className="deviceSelect">
               <div className="collabName">
                 <h5>{state.name}</h5>
-                <h6>@{state.user.username}</h6>
+                <h6>@{state.owner.username}</h6>
               </div>
               <h5>Select the devices to record with:</h5>
               <select
@@ -150,7 +167,7 @@ function Record() {
                 {videoDevices.length
                   ? videoDevices.map((d) => {
                       return (
-                        <option key={d.deviceId} value={d.devideId}>
+                        <option key={d.deviceId} value={d.deviceId}>
                           {d.label}
                         </option>
                       );

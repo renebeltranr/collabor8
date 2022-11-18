@@ -53,7 +53,7 @@ function NewCollab() {
               type="text"
               placeholder="Cool Collab Name"
               name="name"
-              value={state.username}
+              value={state.name}
               onChange={handleChange}
             />
           </div>

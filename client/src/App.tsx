@@ -11,9 +11,10 @@ import { Collab } from "./components/Collab/Collab";
 import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
-import { iGlobalContext } from "./utilities/types";
+import { IGlobalContext } from "./utilities/types";
 
-export const GlobalContext = createContext<iGlobalContext>({
+
+export const GlobalContext = createContext<IGlobalContext>({
   isAuthenticated: false,
   setIsAuthenticated: () => {},
   setUserId: () => {},

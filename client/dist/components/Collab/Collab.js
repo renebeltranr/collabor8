@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import React from "react";
 import collabApiService from "../../utilities/collabApiService";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import { useState, useContext, useEffect } from "react";
@@ -52,18 +53,20 @@ export const Collab = function () {
     }
     function handlePlay() {
         for (let i = 0; i < playAll.length; i++) {
-            playAll[i].play();
+            let video = playAll[i];
+            video === null || video === void 0 ? void 0 : video.play();
         }
     }
     function handlePause() {
         for (let i = 0; i < playAll.length; i++) {
-            playAll[i].pause();
+            let video = playAll[i];
+            video === null || video === void 0 ? void 0 : video.pause();
         }
     }
     function handleDelete() {
         return __awaiter(this, void 0, void 0, function* () {
             //add confirmation before deletion
-            const deletion = yield collabApiService.deleteCollab({
+            yield collabApiService.deleteCollab({
                 uid: collab.user._id,
                 cid: id,
             });
@@ -143,6 +146,7 @@ export const Collab = function () {
                                 React.createElement("div", { hidden: true }, trackCounter++),
                                 ctx.userId === collab.user._id ? (React.createElement("div", { className: "pendingButtons" },
                                     React.createElement("button", { onClick: () => deleteTrack(el.url), id: "denyTrack", className: "default-btn" }, "X"))) : ("")));
+                        return null;
                     }),
                     collab.pendingtracks.length > 0 && ctx.userId === collab.user._id
                         ? collab.pendingtracks.map((el) => {
@@ -161,6 +165,7 @@ export const Collab = function () {
                                     React.createElement("div", { className: "pendingButtons" },
                                         React.createElement("button", { onClick: () => acceptTrack(el.url), id: "acceptTrack", className: "default-btn" }, "OK"),
                                         React.createElement("button", { onClick: () => denyTrack(el.url), id: "denyTrack", className: "default-btn" }, "X"))));
+                            return null;
                         })
                         : "")))));
 };
