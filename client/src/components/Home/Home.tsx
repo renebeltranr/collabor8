@@ -5,12 +5,21 @@ import collabApiService from "../../utilities/collabApiService";
 import Spinner from "../Spinner/Spinner";
 import "./Home.css";
 
+type Collab = {
+  createdAt: string;
+  name: string;
+  owner: { username: string };
+  _id: string;
+  tracks: string[];
+};
+
 function Home() {
   const [state, setState] = useState([]); // need more descriptive name for this state
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchCollabs() {
     const res = await collabApiService.getCollabs();
+    console.log(res);
     setState(res);
     setTimeout(() => {
       setIsLoading(false);
@@ -30,7 +39,7 @@ function Home() {
           <h3>LATEST COLLABS</h3>
         </div>
         <CollabList>
-          {state.map((el) => {
+          {state.map((el: Collab) => {
             return (
               <ListedCollab
                 owner={el.owner.username}
