@@ -4,14 +4,7 @@ import ListedCollab from "../ListedCollab/ListedCollab";
 import collabApiService from "../../utilities/collabApiService";
 import Spinner from "../Spinner/Spinner";
 import "./Home.css";
-
-type Collab = {
-  createdAt: string;
-  name: string;
-  owner: { username: string };
-  _id: string;
-  tracks: string[];
-};
+import { ICollab } from "../../utilities/types";
 
 function Home() {
   const [collabs, setCollabs] = useState([]);
@@ -38,7 +31,7 @@ function Home() {
           <h3>LATEST COLLABS</h3>
         </div>
         <CollabList>
-          {collabs.map((el: Collab) => {
+          {collabs.map((el: ICollab) => {
             return (
               <ListedCollab
                 owner={el.owner.username}

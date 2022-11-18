@@ -11,15 +11,7 @@ import { Collab } from "./components/Collab/Collab";
 import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
-
-interface iGlobalContext {
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserId: React.Dispatch<React.SetStateAction<string>>;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
-  userId: string;
-  username: string;
-}
+import { iGlobalContext } from "./utilities/types";
 
 export const GlobalContext = createContext<iGlobalContext>({
   isAuthenticated: false,
