@@ -7,6 +7,7 @@ import "./Register.css";
 const initialState = {
   username: "",
   password: "",
+  passwordConf: "",
   country: "",
 };
 
@@ -25,7 +26,10 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { password, country } = state;
+    const { password, passwordConf, country } = state;
+    if (password !== passwordConf) {
+      return alert("Passwords do not match."); // TO DO: instead of alert add a div under the form
+    }
     let lowerCaseUsername = state.username.toLowerCase();
     const user = { username: lowerCaseUsername, password, country };
     const res = await authApiService.register(user);
@@ -39,7 +43,12 @@ function Register() {
   };
 
   const validateForm = () => {
-    return !state.username || !state.password || !state.country;
+    return (
+      !state.username ||
+      !state.password ||
+      !state.country ||
+      !state.passwordConf
+    );
   };
 
   return (
@@ -52,6 +61,7 @@ function Register() {
               type="text"
               placeholder="username"
               name="username"
+              minLength={4}
               value={state.username}
               onChange={handleChange}
             />
@@ -63,10 +73,17 @@ function Register() {
               onChange={handleChange}
             />
             <input
+              type="password"
+              placeholder="password confirmation"
+              name="passwordConf"
+              value={state.passwordConf}
+              onChange={handleChange}
+            />
+            <input
               type="text"
               placeholder="Spain"
               name="country"
-              value={state.firstName}
+              value={state.country}
               onChange={handleChange}
             />
             <button
