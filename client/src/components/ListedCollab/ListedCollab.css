@@ -41,3 +41,8 @@
   font-style: italic;
   color: rgb(93, 93, 93);
 }
+
+.dateStyle {
+  margin-top: 1.5em;
+  padding: 0;
+}

@@ -75,7 +75,7 @@ function Register() {
               type="submit"
               disabled={validateForm()}
             >
-              &nbsp;Register&nbsp;
+              Register
             </button>
           </form>
         </div>

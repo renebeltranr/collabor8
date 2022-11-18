@@ -1,6 +1,12 @@
 .home {
   flex-direction: column;
   justify-content: start;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  height: 70vh;
+  width: 70vw;
+  overflow-y: scroll;
 }
 
 .homeTitle {

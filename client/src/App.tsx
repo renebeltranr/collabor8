@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
-//import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import authApiService from "./utilities/authApiService";
 

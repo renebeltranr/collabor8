@@ -1,4 +1,10 @@
 .collab {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  height: 70vh;
+  width: 70vw;
+  overflow-y: scroll;
   flex-direction: column;
   justify-content: start;
   width: 80vw;
@@ -95,13 +101,6 @@
   position: absolute;
   top: 1em;
   right: 1em;
-}
-
-.videoTrack {
-  display: flex;
-  position: relative;
-  margin: 0.5em;
-  box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
 }
 
 .trackStatus {
