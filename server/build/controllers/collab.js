@@ -42,11 +42,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var collab_1 = __importDefault(require("../models/collab"));
 var user_1 = __importDefault(require("../models/user"));
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newCollab, cb, user, result, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var newCollab, cb, user, _a, result, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _b.trys.push([0, 4, , 5]);
                 newCollab = new collab_1.default({
                     owner: req.session.uid,
                     name: req.body.name,
@@ -54,18 +54,19 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 });
                 return [4 /*yield*/, newCollab.save()];
             case 1:
-                cb = _a.sent();
+                cb = _b.sent();
+                _a = user_1.default.bind;
                 return [4 /*yield*/, user_1.default.findById(req.session.uid)];
             case 2:
-                user = _a.sent();
+                user = new (_a.apply(user_1.default, [void 0, _b.sent()]))();
                 user.owncollabs.push(cb._id);
                 return [4 /*yield*/, user.save()];
             case 3:
-                result = _a.sent();
+                result = _b.sent();
                 res.status(201).send(cb);
                 return [3 /*break*/, 5];
             case 4:
-                error_1 = _a.sent();
+                error_1 = _b.sent();
                 console.log(error_1);
                 res.status(400).send({ error: error_1, message: "Could not create Collab" });
                 return [3 /*break*/, 5];
@@ -137,14 +138,15 @@ var getCollab = function (req, res) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, saveresult, saveresult, error_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var result, _a, saveresult, saveresult, error_5;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 6, , 7]);
+                _b.trys.push([0, 6, , 7]);
+                _a = collab_1.default.bind;
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.body.cid })];
             case 1:
-                result = _a.sent();
+                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.tracks.push({
                     url: req.body.url,
@@ -154,7 +156,7 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 });
                 return [4 /*yield*/, result.save()];
             case 2:
-                saveresult = _a.sent();
+                saveresult = _b.sent();
                 res.status(201).send(saveresult);
                 return [3 /*break*/, 5];
             case 3:
@@ -166,12 +168,12 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 });
                 return [4 /*yield*/, result.save()];
             case 4:
-                saveresult = _a.sent();
+                saveresult = _b.sent();
                 res.status(201).send(saveresult);
-                _a.label = 5;
+                _b.label = 5;
             case 5: return [3 /*break*/, 7];
             case 6:
-                error_5 = _a.sent();
+                error_5 = _b.sent();
                 console.log(error_5);
                 res.status(400).send({ error: error_5, message: "Could not save the Collab" });
                 return [3 /*break*/, 7];
@@ -180,24 +182,25 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 var saveSettings = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, saveresult, error_6;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var result, _a, saveresult, error_6;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _b.trys.push([0, 4, , 5]);
+                _a = collab_1.default.bind;
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
             case 1:
-                result = _a.sent();
+                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.tracks = req.body.tracks;
                 return [4 /*yield*/, result.save()];
             case 2:
-                saveresult = _a.sent();
+                saveresult = _b.sent();
                 res.status(201).send(saveresult);
-                _a.label = 3;
+                _b.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4:
-                error_6 = _a.sent();
+                error_6 = _b.sent();
                 console.log(error_6);
                 res.status(400).send({ error: error_6, message: "Could not save the settings" });
                 return [3 /*break*/, 5];
@@ -206,14 +209,15 @@ var saveSettings = function (req, res) { return __awaiter(void 0, void 0, void 0
     });
 }); };
 var acceptTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result_1, trackToDelete_1, savedResult, error_7;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var result_1, _a, trackToDelete_1, savedResult, error_7;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _b.trys.push([0, 4, , 5]);
+                _a = collab_1.default.bind;
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
             case 1:
-                result_1 = _a.sent();
+                result_1 = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
                 if (!(result_1.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result_1.pendingtracks.forEach(function (el) {
                     if (el.url === req.body.url) {
@@ -224,12 +228,12 @@ var acceptTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 result_1.pendingtracks = result_1.pendingtracks.filter(function (el) { return el != trackToDelete_1; });
                 return [4 /*yield*/, result_1.save()];
             case 2:
-                savedResult = _a.sent();
+                savedResult = _b.sent();
                 res.status(201).send(savedResult);
                 return [3 /*break*/, 3];
             case 3: return [3 /*break*/, 5];
             case 4:
-                error_7 = _a.sent();
+                error_7 = _b.sent();
                 console.log(error_7);
                 res.status(400).send({ error: error_7, message: "Could not accept the track" });
                 return [3 /*break*/, 5];
@@ -238,14 +242,15 @@ var acceptTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
     });
 }); };
 var denyTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, trackToDelete_2, savedResult, error_8;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var result, _a, trackToDelete_2, savedResult, error_8;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _b.trys.push([0, 4, , 5]);
+                _a = collab_1.default.bind;
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
             case 1:
-                result = _a.sent();
+                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.pendingtracks.forEach(function (el) {
                     if (el.url === req.body.url) {
@@ -255,12 +260,12 @@ var denyTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 result.pendingtracks = result.pendingtracks.filter(function (el) { return el != trackToDelete_2; });
                 return [4 /*yield*/, result.save()];
             case 2:
-                savedResult = _a.sent();
+                savedResult = _b.sent();
                 res.status(201).send(savedResult);
                 return [3 /*break*/, 3];
             case 3: return [3 /*break*/, 5];
             case 4:
-                error_8 = _a.sent();
+                error_8 = _b.sent();
                 console.log(error_8);
                 res.status(400).send({ error: error_8, message: "Could not delete the track" });
                 return [3 /*break*/, 5];
@@ -269,14 +274,15 @@ var denyTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 var deleteTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, trackToDelete_3, savedResult, error_9;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var result, _a, trackToDelete_3, savedResult, error_9;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
+                _b.trys.push([0, 4, , 5]);
+                _a = collab_1.default.bind;
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
             case 1:
-                result = _a.sent();
+                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.tracks.forEach(function (el) {
                     if (el.url === req.body.url) {
@@ -286,12 +292,12 @@ var deleteTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 result.tracks = result.tracks.filter(function (el) { return el != trackToDelete_3; });
                 return [4 /*yield*/, result.save()];
             case 2:
-                savedResult = _a.sent();
+                savedResult = _b.sent();
                 res.status(201).send(savedResult);
                 return [3 /*break*/, 3];
             case 3: return [3 /*break*/, 5];
             case 4:
-                error_9 = _a.sent();
+                error_9 = _b.sent();
                 console.log(error_9);
                 res.status(400).send({ error: error_9, message: "Could not delete the track" });
                 return [3 /*break*/, 5];

@@ -1,8 +1,9 @@
 "use strict";
 
 import mongoose from "mongoose";
+import { ICollab } from "../types/types";
 const Schema = mongoose.Schema;
-const CollabSchema = new Schema(
+const CollabSchema = new Schema<ICollab>(
   {
     owner: {
       type: Schema.Types.ObjectId,
@@ -28,4 +29,4 @@ const CollabSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("Collab", CollabSchema);
+export default mongoose.model<ICollab>("Collab", CollabSchema);

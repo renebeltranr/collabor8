@@ -20,19 +20,30 @@ export type Route = {
 
 export type IUser = {
   username: string,
-  password: string,
+  password: string | undefined,
   bio: string,
   profilepic: string,
   country: string,
   instruments: any,
   owncollabs: Array<any>,
   othercollabs: any,
-  createdAt: any
-  updatedAt: any
+  createdAt: string,
+  updatedAt: string,
+  _id: string,
 }
 
 declare module 'express-session' {
   export interface SessionData {
     uid: string;
   }
+}
+
+export type ICollab = {
+  owner: IUser,
+  name: string,
+  tracks: any,
+  pendingtracks: any,
+  createdAt: string,
+  updatedAt: string,
+  _id: string,
 }
