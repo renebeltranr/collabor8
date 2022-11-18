@@ -5,40 +5,39 @@ import { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Collab.css";
-import { ICollab } from "../../utilities/types";
-import { IUser } from "../../utilities/types";
-import Spinner from "../Spinner/Spinner";
 
-/* const initialCollabState = {
+const initialCollabState: any = {
   name: "",
   tracks: [],
   pendingtracks: [],
-  owner: {
+  user: {
     username: "",
   },
-}; */
+};
 
 export const Collab = function () {
   let navigate = useNavigate();
   const ctx = useContext(GlobalContext);
-  const [collab, setCollab] = useState();
+  const [collab, setCollab] = useState(initialCollabState);
   const { id } = useParams();
   const playAll = document.getElementsByClassName("trackPlayer");
   let trackCounter = 0;
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getCollab = async () => {
-      const collabArray = await collabApiService.getCollab(id);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 700);
-      const collabObj: ICollab = collabArray[0];
-      console.log(collabObj);
-      if (collabObj) {
-        const { name, tracks, pendingtracks, owner } = collabObj;
-        //const user = collabObj.owner;
-        setCollab((collabObj: ICollab) => {});
+      const collabInfo = await collabApiService.getCollab(id);
+      if (collabInfo) {
+        const { name, tracks, pendingtracks } = collabInfo[0];
+        const user = collabInfo[0].owner;
+        setCollab((prevState) => {
+          return {
+            ...prevState,
+            name,
+            tracks,
+            pendingtracks,
+            user,
+          };
+        });
       } else {
         console.log(`Couldn't retrieve collab info`);
       }
@@ -46,42 +45,42 @@ export const Collab = function () {
     getCollab();
   }, [id]);
 
-  if (isLoading) return <Spinner />;
-
   function handleClick() {
     navigate("/record/" + id);
   }
 
   function handlePlay() {
     for (let i = 0; i < playAll.length; i++) {
-      playAll[i].play();
+      let video = playAll[i] as HTMLVideoElement | null;
+      video?.play();
     }
   }
 
   function handlePause() {
     for (let i = 0; i < playAll.length; i++) {
-      playAll[i].pause();
+      let video = playAll[i] as HTMLVideoElement | null;
+      video?.pause();
     }
   }
 
   async function handleDelete() {
-    //TO DO: add confirmation before deletion
+    //add confirmation before deletion
     await collabApiService.deleteCollab({
-      uid: collab.owner._id,
+      uid: collab.user._id,
       cid: id,
     });
     navigate(`/profile/${ctx.username}`);
   }
 
-  async function acceptTrack(url: string) {
+  async function acceptTrack(url) {
     const result = await collabApiService.acceptTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
-  async function denyTrack(url: string) {
+  async function denyTrack(url) {
     const result = await collabApiService.denyTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
-  async function deleteTrack(url: string) {
+  async function deleteTrack(url) {
     const result = await collabApiService.deleteTrack({ url: url, cid: id });
     if (result) window.location.reload();
   }
@@ -93,7 +92,7 @@ export const Collab = function () {
     if (result) window.location.reload();
   }
 
-  function goToUser(id: string) {
+  function goToUser(id) {
     navigate("/profile/" + id);
   }
 
@@ -104,8 +103,8 @@ export const Collab = function () {
           <div className="collabName">
             <h5>{collab.name}</h5>
             <span>
-              <Link to={"/profile/" + collab.owner.username}>
-                <h6>@{collab.owner.username}</h6>
+              <Link to={"/profile/" + collab.user.username}>
+                <h6>@{collab.user.username}</h6>
               </Link>
             </span>
             <div className="collabButtons">
@@ -115,7 +114,7 @@ export const Collab = function () {
               <button className="default-btn" onClick={handlePause}>
                 Pause
               </button>
-              {ctx.userId === collab.owner._id ? (
+              {ctx.userId === collab.user._id ? (
                 <>
                   <button className="default-btn" onClick={handleClick}>
                     Record
@@ -134,7 +133,7 @@ export const Collab = function () {
               ) : (
                 <div></div>
               )}
-              {ctx.userId !== collab.owner._id ? (
+              {ctx.userId !== collab.user._id ? (
                 <>
                   <button className="default-btn" onClick={handleClick}>
                     Submit Recording
@@ -176,7 +175,7 @@ export const Collab = function () {
             ) : (
               ""
             )}
-            {collab.tracks.map((el: any) => {
+            {collab.tracks.map((el) => {
               if (el.url && el.url[0] === "h" && el.url[1] === "t")
                 return (
                   <div className="videoTrack">
@@ -203,7 +202,7 @@ export const Collab = function () {
                       @{el.username}
                     </div>
                     <div hidden>{trackCounter++}</div>
-                    {ctx.userId === collab.owner._id ? (
+                    {ctx.userId === collab.user._id ? (
                       <div className="pendingButtons">
                         <button
                           onClick={() => deleteTrack(el.url)}
@@ -221,8 +220,8 @@ export const Collab = function () {
               return null;
             })}
 
-            {collab.pendingtracks.length > 0 && ctx.userId === collab.owner._id
-              ? collab.pendingtracks.map((el: any) => {
+            {collab.pendingtracks.length > 0 && ctx.userId === collab.user._id
+              ? collab.pendingtracks.map((el) => {
                   if (el.url && el.url[0] === "h" && el.url[1] === "t")
                     return (
                       <div className="videoTrack">

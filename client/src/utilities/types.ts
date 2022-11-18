@@ -1,12 +1,12 @@
 export interface ICollab {
-  createdAt: string;
-  name: string;
+  createdAt?: string;
+  name?: string;
   owner: IUser;
-  pendingtracks: string[];
-  tracks: Array<any>;
-  updatedAt: string;
+  pendingtracks?: string[];
+  tracks?: Array<any>;
+  updatedAt?: string;
   //__v: number;
-  _id: string;
+  _id?: string;
 }
 
 export type IUser = {
@@ -31,4 +31,6 @@ export interface iGlobalContext {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   userId: string;
   username: string;
+  collab: ICollab;
+  setCollab: React.Dispatch<React.SetStateAction<ICollab>>;
 }
