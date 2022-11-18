@@ -12,7 +12,16 @@ import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
 
-export const GlobalContext = createContext({
+interface iGlobalContext {
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  userId: string;
+  username: string;
+}
+
+export const GlobalContext = createContext<iGlobalContext>({
   isAuthenticated: false,
   setIsAuthenticated: () => {},
   setUserId: () => {},
@@ -41,53 +50,30 @@ function App() {
   }, []);
 
   const ctx = {
-    isAuthenticated: isAuthenticated,
-    setIsAuthenticated: setIsAuthenticated,
-    setUserId: setUserId,
-    setUsername: setUsername,
-    userId: userId,
-    username: username,
+    isAuthenticated,
+    setIsAuthenticated,
+    setUserId,
+    setUsername,
+    userId,
+    username,
   };
 
   return (
     <div className="App">
       <Router>
         <GlobalContext.Provider value={ctx}>
-          <Navbar
-            isAuthenticated={ctx.isAuthenticated}
-            username={ctx.username}
-          />
+          <Navbar />
           <Routes>
-            <Route
-              path="/register"
-              element={<Register setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route
-              path="/login"
-              element={<Login setIsAuthenticated={setIsAuthenticated} />}
-            />
-            <Route
-              path="/profile/:username"
-              element={<Profile isAuthenticated={isAuthenticated} />}
-            />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile/:username" element={<Profile />} />
             <Route path="/" element={<Home />} />
-            <Route path="/collab/id/:id" element={<Collab userId={userId} />} />
+            <Route path="/collab/id/:id" element={<Collab />} />
             {isAuthenticated ? (
               <>
-                <Route
-                  path="/collab/newCollab"
-                  element={<NewCollab isAuthenticated={isAuthenticated} />}
-                />
-                <Route
-                  path="/logout"
-                  element={<Logout setIsAuthenticated={setIsAuthenticated} />}
-                />
-                <Route
-                  path="/record/:id"
-                  element={
-                    <Record isAuthenticated={isAuthenticated} userId={userId} />
-                  }
-                />
+                <Route path="/collab/newCollab" element={<NewCollab />} />
+                <Route path="/logout" element={<Logout />} />
+                <Route path="/record/:id" element={<Record />} />
               </>
             ) : (
               <></>

@@ -4,7 +4,7 @@ import { GlobalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import "./NewCollab.css";
 
-function NewCollab(props) {
+function NewCollab() {
   const navigate = useNavigate();
   const initialState = {
     name: "",
