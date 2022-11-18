@@ -5,29 +5,15 @@ import { GlobalContext } from "../../App";
 import ReactPlayer from "react-player/lazy";
 import { upVideoToCloudinary } from "../../utilities/Cloudinary";
 import "./Record.css";
-import { HTMLWithDisabled, HTMLWithSource, ICollab, IUser } from "../../utilities/types";
+import { HTMLWithDisabled, HTMLWithSource } from "../../utilities/types";
 
-const Iuser:IUser={
-  username: "",
-  password: undefined,
-  bio: "",
-  contry: "",
-  createdAt: "",
-  instruments: [],
-  othercollabs: [],
-  owncollabs: [],
-  profilepic: '',
-  updatedAt: '',
-  //__v: number;
-  _id: '',
-}
-
-const initialState:ICollab = {
+const initialState = {
   name: "",
   tracks: [],
-  owner: Iuser,
+  user: {
+    username: "",
+  },
 };
-
 
 function Record() {
   const ctx = useContext(GlobalContext);
@@ -36,7 +22,7 @@ function Record() {
   const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
-  const [state, setState] = useState<ICollab>(initialState);
+  const [state, setState] = useState(initialState);
   const { id } = useParams();
 
   function handleAudioSelection(e) {
@@ -141,7 +127,7 @@ function Record() {
             <div className="deviceSelect">
               <div className="collabName">
                 <h5>{state.name}</h5>
-                <h6>@{state.owner.username}</h6>
+                <h6>@{state.user.username}</h6>
               </div>
               <h5>Select the devices to record with:</h5>
               <select
