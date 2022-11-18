@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "./ListedCollab.css";
@@ -16,6 +17,7 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
                 return (React.createElement("img", { className: "listedPictures", key: el.url, width: "160", height: "160", alt: "", src: el.url[el.url.length - 1] === "m"
                         ? el.url.slice(0, -4) + "jpg"
                         : el.url.slice(0, -3) + "jpg" }));
+            return null;
         })),
         React.createElement("div", { className: "createdAt" },
             React.createElement("h6", { className: "dateStyle" }, moment(createdAt).format("MMMM Do YYYY")))));

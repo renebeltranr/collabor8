@@ -19,7 +19,6 @@ function Home() {
     function fetchCollabs() {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield collabApiService.getCollabs();
-            console.log(res);
             setCollabs(res);
             setTimeout(() => {
                 setIsLoading(false);

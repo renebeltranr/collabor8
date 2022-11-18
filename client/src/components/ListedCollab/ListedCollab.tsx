@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import "./ListedCollab.css";
@@ -32,6 +33,7 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
                 }
               ></img>
             );
+          return null;
         })}
       </div>
       <div className="createdAt">

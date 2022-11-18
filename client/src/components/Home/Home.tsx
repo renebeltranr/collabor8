@@ -19,7 +19,6 @@ function Home() {
 
   async function fetchCollabs() {
     const res = await collabApiService.getCollabs();
-    console.log(res);
     setCollabs(res);
     setTimeout(() => {
       setIsLoading(false);
