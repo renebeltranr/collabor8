@@ -47,3 +47,7 @@ export type ICollab = {
 export interface RequestWithUser extends Request {
   user: IUser;
 }
+
+export type DataUpdate = {
+  [key: string]: string;
+};

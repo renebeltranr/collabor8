@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import User from "../models/user";
+import { RequestWithUser, DataUpdate } from "../types/types";
 
 const create = async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -29,9 +30,11 @@ const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });
-    const validatedPass = await bcrypt.compare(password, user.password);
-    if (!validatedPass) throw new Error();
-    req.session.uid = user._id;
+    if (user !== null) {
+      const validatedPass = await bcrypt.compare(password, user.password!);
+      if (!validatedPass) throw new Error();
+    }
+    if (user !== null) req.session.uid = user._id;
     res.status(200).send(user);
   } catch (error) {
     res
@@ -40,26 +43,26 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-const profile = async (req, res) => {
+const profile = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ username: req.params.username });
     res.status(200).send(user);
   } catch {
-    res.status(404).send({ error, message: "User not found" });
+    res.status(404).send({ error: Error, message: "User not found" });
   }
 };
 
-const profileUpdate = async (req, res) => {
+const profileUpdate = async (req: Request, res: Response) => {
   try {
     const uid = req.params.id;
     if (uid === req.body._id) {
-      let dataToUpdate = {};
+      let dataToUpdate: DataUpdate = {};
       if (req.body.country) dataToUpdate.country = req.body.country;
       if (req.body.bio) dataToUpdate.bio = req.body.bio;
       const result = await User.findOneAndUpdate({ _id: uid }, dataToUpdate, {
         new: true,
       });
-      result.password = undefined;
+      if (result !== null) result.password = undefined;
       res.status(201).send(result);
     } else {
       throw new Error();
@@ -70,18 +73,18 @@ const profileUpdate = async (req, res) => {
   }
 };
 
-const me = async (req, res) => {
+const me = async (req: RequestWithUser, res: Response) => {
   try {
     const { _id, username, country, bio, owncollabs } = req.user;
     const user = { _id, username, country, bio, owncollabs };
     res.status(200).send(user);
   } catch {
-    res.status(404).send({ error, message: "User not found" });
+    res.status(404).send({ error: Error, message: "User not found" });
   }
 };
 
-const logout = (req, res) => {
-  req.session.destroy((error) => {
+const logout = (req: Request, res: Response) => {
+  req.session.destroy((error: Error) => {
     if (error) {
       res
         .status(500)
