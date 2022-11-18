@@ -14,13 +14,13 @@ type Collab = {
 };
 
 function Home() {
-  const [state, setState] = useState([]); // need more descriptive name for this state
+  const [collabs, setCollabs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchCollabs() {
     const res = await collabApiService.getCollabs();
     console.log(res);
-    setState(res);
+    setCollabs(res);
     setTimeout(() => {
       setIsLoading(false);
     }, 700);
@@ -39,7 +39,7 @@ function Home() {
           <h3>LATEST COLLABS</h3>
         </div>
         <CollabList>
-          {state.map((el: Collab) => {
+          {collabs.map((el: Collab) => {
             return (
               <ListedCollab
                 owner={el.owner.username}
