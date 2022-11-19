@@ -19,31 +19,37 @@ function Profile() {
   const navigate = useNavigate();
   const { username } = useParams();
   initialState.username = username as string;
-  const [state, setState] = useState<>(initialState);
+  const [state, setState] = useState(initialState);
   const ctx = useContext(GlobalContext);
 
   useEffect(() => {
     const getProfile = async () => {
-      const userInfo = await authApiService.profile(username);
-      if (userInfo) {
-        const { username, country, bio, _id } = userInfo;
-        setState((prevState) => {
-          return {
-            ...prevState,
-            username,
-            country,
-            bio,
-          };
-        });
-        const test = await (collabApiService.getUserCollabs && collabApiService.getUserCollabs(_id));
-        setState((prevState: IUser) => {
-          return {
-            ...prevState,
-            owncollabs: test,
-          };
-        });
-      } else {
-        console.log(`Couldn't retrieve user info`);
+      if (authApiService.profile) {
+        const userInfo: IUser | Response = (await authApiService.profile(
+          username as string
+        )) as Response | IUser;
+        if (userInfo) {
+          const user = userInfo as IUser;
+          const { username, country, bio, _id } = user;
+          setState((prevState) => {
+            return {
+              ...prevState,
+              username,
+              country,
+              bio,
+            };
+          });
+          const test = await (collabApiService.getUserCollabs &&
+            collabApiService.getUserCollabs(_id));
+          setState((prevState: IUser) => {
+            return {
+              ...prevState,
+              owncollabs: test,
+            };
+          });
+        } else {
+          console.log(`Couldn't retrieve user info`);
+        }
       }
     };
     getProfile();
