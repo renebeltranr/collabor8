@@ -10,7 +10,7 @@ function Logout() {
 
   const handleClick = async () => {
     if (ctx.isAuthenticated) {
-      await authApiService.logout();
+      if (authApiService.logout) await authApiService.logout();
       ctx.setIsAuthenticated(false);
       ctx.setUserId("");
       ctx.setUsername("");

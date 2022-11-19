@@ -1,8 +1,8 @@
-import { IAuthApiService, IUser } from "./types";
+import { IAuthApiService, Credentials } from "./types";
 const URL = "http://localhost:3001";
 const authApiService: IAuthApiService = {};
 
-authApiService.register = (user: IUser) => {
+authApiService.register = (user: Credentials) => {
   return fetch(`${URL}/register`, {
     method: "POST",
     credentials: "include",
@@ -14,7 +14,7 @@ authApiService.register = (user: IUser) => {
     .catch((err) => console.log(err));
 };
 
-authApiService.login = (user: IUser) => {
+authApiService.login = (user: Credentials) => {
   return fetch(`${URL}/login`, {
     method: "POST",
     credentials: "include",

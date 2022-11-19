@@ -34,8 +34,8 @@ export interface iGlobalContext {
 }
 
 export interface IAuthApiService {
-  register?: (user: IUser) => Promise<Response>;
-  login?: (user: IUser) => Promise<Response>;
+  register?: (user: Credentials) => Promise<Response>;
+  login?: (user: Credentials) => Promise<IError | Response>;
   profile?: (username: string) => Promise<Response>;
   me?: () => Promise<Response>;
   logout?: () => Promise<Response>;
@@ -44,4 +44,16 @@ export interface IAuthApiService {
 
 export type DataUpdate = {
   [key: string]: string;
+};
+
+export type Credentials = {
+  username: string;
+  password: string;
+  country?: string;
+};
+
+export type IError = {
+  error: any;
+  message: string;
+  status: number;
 };
