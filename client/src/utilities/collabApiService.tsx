@@ -1,5 +1,7 @@
+import { ICollabApiService, ICollab, ISaveTrack } from "./types";
+
 const URL = "http://localhost:3001";
-const collabApiService = {};
+const collabApiService: ICollabApiService = {};
 
 collabApiService.getCollabs = () => {
   return fetch(`${URL}/collab/getAll`, {
@@ -8,11 +10,11 @@ collabApiService.getCollabs = () => {
     mode: "cors",
     headers: { "Content-Type": "application/json" },
   })
-    .then((res) => res.json())
+    .then((res) => res.json() as Promise<Response>)
     .catch((err) => console.log(err));
 };
 
-collabApiService.newCollab = (cb) => {
+collabApiService.newCollab = (cb: ICollab) => {
   return fetch(`${URL}/collab/newCollab`, {
     method: "POST",
     credentials: "include",
@@ -45,7 +47,7 @@ collabApiService.getCollab = (id) => {
     .catch((err) => console.log(err));
 };
 
-collabApiService.saveTrack = (data) => {
+collabApiService.saveTrack = (data: ISaveTrack) => {
   return fetch(`${URL}/collab/saveTrack`, {
     method: "POST",
     credentials: "include",
@@ -61,7 +63,7 @@ collabApiService.saveTrack = (data) => {
     .catch((err) => console.log(err));
 };
 
-collabApiService.saveSettings = (data) => {
+collabApiService.saveSettings = (data: any) => {
   return fetch(`${URL}/collab/id/${data.cid}/saveSettings`, {
     method: "PUT",
     credentials: "include",

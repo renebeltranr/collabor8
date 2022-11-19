@@ -3,6 +3,7 @@ import collabApiService from "../../utilities/collabApiService";
 import { GlobalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import "./NewCollab.css";
+import { ICollab, IError } from "../../utilities/types";
 
 function NewCollab() {
   const navigate = useNavigate();
@@ -23,13 +24,14 @@ function NewCollab() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const cb = {
+    const cb: ICollab = {
       name: state.name,
       tracks: [state.URL],
     };
-    const res = await collabApiService.newCollab(cb);
-    if (res.error) {
-      alert(`${res.message}`);
+    const res:(IError | Response) = (await (collabApiService.newCollab && collabApiService.newCollab(cb))) as (IError | Response);
+    if (res.status === 400) {
+      const errorResponse = res as IError
+      alert(`${errorResponse.message}`);
       setState(initialState);
     } else {
       console.log("collab created successfully: ", cb);

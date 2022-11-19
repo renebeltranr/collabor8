@@ -1,7 +1,7 @@
 export interface ICollab {
   createdAt?: string;
   name?: string;
-  owner: IUser;
+  owner?: IUser;
   pendingtracks?: string[];
   tracks?: Array<any>;
   updatedAt?: string;
@@ -11,17 +11,17 @@ export interface ICollab {
 
 export type IUser = {
   username: string;
-  password: string | undefined;
+  password?: string | undefined;
   bio: string;
-  contry: string;
-  createdAt: string;
-  instruments: string[];
-  othercollabs: string[];
+  country: string;
+  createdAt?: string;
+  instruments?: string[];
+  othercollabs?: string[];
   owncollabs: string[];
-  profilepic: string;
-  updatedAt: string;
+  profilepic?: string;
+  updatedAt?: string;
   //__v: number;
-  _id: string;
+  _id?: string;
 };
 
 export interface IGlobalContext {
@@ -39,4 +39,34 @@ export interface HTMLWithSource extends HTMLElement {
 
 export interface HTMLWithDisabled extends HTMLElement {
   disabled: boolean,
+}
+
+export type ICollabApiService = {
+  getCollabs?: () => Promise<void|Response>,
+  newCollab?: (cb: ICollab) => Promise<void|Promise<Response>>,
+  getUserCollabs?: (id: Number) => Promise<void|Response>,
+  getCollab?: (id: string | undefined) => Promise<void|Response>,
+  saveTrack?: (data: ISaveTrack) => Promise<Promise<Response>>,
+  saveSettings?: (data: any) => Promise<Response>,
+  acceptTrack?: (data) => Promise<Response>,
+  denyTrack?: (data) => Promise<Response>,
+  deleteTrack?: (data) => Promise<Response>,
+  deleteCollab?: (data) => Promise<Response>,
+}
+
+export type IError = {
+  error?: any,
+  message?: string,
+  status: number
+}
+
+export type ISaveTrack = {
+  url: string,
+  cid: number,
+  username: string
+}
+
+export type ISettings = {
+  cid: number,
+  collab:
 }
