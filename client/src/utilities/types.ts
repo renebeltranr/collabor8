@@ -33,13 +33,39 @@ export interface IGlobalContext {
   username: string;
 }
 
+
 export interface HTMLWithSource extends HTMLElement {
-  src: string,
+  src: string;
 }
 
 export interface HTMLWithDisabled extends HTMLElement {
-  disabled: boolean,
+  disabled: boolean;
 }
+
+export interface IAuthApiService {
+  register?: (user: Credentials) => Promise<Response>;
+  login?: (user: Credentials) => Promise<IError | Response>;
+  profile?: (username: string) => Promise<Response>;
+  me?: () => Promise<Response>;
+  logout?: () => Promise<Response>;
+  profileUpdate?: (data: DataUpdate) => Promise<Response>;
+}
+
+export type DataUpdate = {
+  [key: string]: string;
+};
+
+export type Credentials = {
+  username: string;
+  password: string;
+  country?: string;
+};
+
+export type IError = {
+  error: any;
+  message: string;
+  status: number;
+};
 
 export type ICollabApiService = {
   getCollabs?: () => Promise<void|Response>,
@@ -52,12 +78,6 @@ export type ICollabApiService = {
   denyTrack?: (data) => Promise<Response>,
   deleteTrack?: (data) => Promise<Response>,
   deleteCollab?: (data) => Promise<Response>,
-}
-
-export type IError = {
-  error?: any,
-  message?: string,
-  status: number
 }
 
 export type ISaveTrack = {

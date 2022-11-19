@@ -1,7 +1,8 @@
+import { IAuthApiService, Credentials } from "./types";
 const URL = "http://localhost:3001";
-const authApiService = {};
+const authApiService: IAuthApiService = {};
 
-authApiService.register = (user) => {
+authApiService.register = (user: Credentials) => {
   return fetch(`${URL}/register`, {
     method: "POST",
     credentials: "include",
@@ -13,7 +14,7 @@ authApiService.register = (user) => {
     .catch((err) => console.log(err));
 };
 
-authApiService.login = (user) => {
+authApiService.login = (user: Credentials) => {
   return fetch(`${URL}/login`, {
     method: "POST",
     credentials: "include",
@@ -25,7 +26,7 @@ authApiService.login = (user) => {
     .catch((err) => console.log(err));
 };
 
-authApiService.profile = (username) => {
+authApiService.profile = (username: string) => {
   return fetch(`${URL}/profile/${username}`, {
     method: "GET",
     credentials: "include",
