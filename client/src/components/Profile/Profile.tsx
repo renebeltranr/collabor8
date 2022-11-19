@@ -6,6 +6,7 @@ import ListedCollab from "../ListedCollab/ListedCollab";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Profile.css";
+import { ICollab } from "../../utilities/types";
 
 const initialState = {
   username: "",
@@ -17,7 +18,7 @@ const initialState = {
 function Profile() {
   const navigate = useNavigate();
   const { username } = useParams();
-  initialState.username = username;
+  initialState.username = username as string;
   const [state, setState] = useState(initialState);
   const ctx = useContext(GlobalContext);
 
@@ -110,7 +111,7 @@ function Profile() {
           </div>
           {state.owncollabs.length > 0 ? (
             <CollabList>
-              {state.owncollabs.map((el) => {
+              {state.owncollabs.map((el: ICollab) => {
                 return (
                   <ListedCollab
                     owner={username}

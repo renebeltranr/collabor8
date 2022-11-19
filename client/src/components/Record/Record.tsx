@@ -1,24 +1,26 @@
 import collabApiService from "../../utilities/collabApiService";
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import ReactPlayer from "react-player/lazy";
 import { upVideoToCloudinary } from "../../utilities/Cloudinary";
 import "./Record.css";
+import { HTMLWithDisabled, HTMLWithSource } from "../../utilities/types";
 
 const initialState = {
   name: "",
   tracks: [],
   user: {
     username: "",
+    _id: undefined,
   },
 };
 
 function Record() {
   const ctx = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [audioDevices, setAudioDevices] = useState([]);
-  const [videoDevices, setVideoDevices] = useState([]);
+  const [audioDevices, setAudioDevices] = useState<MediaDeviceInfo[]>([]);
+  const [videoDevices, setVideoDevices] = useState<MediaDeviceInfo[]>([]);
   const [selectedAudioDevice, setSelectedAudioDevice] = useState("");
   const [selectedVideoDevice, setSelectedVideoDevice] = useState("");
   const [state, setState] = useState(initialState);
@@ -57,9 +59,9 @@ function Record() {
   }, [id]);
 
   const stopButton = document.getElementById("stop");
-  const submitButton = document.getElementById("submit");
-  const audioPlayer = document.getElementById("audioPlayer");
-  const videoPlayer = document.getElementById("videoPlayer");
+  const submitButton: HTMLWithDisabled = document.getElementById("submit") as HTMLWithDisabled;
+  const audioPlayer: HTMLWithSource = document.getElementById("audioPlayer") as HTMLWithSource;
+  const videoPlayer: HTMLWithSource = document.getElementById("videoPlayer") as HTMLWithSource;
 
   function startHandler() {
     let constraintObj = {
@@ -81,14 +83,16 @@ function Record() {
       videoBitsPerSecond: 256000,
     };
     const mediaRecorder = new MediaRecorder(stream, options);
-    const chunks = [];
+    const chunks: Array<any> = [];
 
     mediaRecorder.addEventListener("dataavailable", function (e) {
       if (e.data.size > 0) chunks.push(e.data);
     });
-    stopButton.addEventListener("click", function () {
+    
+    stopButton?.addEventListener("click", function () {
       mediaRecorder.stop();
     });
+    
     mediaRecorder.addEventListener("stop", function () {
       let blob = new Blob(chunks);
       let audioURL = window.URL.createObjectURL(blob);
@@ -100,7 +104,7 @@ function Record() {
     submitButton.addEventListener("click", function () {
       const result = upVideoToCloudinary(chunks[0]);
       result
-        .then((data) => {
+        .then((data: any) => {
           submitButton.disabled = true;
           const ret = collabApiService.saveTrack({
             url: data.secure_url,
@@ -150,7 +154,7 @@ function Record() {
                 {videoDevices.length
                   ? videoDevices.map((d) => {
                       return (
-                        <option key={d.deviceId} value={d.devideId}>
+                        <option key={d.deviceId} value={d.deviceId}>
                           {d.label}
                         </option>
                       );

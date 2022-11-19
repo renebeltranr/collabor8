@@ -24,13 +24,22 @@ export type IUser = {
   _id: string;
 };
 
-export interface iGlobalContext {
+export interface IGlobalContext {
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   userId: string;
   username: string;
+}
+
+
+export interface HTMLWithSource extends HTMLElement {
+  src: string;
+}
+
+export interface HTMLWithDisabled extends HTMLElement {
+  disabled: boolean;
 }
 
 export interface IAuthApiService {
