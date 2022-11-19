@@ -1,0 +1,32 @@
+.loginFlex {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  max-height: 10em;
+}
+#login-btn {
+  margin-top: 1em;
+}
+.login {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  height: 70vh;
+  width: 70vw;
+  overflow-y: scroll;
+}
+.mainForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background: #6b6cfb;
+  height: 85vh;
+}

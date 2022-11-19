@@ -1,0 +1,27 @@
+.home {
+  flex-direction: column;
+  justify-content: start;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  height: 70vh;
+  width: 70vw;
+  overflow-y: scroll;
+}
+
+.homeTitle {
+  background: #f9f9f9;
+  color: #60a0c7;
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+  -webkit-backdrop-filter: blur(9.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background: #6b6cfb;
+  height: 85vh;
+}

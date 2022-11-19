@@ -1,0 +1,48 @@
+.listedCollab {
+  background: #f9f9f9;
+  color: #60a0c7;
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+  -webkit-backdrop-filter: blur(9.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 1px 1px rgba(86, 86, 86, 0.5);
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.collabName {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+}
+
+.newCollabName,
+.newCollabVid {
+  margin: 0.5em;
+}
+
+.collabTracks {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 40vh;
+  justify-content: center;
+}
+
+.listedPictures {
+  margin: 0.5em;
+  box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
+}
+
+.createdAt {
+  align-self: flex-end;
+  font-style: italic;
+  color: rgb(93, 93, 93);
+}
+
+.dateStyle {
+  margin-top: 1.5em;
+  padding: 0;
+}
