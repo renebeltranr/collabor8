@@ -94,26 +94,30 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 3, , 4]);
+                _b.trys.push([0, 4, , 5]);
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, user_1.default.findOne({ username: username })];
             case 1:
                 user = _b.sent();
+                if (!(user !== null)) return [3 /*break*/, 3];
                 return [4 /*yield*/, bcrypt_1.default.compare(password, user.password)];
             case 2:
                 validatedPass = _b.sent();
                 if (!validatedPass)
                     throw new Error();
-                req.session.uid = user._id;
-                res.status(200).send(user);
-                return [3 /*break*/, 4];
+                _b.label = 3;
             case 3:
+                if (user !== null)
+                    req.session.uid = user._id;
+                res.status(200).send(user);
+                return [3 /*break*/, 5];
+            case 4:
                 error_2 = _b.sent();
                 res
                     .status(401)
                     .send({ error: "401", message: "Username or password is incorrect" });
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
@@ -130,7 +134,7 @@ var profile = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
                 return [3 /*break*/, 3];
             case 2:
                 _a = _b.sent();
-                res.status(404).send({ error: error, message: "User not found" });
+                res.status(404).send({ error: Error, message: "User not found" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -154,7 +158,8 @@ var profileUpdate = function (req, res) { return __awaiter(void 0, void 0, void 
                     })];
             case 1:
                 result = _a.sent();
-                result.password = undefined;
+                if (result !== null)
+                    result.password = undefined;
                 res.status(201).send(result);
                 return [3 /*break*/, 3];
             case 2: throw new Error();
@@ -177,7 +182,7 @@ var me = function (req, res) { return __awaiter(void 0, void 0, void 0, function
             res.status(200).send(user);
         }
         catch (_c) {
-            res.status(404).send({ error: error, message: "User not found" });
+            res.status(404).send({ error: Error, message: "User not found" });
         }
         return [2 /*return*/];
     });

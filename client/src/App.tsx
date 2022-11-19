@@ -11,7 +11,7 @@ import { Collab } from "./components/Collab/Collab";
 import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
-import { IGlobalContext } from "./utilities/types";
+import { IGlobalContext, IUser } from "./utilities/types";
 
 
 export const GlobalContext = createContext<IGlobalContext>({
@@ -25,15 +25,15 @@ export const GlobalContext = createContext<IGlobalContext>({
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState<string>("");
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     const getProfile = async () => {
-      const userInfo = await authApiService.me();
+      const userInfo: IUser = await  (authApiService.me && authApiService.me()) as any as IUser;
       if (userInfo !== undefined) {
         setIsAuthenticated(true);
-        setUserId(userInfo._id);
+        setUserId(userInfo._id as string);
         setUsername(userInfo.username);
       } else {
         console.log("Couldn't retrieve user info");

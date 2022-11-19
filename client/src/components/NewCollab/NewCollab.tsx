@@ -16,6 +16,8 @@ function NewCollab() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log("name", name)
+    console.log("value", value)
     setState((prevState) => ({
       ...prevState,
       [name]: value,

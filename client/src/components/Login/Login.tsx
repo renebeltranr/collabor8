@@ -37,7 +37,7 @@ function Login() {
       } else {
         const userResponse = res as unknown as IUser;
         ctx.setIsAuthenticated(true);
-        ctx.setUserId(userResponse._id);
+        ctx.setUserId(userResponse._id as string);
         ctx.setUsername(userResponse.username);
         navigate(`/profile/${username}`);
       }
