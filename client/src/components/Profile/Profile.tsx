@@ -6,9 +6,9 @@ import ListedCollab from "../ListedCollab/ListedCollab";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Profile.css";
-import { ICollab } from "../../utilities/types";
+import { ICollab, IUser } from "../../utilities/types";
 
-const initialState = {
+const initialState: IUser = {
   username: "",
   country: "",
   bio: "",
@@ -19,7 +19,7 @@ function Profile() {
   const navigate = useNavigate();
   const { username } = useParams();
   initialState.username = username as string;
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<>(initialState);
   const ctx = useContext(GlobalContext);
 
   useEffect(() => {
@@ -35,8 +35,8 @@ function Profile() {
             bio,
           };
         });
-        const test = await collabApiService.getUserCollabs(_id);
-        setState((prevState) => {
+        const test = await (collabApiService.getUserCollabs && collabApiService.getUserCollabs(_id));
+        setState((prevState: IUser) => {
           return {
             ...prevState,
             owncollabs: test,

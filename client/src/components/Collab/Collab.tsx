@@ -25,7 +25,8 @@ export const Collab = function () {
 
   useEffect(() => {
     const getCollab = async () => {
-      const collabInfo = await collabApiService.getCollab(id);
+      const collabInfo = await 
+      (collabApiService.getCollab && collabApiService.getCollab(id));
       if (collabInfo) {
         const { name, tracks, pendingtracks } = collabInfo[0];
         const user = collabInfo[0].owner;
@@ -65,30 +66,32 @@ export const Collab = function () {
 
   async function handleDelete() {
     //add confirmation before deletion
-    await collabApiService.deleteCollab({
+    await (collabApiService.deleteCollab && 
+      collabApiService.deleteCollab
+    ({
       uid: collab.user._id,
       cid: id,
-    });
+    }));
     navigate(`/profile/${ctx.username}`);
   }
 
   async function acceptTrack(url) {
-    const result = await collabApiService.acceptTrack({ url: url, cid: id });
+    const result = await (collabApiService.acceptTrack && collabApiService.acceptTrack({ url: url, cid: id }));
     if (result) window.location.reload();
   }
   async function denyTrack(url) {
-    const result = await collabApiService.denyTrack({ url: url, cid: id });
+    const result = await (collabApiService.denyTrack && collabApiService.denyTrack({ url: url, cid: id }));
     if (result) window.location.reload();
   }
   async function deleteTrack(url) {
-    const result = await collabApiService.deleteTrack({ url: url, cid: id });
+    const result = await (collabApiService.deleteTrack && collabApiService.deleteTrack({ url: url, cid: id }));
     if (result) window.location.reload();
   }
   async function handleSaveSettings() {
-    const result = await collabApiService.saveSettings({
+    const result = await (collabApiService.saveSettings && collabApiService.saveSettings({
       cid: id,
       collab: collab,
-    });
+    }));
     if (result) window.location.reload();
   }
 

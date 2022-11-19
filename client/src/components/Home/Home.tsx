@@ -7,11 +7,13 @@ import "./Home.css";
 import { ICollab } from "../../utilities/types";
 
 function Home() {
-  const [collabs, setCollabs] = useState([]);
+  const [collabs, setCollabs] = useState<ICollab[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchCollabs() {
-    const res = await collabApiService.getCollabs();
+    const res: ICollab[] = await 
+    (collabApiService.getCollabs && 
+      collabApiService.getCollabs()) as any as ICollab[];
     setCollabs(res);
     setTimeout(() => {
       setIsLoading(false);
@@ -34,7 +36,7 @@ function Home() {
           {collabs.map((el: ICollab) => {
             return (
               <ListedCollab
-                owner={el.owner.username}
+                owner={el?.owner?.username}
                 name={el.name}
                 tracks={el.tracks}
                 _id={el._id}
