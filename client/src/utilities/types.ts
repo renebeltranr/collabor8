@@ -31,6 +31,17 @@ export interface iGlobalContext {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   userId: string;
   username: string;
-  collab: ICollab;
-  setCollab: React.Dispatch<React.SetStateAction<ICollab>>;
 }
+
+export interface IAuthApiService {
+  register?: (user: IUser) => Promise<Response>;
+  login?: (user: IUser) => Promise<Response>;
+  profile?: (username: string) => Promise<Response>;
+  me?: () => Promise<Response>;
+  logout?: () => Promise<Response>;
+  profileUpdate?: (data: DataUpdate) => Promise<Response>;
+}
+
+export type DataUpdate = {
+  [key: string]: string;
+};
