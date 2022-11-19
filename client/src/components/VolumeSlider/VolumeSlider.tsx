@@ -1,18 +1,23 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import "./VolumeSlider.css";
 
 function VolumeSlider({ volume, setCollab, url, id }) {
-  const [currentVolume, setCurrentVolume] = useState(String(volume));
+  const [currentVolume, setCurrentVolume] = useState(volume);
 
   useEffect(() => {
-    const track = document.getElementById(String(id));
+    const track = document.getElementById(
+      String(id)
+    ) as HTMLVideoElement | null;
     if (track) track.volume = currentVolume / 100;
-  }, [currentVolume]);
+  }, [currentVolume, id]);
 
   function handleVolumeChange(e) {
     setCurrentVolume(e.target.value);
-    const track = document.getElementById(String(id));
-    track.volume = currentVolume / 100;
+    const track = document.getElementById(
+      String(id)
+    ) as HTMLVideoElement | null;
+    if (track) track.volume = currentVolume / 100;
     //
     if (id[0] === "t") {
       setCollab((prevState) => {
