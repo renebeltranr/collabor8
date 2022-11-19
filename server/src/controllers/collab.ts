@@ -1,7 +1,9 @@
-const Collab = require("./../models/collab");
-const User = require("./../models/user");
+import { Request, Response } from "express";
+import Collab from "../models/collab";
+import User from "../models/user";
+import { ICollab, IUser } from "../types/types";
 
-const create = async (req, res) => {
+const create = async (req: Request, res: Response) => {
   try {
     const newCollab = new Collab({
       owner: req.session.uid,
@@ -9,9 +11,9 @@ const create = async (req, res) => {
       tracks: req.body.tracks,
     });
     const cb = await newCollab.save();
-    const user = await User.findById(req.session.uid);
+    const user = new User (await User.findById(req.session.uid) as IUser);
     user.owncollabs.push(cb._id);
-    const result = await user.save();
+    const result= await user.save();
     res.status(201).send(cb);
   } catch (error) {
     console.log(error);
@@ -19,7 +21,7 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req: Request, res: Response) => {
   try {
     const cb = await Collab.find().sort({ createdAt: -1 }).populate("owner");
     res.status(200).send(cb);
@@ -29,7 +31,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getUserCollabs = async (req, res) => {
+const getUserCollabs = async (req: Request, res: Response) => {
   try {
     const uid = req.params.id;
     const cb = await Collab.find({ owner: uid });
@@ -40,10 +42,10 @@ const getUserCollabs = async (req, res) => {
   }
 };
 
-const getCollab = async (req, res) => {
+const getCollab = async (req:Request, res: Response) => {
   try {
     const cid = req.params;
-    const cb = await Collab.find({ _id: cid.id }).populate("owner");
+    const cb: Array<ICollab> = await Collab.find({ _id: cid.id }).populate("owner") as Array<ICollab>;
     cb[0].owner.password = undefined;
     res.status(200).send(cb);
   } catch (error) {
@@ -52,9 +54,11 @@ const getCollab = async (req, res) => {
   }
 };
 
-const saveTrack = async (req, res) => {
+const saveTrack = async (req: Request, res: Response) => {
   try {
-    const result = await Collab.findOne({ _id: req.body.cid });
+    
+    const result = new Collab (await Collab.findOne({ _id: req.body.cid }) as ICollab);
+        
     if (result.owner.valueOf() === req.session.uid) {
       result.tracks.push({
         url: req.body.url,
@@ -62,7 +66,9 @@ const saveTrack = async (req, res) => {
         volume: 100,
         username: req.body.username,
       });
+
       const saveresult = await result.save();
+      
       res.status(201).send(saveresult);
     } else {
       result.pendingtracks.push({
@@ -80,9 +86,9 @@ const saveTrack = async (req, res) => {
   }
 };
 
-const saveSettings = async (req, res) => {
+const saveSettings = async (req: Request, res: Response) => {
   try {
-    const result = await Collab.findOne({ _id: req.params.id });
+    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
     if (result.owner.valueOf() === req.session.uid) {
       result.tracks = req.body.tracks;
       const saveresult = await result.save();
@@ -94,19 +100,19 @@ const saveSettings = async (req, res) => {
   }
 };
 
-const acceptTrack = async (req, res) => {
+const acceptTrack = async (req: Request, res: Response) => {
   try {
-    const result = await Collab.findOne({ _id: req.params.id });
+    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
     if (result.owner.valueOf() === req.session.uid) {
-      let trackToDelete;
-      result.pendingtracks.forEach((el) => {
+      let trackToDelete: string;
+      result.pendingtracks.forEach((el: any) => {
         if (el.url === req.body.url) {
           result.tracks.push(el);
           trackToDelete = el;
         }
       });
       result.pendingtracks = result.pendingtracks.filter(
-        (el) => el != trackToDelete
+        (el: any) => el != trackToDelete
       );
       const savedResult = await result.save();
       res.status(201).send(savedResult);
@@ -118,18 +124,18 @@ const acceptTrack = async (req, res) => {
   }
 };
 
-const denyTrack = async (req, res) => {
+const denyTrack = async (req: Request, res: Response) => {
   try {
-    const result = await Collab.findOne({ _id: req.params.id });
+    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
     if (result.owner.valueOf() === req.session.uid) {
-      let trackToDelete;
-      result.pendingtracks.forEach((el) => {
+      let trackToDelete: string;
+      result.pendingtracks.forEach((el: any) => {
         if (el.url === req.body.url) {
           trackToDelete = el;
         }
       });
       result.pendingtracks = result.pendingtracks.filter(
-        (el) => el != trackToDelete
+        (el: any) => el != trackToDelete
       );
       const savedResult = await result.save();
       res.status(201).send(savedResult);
@@ -141,17 +147,17 @@ const denyTrack = async (req, res) => {
   }
 };
 
-const deleteTrack = async (req, res) => {
+const deleteTrack = async (req: Request, res: Response) => {
   try {
-    const result = await Collab.findOne({ _id: req.params.id });
+    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
     if (result.owner.valueOf() === req.session.uid) {
-      let trackToDelete;
-      result.tracks.forEach((el) => {
+      let trackToDelete: string;
+      result.tracks.forEach((el:any) => {
         if (el.url === req.body.url) {
           trackToDelete = el;
         }
       });
-      result.tracks = result.tracks.filter((el) => el != trackToDelete);
+      result.tracks = result.tracks.filter((el:any) => el != trackToDelete);
       const savedResult = await result.save();
       res.status(201).send(savedResult);
     } else {
@@ -162,7 +168,7 @@ const deleteTrack = async (req, res) => {
   }
 };
 
-const deleteCollab = async (req, res) => {
+const deleteCollab = async (req: Request, res: Response) => {
   try {
     if (req.body.uid === req.session.uid) {
       const result = await Collab.deleteOne({ _id: req.params.cid });
@@ -184,7 +190,7 @@ const deleteCollab = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   create,
   getAll,
   getUserCollabs,
