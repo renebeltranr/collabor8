@@ -12,6 +12,7 @@ const initialState = {
   tracks: [],
   user: {
     username: "",
+    _id: undefined,
   },
 };
 
@@ -103,7 +104,7 @@ function Record() {
     submitButton.addEventListener("click", function () {
       const result = upVideoToCloudinary(chunks[0]);
       result
-        .then((data) => {
+        .then((data: any) => {
           submitButton.disabled = true;
           const ret = collabApiService.saveTrack({
             url: data.secure_url,
