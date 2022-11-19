@@ -76,7 +76,8 @@ export const Collab = function () {
   }
 
   async function acceptTrack(url) {
-    const result = await (collabApiService.acceptTrack && collabApiService.acceptTrack({ url: url, cid: id }));
+    const result = await (collabApiService.acceptTrack 
+      && collabApiService.acceptTrack({ url: url, cid: id }));
     if (result) window.location.reload();
   }
   async function denyTrack(url) {

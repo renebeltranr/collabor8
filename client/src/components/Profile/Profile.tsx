@@ -19,7 +19,7 @@ function Profile() {
   const navigate = useNavigate();
   const { username } = useParams();
   initialState.username = username as string;
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<IUser>(initialState);
   const ctx = useContext(GlobalContext);
 
   useEffect(() => {
@@ -39,8 +39,8 @@ function Profile() {
               bio,
             };
           });
-          const test = await (collabApiService.getUserCollabs &&
-            collabApiService.getUserCollabs(_id));
+          const test: string[] = (await (collabApiService.getUserCollabs &&
+            collabApiService.getUserCollabs(_id as string))) as any as string[];
           setState((prevState: IUser) => {
             return {
               ...prevState,
@@ -61,10 +61,11 @@ function Profile() {
 
   async function handleCountryUpdate(e) {
     try {
-      await authApiService.profileUpdate({
-        _id: ctx.userId,
-        country: e.target.innerText,
-      });
+      if (authApiService.profileUpdate)
+        await authApiService.profileUpdate({
+          _id: ctx.userId,
+          country: e.target.innerText,
+        });
     } catch (error) {
       console.log(error);
     }
@@ -72,10 +73,11 @@ function Profile() {
 
   async function handleBioUpdate(e) {
     try {
-      await authApiService.profileUpdate({
-        _id: ctx.userId,
-        bio: e.target.innerText,
-      });
+      if (authApiService.profileUpdate)
+        await authApiService.profileUpdate({
+          _id: ctx.userId,
+          bio: e.target.innerText,
+        });
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +119,8 @@ function Profile() {
           </div>
           {state.owncollabs.length > 0 ? (
             <CollabList>
-              {state.owncollabs.map((el: ICollab) => {
+              {(state.owncollabs as ICollab[]).map((el) => {
+                el as any as ICollab;
                 return (
                   <ListedCollab
                     owner={username}
