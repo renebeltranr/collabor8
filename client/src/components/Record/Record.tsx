@@ -39,7 +39,9 @@ function Record() {
       setVideoDevices(devs.filter((d) => d.kind === "videoinput"));
     });
     const getCollab = async () => {
-      const collabInfo = await collabApiService.getCollab(id);
+      const collabInfo = await (
+        collabApiService.getCollab
+         && collabApiService.getCollab(id));
       if (collabInfo) {
         const { name, tracks } = collabInfo[0];
         const user = collabInfo[0].owner;
@@ -106,12 +108,13 @@ function Record() {
       result
         .then((data: any) => {
           submitButton.disabled = true;
-          const ret = collabApiService.saveTrack({
+          const ret = (collabApiService.saveTrack && 
+            collabApiService.saveTrack({
             url: data.secure_url,
-            cid: id,
+            cid: id ,
             username: ctx.username,
-          });
-          ret.then((data) => {
+          }));
+          ret?.then((data) => {
             navigate(`/collab/id/${id}`);
           });
         })

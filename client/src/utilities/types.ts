@@ -82,11 +82,7 @@ export type ICollabApiService = {
 
 export type ISaveTrack = {
   url: string,
-  cid: number,
+  cid: string | undefined,
   username: string
 }
 
-export type ISettings = {
-  cid: number,
-  collab:
-}
