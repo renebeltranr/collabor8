@@ -1,5 +1,6 @@
 import { Request, RequestHandler as Middleware, Response } from "express";
 export type User = { username: string; password: string };
+import { Types } from 'mongoose';
 
 type Method = "get" | "post" | "put" | "delete";
 
@@ -25,23 +26,25 @@ export type IUser = {
   othercollabs: any;
   createdAt: string;
   updatedAt: string;
-  _id: string;
+  _id: Types.ObjectId;
+  __v: any;
 };
 
 declare module "express-session" {
   export interface SessionData {
-    uid: string;
+    uid: any;
   }
 }
 
 export type ICollab = {
-  owner: IUser;
+  owner: Types.ObjectId;
   name: string;
   tracks: any;
   pendingtracks: any;
   createdAt: string;
   updatedAt: string;
-  _id: string;
+  _id: Types.ObjectId;
+  __v: any;
 };
 
 export interface RequestWithUser extends Request {

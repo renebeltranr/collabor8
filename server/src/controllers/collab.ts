@@ -12,7 +12,7 @@ const create = async (req: Request, res: Response) => {
     });
     console.log('controller');
     const cb = await newCollab.save();
-    const user = new User (await User.findById(req.session.uid) as IUser);
+    const user: any = await User.findById(req.session.uid) as any;
     user.owncollabs.push(cb._id);
     const result= await user.save();
     console.log('Controller', result)
@@ -27,6 +27,7 @@ const handleOptions =async (req:Request, res: Response) => {
   try {
     res.set('Access-Control-Allow-Origin','http://localhost:3000').set('Access-Control-Allow-Credentials','http://localhost:3000').status(201).send({msg: 'Allow cors'});
   } catch (error) {
+    console.log(error);
     
   }
 }
@@ -56,7 +57,8 @@ const getCollab = async (req:Request, res: Response) => {
   try {
     const cid = req.params;
     const cb: Array<ICollab> = await Collab.find({ _id: cid.id }).populate("owner") as Array<ICollab>;
-    cb[0].owner.password = undefined;
+    const ownerUser = await User.findOne({ username: cb[0].owner });
+    ownerUser.password = undefined;
     res.status(200).send(cb);
   } catch (error) {
     console.log(error);

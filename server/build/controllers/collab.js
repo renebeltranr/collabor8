@@ -42,11 +42,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var collab_1 = __importDefault(require("../models/collab"));
 var user_1 = __importDefault(require("../models/user"));
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newCollab, cb, user, _a, result, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var newCollab, cb, user, result, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 4, , 5]);
+                _a.trys.push([0, 4, , 5]);
                 newCollab = new collab_1.default({
                     owner: req.session.uid,
                     name: req.body.name,
@@ -55,20 +55,19 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 console.log('controller');
                 return [4 /*yield*/, newCollab.save()];
             case 1:
-                cb = _b.sent();
-                _a = user_1.default.bind;
+                cb = _a.sent();
                 return [4 /*yield*/, user_1.default.findById(req.session.uid)];
             case 2:
-                user = new (_a.apply(user_1.default, [void 0, _b.sent()]))();
+                user = _a.sent();
                 user.owncollabs.push(cb._id);
                 return [4 /*yield*/, user.save()];
             case 3:
-                result = _b.sent();
+                result = _a.sent();
                 console.log('Controller', result);
                 res.set({ 'Access-Control-Allow-Origin': 'http://localhost:3000', 'Access-Control-Allow-Credentials': true, 'Access-Control-Allow-Headers': 'Accept' }).status(201).send(cb);
                 return [3 /*break*/, 5];
             case 4:
-                error_1 = _b.sent();
+                error_1 = _a.sent();
                 console.log(error_1);
                 res.status(400).send({ error: error_1, message: "Could not create Collab" });
                 return [3 /*break*/, 5];
@@ -82,6 +81,7 @@ var handleOptions = function (req, res) { return __awaiter(void 0, void 0, void 
             res.set('Access-Control-Allow-Origin', 'http://localhost:3000').set('Access-Control-Allow-Credentials', 'http://localhost:3000').status(201).send({ msg: 'Allow cors' });
         }
         catch (error) {
+            console.log(error);
         }
         return [2 /*return*/];
     });
@@ -128,24 +128,27 @@ var getUserCollabs = function (req, res) { return __awaiter(void 0, void 0, void
     });
 }); };
 var getCollab = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var cid, cb, error_4;
+    var cid, cb, ownerUser, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 3, , 4]);
                 cid = req.params;
                 return [4 /*yield*/, collab_1.default.find({ _id: cid.id }).populate("owner")];
             case 1:
                 cb = _a.sent();
-                cb[0].owner.password = undefined;
-                res.status(200).send(cb);
-                return [3 /*break*/, 3];
+                return [4 /*yield*/, user_1.default.findOne({ username: cb[0].owner })];
             case 2:
+                ownerUser = _a.sent();
+                ownerUser.password = undefined;
+                res.status(200).send(cb);
+                return [3 /*break*/, 4];
+            case 3:
                 error_4 = _a.sent();
                 console.log(error_4);
                 res.status(400).send({ error: error_4, message: "Could not get the Collab" });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };

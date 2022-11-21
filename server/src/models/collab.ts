@@ -2,6 +2,7 @@
 
 import mongoose from "mongoose";
 import { ICollab } from "../types/types";
+
 const Schema = mongoose.Schema;
 const CollabSchema = new Schema<ICollab>(
   {
