@@ -46,7 +46,7 @@ var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                uid = req.session;
+                uid = req.session.uid;
                 return [4 /*yield*/, user_1.default.findOne({ _id: uid })];
             case 1:
                 user = _a.sent();
@@ -58,7 +58,7 @@ var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
-                console.log(error_1);
+                console.log("Authentication Middleware error: ", error_1);
                 return [2 /*return*/, res.status(401)];
             case 3: return [2 /*return*/];
         }

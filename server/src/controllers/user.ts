@@ -21,7 +21,7 @@ const create = async (req: Request, res: Response) => {
     req.session.uid = user._id;
     res.status(201).send(user);
   } catch (error) {
-    console.log(error);
+    console.log('Controller create User error:', error);
     res.status(400).send({ error, message: "Could not create user" });
   }
 };
@@ -37,6 +37,7 @@ const login = async (req: Request, res: Response) => {
     if (user !== null) req.session.uid = user._id;
     res.status(200).send(user);
   } catch (error) {
+    console.log('Controller login error:', error),
     res
       .status(401)
       .send({ error: "401", message: "Username or password is incorrect" });
@@ -61,14 +62,14 @@ const profileUpdate = async (req: Request, res: Response) => {
       if (req.body.bio) dataToUpdate.bio = req.body.bio;
       const result = await User.findOneAndUpdate({ _id: uid }, dataToUpdate, {
         new: true,
-      });
+      }) as any;
       if (result !== null) result.password = undefined;
       res.status(201).send(result);
     } else {
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    console.log('Controller profileUpdate error:', error);
     res.status(400).send({ error, message: "Error updating profile" });
   }
 };

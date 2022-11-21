@@ -9,14 +9,14 @@ const authMiddleware = async (
   next: NextFunction
 ) => {
   try {
-    const uid: any = req.session as any;
+    const { uid } = req.session;
     const user: any = await User.findOne({ _id: uid }) as any;
     if (!user) throw new Error("Error at authMiddleware");
     req.user = user;
     console.log('Auth', req.method)
     next();
   } catch (error) {
-    console.log(error)
+    console.log("Authentication Middleware error: ", error)
     return res.status(401);
   }
 };

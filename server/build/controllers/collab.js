@@ -52,7 +52,6 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     name: req.body.name,
                     tracks: req.body.tracks,
                 });
-                console.log('controller');
                 return [4 /*yield*/, newCollab.save()];
             case 1:
                 cb = _a.sent();
@@ -63,12 +62,11 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [4 /*yield*/, user.save()];
             case 3:
                 result = _a.sent();
-                console.log('Controller', result);
                 res.set({ 'Access-Control-Allow-Origin': 'http://localhost:3000', 'Access-Control-Allow-Credentials': true, 'Access-Control-Allow-Headers': 'Accept' }).status(201).send(cb);
                 return [3 /*break*/, 5];
             case 4:
                 error_1 = _a.sent();
-                console.log(error_1);
+                console.log('Controller Create error:', error_1);
                 res.status(400).send({ error: error_1, message: "Could not create Collab" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
@@ -81,7 +79,7 @@ var handleOptions = function (req, res) { return __awaiter(void 0, void 0, void 
             res.set('Access-Control-Allow-Origin', 'http://localhost:3000').set('Access-Control-Allow-Credentials', 'http://localhost:3000').status(201).send({ msg: 'Allow cors' });
         }
         catch (error) {
-            console.log(error);
+            console.log('Controller handleOptions error:', error);
         }
         return [2 /*return*/];
     });
@@ -99,7 +97,7 @@ var getAll = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _a.sent();
-                console.log(error_2);
+                console.log('Controller getAll error:', error_2);
                 res.status(400).send({ error: error_2, message: "Could not get all Collabs" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -120,7 +118,7 @@ var getUserCollabs = function (req, res) { return __awaiter(void 0, void 0, void
                 return [3 /*break*/, 3];
             case 2:
                 error_3 = _a.sent();
-                console.log(error_3);
+                console.log('Controller getUserCollabs error:', error_3);
                 res.status(400).send({ error: error_3, message: "Could not get user Collabs" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
@@ -145,7 +143,7 @@ var getCollab = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 return [3 /*break*/, 4];
             case 3:
                 error_4 = _a.sent();
-                console.log(error_4);
+                console.log('Controller getCollab error:', error_4);
                 res.status(400).send({ error: error_4, message: "Could not get the Collab" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
@@ -153,15 +151,14 @@ var getCollab = function (req, res) { return __awaiter(void 0, void 0, void 0, f
     });
 }); };
 var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, _a, saveresult, saveresult, error_5;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var result, saveresult, saveresult, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 6, , 7]);
-                _a = collab_1.default.bind;
+                _a.trys.push([0, 6, , 7]);
                 return [4 /*yield*/, collab_1.default.findOne({ _id: req.body.cid })];
             case 1:
-                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
+                result = _a.sent();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.tracks.push({
                     url: req.body.url,
@@ -171,7 +168,7 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 });
                 return [4 /*yield*/, result.save()];
             case 2:
-                saveresult = _b.sent();
+                saveresult = _a.sent();
                 res.status(201).send(saveresult);
                 return [3 /*break*/, 5];
             case 3:
@@ -183,13 +180,13 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 });
                 return [4 /*yield*/, result.save()];
             case 4:
-                saveresult = _b.sent();
+                saveresult = _a.sent();
                 res.status(201).send(saveresult);
-                _b.label = 5;
+                _a.label = 5;
             case 5: return [3 /*break*/, 7];
             case 6:
-                error_5 = _b.sent();
-                console.log(error_5);
+                error_5 = _a.sent();
+                console.log('Controller saveTrack error:', error_5);
                 res.status(400).send({ error: error_5, message: "Could not save the Collab" });
                 return [3 /*break*/, 7];
             case 7: return [2 /*return*/];
@@ -216,7 +213,7 @@ var saveSettings = function (req, res) { return __awaiter(void 0, void 0, void 0
             case 3: return [3 /*break*/, 5];
             case 4:
                 error_6 = _b.sent();
-                console.log(error_6);
+                console.log('Controller saveSettings error:', error_6);
                 res.status(400).send({ error: error_6, message: "Could not save the settings" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
@@ -249,7 +246,7 @@ var acceptTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
             case 3: return [3 /*break*/, 5];
             case 4:
                 error_7 = _b.sent();
-                console.log(error_7);
+                console.log('Controller acceptTrack error:', error_7);
                 res.status(400).send({ error: error_7, message: "Could not accept the track" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
@@ -281,7 +278,7 @@ var denyTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
             case 3: return [3 /*break*/, 5];
             case 4:
                 error_8 = _b.sent();
-                console.log(error_8);
+                console.log('Controller denyTrack error:', error_8);
                 res.status(400).send({ error: error_8, message: "Could not delete the track" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
@@ -313,7 +310,7 @@ var deleteTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
             case 3: return [3 /*break*/, 5];
             case 4:
                 error_9 = _b.sent();
-                console.log(error_9);
+                console.log('Controller deleteTrack error:', error_9);
                 res.status(400).send({ error: error_9, message: "Could not delete the track" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
@@ -344,7 +341,7 @@ var deleteCollab = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [3 /*break*/, 7];
             case 6:
                 error_10 = _a.sent();
-                console.log(error_10);
+                console.log('Controller deleteCollab error:', error_10);
                 res.status(400).send({ error: error_10, message: "Could not delete the Collab" });
                 return [3 /*break*/, 7];
             case 7: return [2 /*return*/];

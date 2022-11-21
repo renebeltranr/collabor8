@@ -82,7 +82,7 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 6];
             case 5:
                 error_1 = _b.sent();
-                console.log(error_1);
+                console.log('Controller create User error:', error_1);
                 res.status(400).send({ error: error_1, message: "Could not create user" });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
@@ -113,9 +113,10 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 return [3 /*break*/, 5];
             case 4:
                 error_2 = _b.sent();
-                res
-                    .status(401)
-                    .send({ error: "401", message: "Username or password is incorrect" });
+                console.log('Controller login error:', error_2),
+                    res
+                        .status(401)
+                        .send({ error: "401", message: "Username or password is incorrect" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
@@ -166,7 +167,7 @@ var profileUpdate = function (req, res) { return __awaiter(void 0, void 0, void 
             case 3: return [3 /*break*/, 5];
             case 4:
                 error_3 = _a.sent();
-                console.log(error_3);
+                console.log('Controller profileUpdate error:', error_3);
                 res.status(400).send({ error: error_3, message: "Error updating profile" });
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
