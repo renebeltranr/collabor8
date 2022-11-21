@@ -10,12 +10,10 @@ const create = async (req: Request, res: Response) => {
       name: req.body.name,
       tracks: req.body.tracks,
     });
-    console.log('controller');
     const cb = await newCollab.save();
-    const user: any = await User.findById(req.session.uid) as any;
+    const user = await User.findById(req.session.uid);
     user.owncollabs.push(cb._id);
     const result= await user.save();
-    console.log('Controller', result)
     res.set({'Access-Control-Allow-Origin':'http://localhost:3000', 'Access-Control-Allow-Credentials':true, 'Access-Control-Allow-Headers': 'Accept'}).status(201).send(cb);
   } catch (error) {
     console.log(error);
@@ -56,7 +54,7 @@ const getUserCollabs = async (req: Request, res: Response) => {
 const getCollab = async (req:Request, res: Response) => {
   try {
     const cid = req.params;
-    const cb: Array<ICollab> = await Collab.find({ _id: cid.id }).populate("owner") as Array<ICollab>;
+    const cb = await Collab.find({ _id: cid.id }).populate("owner");
     const ownerUser = await User.findOne({ username: cb[0].owner });
     ownerUser.password = undefined;
     res.status(200).send(cb);
@@ -69,7 +67,7 @@ const getCollab = async (req:Request, res: Response) => {
 const saveTrack = async (req: Request, res: Response) => {
   try {
     
-    const result = new Collab (await Collab.findOne({ _id: req.body.cid }) as ICollab);
+    const result: any = await Collab.findOne({ _id: req.body.cid });
         
     if (result.owner.valueOf() === req.session.uid) {
       result.tracks.push({
