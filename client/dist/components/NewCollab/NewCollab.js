@@ -22,6 +22,8 @@ function NewCollab() {
     const ctx = React.useContext(GlobalContext);
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log("name", name);
+        console.log("value", value);
         setState((prevState) => (Object.assign(Object.assign({}, prevState), { [name]: value })));
     };
     const handleSubmit = (e) => __awaiter(this, void 0, void 0, function* () {
@@ -30,9 +32,11 @@ function NewCollab() {
             name: state.name,
             tracks: [state.URL],
         };
-        const res = yield collabApiService.newCollab(cb);
-        if (res.error) {
-            alert(`${res.message}`);
+        const res = (yield (collabApiService.newCollab
+            && collabApiService.newCollab(cb)));
+        if (res.status === 400) {
+            const errorResponse = res;
+            alert(`${errorResponse.message}`);
             setState(initialState);
         }
         else {
@@ -49,7 +53,7 @@ function NewCollab() {
                 React.createElement("h3", null, "Create your New Collab"),
                 React.createElement("div", { className: "newCollabName" },
                     React.createElement("h5", null, "Pick a cool Collab name. Other users will see it!"),
-                    React.createElement("input", { className: "default-input", type: "text", placeholder: "Cool Collab Name", name: "name", value: state.username, onChange: handleChange })),
+                    React.createElement("input", { className: "default-input", type: "text", placeholder: "Cool Collab Name", name: "name", value: state.name, onChange: handleChange })),
                 React.createElement("div", { className: "newCollabVid" },
                     React.createElement("h5", null,
                         "Paste the code you find in a Youtube's video URL that will serve as a base track for your Collab. Example:",

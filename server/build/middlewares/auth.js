@@ -41,23 +41,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_1 = __importDefault(require("../models/user"));
 var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var uid, user, _a, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var uid, user, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 2, , 3]);
                 uid = req.session;
-                _a = user_1.default.bind;
                 return [4 /*yield*/, user_1.default.findOne({ _id: uid })];
             case 1:
-                user = new (_a.apply(user_1.default, [void 0, (_b.sent())]))();
+                user = _a.sent();
                 if (!user)
                     throw new Error("Error at authMiddleware");
                 req.user = user;
+                console.log('Auth', req.method);
                 next();
                 return [3 /*break*/, 3];
             case 2:
-                error_1 = _b.sent();
+                error_1 = _a.sent();
+                console.log(error_1);
                 return [2 /*return*/, res.status(401)];
             case 3: return [2 /*return*/];
         }

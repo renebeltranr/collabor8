@@ -27,9 +27,8 @@ function Login() {
     const { username, password } = state;
     const user = { username, password };
     if (authApiService.login) {
-      const res: IError | Response = (await authApiService.login(user)) as
-        | IError
-        | Response;
+      const res: any = (await authApiService.login(user)) as
+        any;
       if (res.status === 400) {
         const errorResponse = res as IError;
         alert(`${errorResponse.message}`);

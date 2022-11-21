@@ -4,6 +4,8 @@ import authWare from "./../middlewares/auth";
 
 const router: any =Router();
 
+console.log('user router')
+
 router.post("/register", userController.create);
 router.post("/login", userController.login);
 router.get("/me", authWare, userController.me);

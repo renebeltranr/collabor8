@@ -33,7 +33,7 @@ function App() {
     const [username, setUsername] = useState("");
     useEffect(() => {
         const getProfile = () => __awaiter(this, void 0, void 0, function* () {
-            const userInfo = yield authApiService.me();
+            const userInfo = yield (authApiService.me && authApiService.me());
             if (userInfo !== undefined) {
                 setIsAuthenticated(true);
                 setUserId(userInfo._id);

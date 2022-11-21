@@ -34,14 +34,17 @@ function Register() {
         }
         let lowerCaseUsername = state.username.toLowerCase();
         const user = { username: lowerCaseUsername, password, country };
-        const res = yield authApiService.register(user);
-        if (res.error) {
-            alert(`${res.message}`);
-            setState(initialState);
-        }
-        else {
-            ctx.setIsAuthenticated(true);
-            navigate(`/profile/${lowerCaseUsername}`);
+        if (authApiService.register) {
+            const res = (yield authApiService.register(user));
+            if (res.status === 400) {
+                const errorResponse = res;
+                alert(`${errorResponse.message}`);
+                setState(initialState);
+            }
+            else {
+                ctx.setIsAuthenticated(true);
+                navigate(`/profile/${lowerCaseUsername}`);
+            }
         }
     });
     const validateForm = () => {

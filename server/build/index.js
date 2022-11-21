@@ -9,12 +9,14 @@ var index_1 = __importDefault(require("./models/index"));
 var user_router_1 = __importDefault(require("./router/user.router"));
 var collab_router_1 = __importDefault(require("./router/collab.router"));
 var express_session_1 = __importDefault(require("express-session"));
+var morgan_1 = __importDefault(require("morgan"));
 var PORT = 3001;
 var app = (0, express_1.default)();
 var corsConfig = {
     origin: "http://localhost:3000",
     credentials: true,
 };
+app.use((0, morgan_1.default)('dev'));
 app.use((0, cors_1.default)(corsConfig));
 app.use(express_1.default.json());
 var sid = {
@@ -23,7 +25,9 @@ var sid = {
     saveUninitialized: false,
     resave: false,
     cookie: {
+        maxAge: 1000 * 60 * 60,
         httpOnly: false,
+        sameSite: true,
         secure: false,
     },
 };

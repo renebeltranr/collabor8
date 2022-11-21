@@ -7,6 +7,7 @@ var express_1 = require("express");
 var user_1 = __importDefault(require("./../controllers/user"));
 var auth_1 = __importDefault(require("./../middlewares/auth"));
 var router = (0, express_1.Router)();
+console.log('user router');
 router.post("/register", user_1.default.create);
 router.post("/login", user_1.default.login);
 router.get("/me", auth_1.default, user_1.default.me);

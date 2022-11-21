@@ -52,6 +52,7 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     name: req.body.name,
                     tracks: req.body.tracks,
                 });
+                console.log('controller');
                 return [4 /*yield*/, newCollab.save()];
             case 1:
                 cb = _b.sent();
@@ -63,7 +64,8 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [4 /*yield*/, user.save()];
             case 3:
                 result = _b.sent();
-                res.status(201).send(cb);
+                console.log('Controller', result);
+                res.set({ 'Access-Control-Allow-Origin': 'http://localhost:3000', 'Access-Control-Allow-Credentials': true, 'Access-Control-Allow-Headers': 'Accept' }).status(201).send(cb);
                 return [3 /*break*/, 5];
             case 4:
                 error_1 = _b.sent();
@@ -72,6 +74,16 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
+    });
+}); };
+var handleOptions = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000').set('Access-Control-Allow-Credentials', 'http://localhost:3000').status(201).send({ msg: 'Allow cors' });
+        }
+        catch (error) {
+        }
+        return [2 /*return*/];
     });
 }); };
 var getAll = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -347,4 +359,5 @@ exports.default = {
     denyTrack: denyTrack,
     deleteTrack: deleteTrack,
     saveSettings: saveSettings,
+    handleOptions: handleOptions
 };

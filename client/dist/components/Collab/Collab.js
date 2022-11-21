@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import React from "react";
 import collabApiService from "../../utilities/collabApiService";
 import VolumeSlider from "../VolumeSlider/VolumeSlider";
 import { useState, useContext, useEffect } from "react";
@@ -30,7 +31,7 @@ export const Collab = function () {
     let trackCounter = 0;
     useEffect(() => {
         const getCollab = () => __awaiter(this, void 0, void 0, function* () {
-            const collabInfo = yield collabApiService.getCollab(id);
+            const collabInfo = yield (collabApiService.getCollab && collabApiService.getCollab(id));
             if (collabInfo) {
                 const { name, tracks, pendingtracks } = collabInfo[0];
                 const user = collabInfo[0].owner;
@@ -52,51 +53,55 @@ export const Collab = function () {
     }
     function handlePlay() {
         for (let i = 0; i < playAll.length; i++) {
-            playAll[i].play();
+            let video = playAll[i];
+            video === null || video === void 0 ? void 0 : video.play();
         }
     }
     function handlePause() {
         for (let i = 0; i < playAll.length; i++) {
-            playAll[i].pause();
+            let video = playAll[i];
+            video === null || video === void 0 ? void 0 : video.pause();
         }
     }
     function handleDelete() {
         return __awaiter(this, void 0, void 0, function* () {
             //add confirmation before deletion
-            const deletion = yield collabApiService.deleteCollab({
-                uid: collab.user._id,
-                cid: id,
-            });
+            yield (collabApiService.deleteCollab &&
+                collabApiService.deleteCollab({
+                    uid: collab.user._id,
+                    cid: id,
+                }));
             navigate(`/profile/${ctx.username}`);
         });
     }
     function acceptTrack(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield collabApiService.acceptTrack({ url: url, cid: id });
+            const result = yield (collabApiService.acceptTrack
+                && collabApiService.acceptTrack({ url: url, cid: id }));
             if (result)
                 window.location.reload();
         });
     }
     function denyTrack(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield collabApiService.denyTrack({ url: url, cid: id });
+            const result = yield (collabApiService.denyTrack && collabApiService.denyTrack({ url: url, cid: id }));
             if (result)
                 window.location.reload();
         });
     }
     function deleteTrack(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield collabApiService.deleteTrack({ url: url, cid: id });
+            const result = yield (collabApiService.deleteTrack && collabApiService.deleteTrack({ url: url, cid: id }));
             if (result)
                 window.location.reload();
         });
     }
     function handleSaveSettings() {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield collabApiService.saveSettings({
+            const result = yield (collabApiService.saveSettings && collabApiService.saveSettings({
                 cid: id,
                 collab: collab,
-            });
+            }));
             if (result)
                 window.location.reload();
         });
@@ -143,6 +148,7 @@ export const Collab = function () {
                                 React.createElement("div", { hidden: true }, trackCounter++),
                                 ctx.userId === collab.user._id ? (React.createElement("div", { className: "pendingButtons" },
                                     React.createElement("button", { onClick: () => deleteTrack(el.url), id: "denyTrack", className: "default-btn" }, "X"))) : ("")));
+                        return null;
                     }),
                     collab.pendingtracks.length > 0 && ctx.userId === collab.user._id
                         ? collab.pendingtracks.map((el) => {
@@ -161,6 +167,7 @@ export const Collab = function () {
                                     React.createElement("div", { className: "pendingButtons" },
                                         React.createElement("button", { onClick: () => acceptTrack(el.url), id: "acceptTrack", className: "default-btn" }, "OK"),
                                         React.createElement("button", { onClick: () => denyTrack(el.url), id: "denyTrack", className: "default-btn" }, "X"))));
+                            return null;
                         })
                         : "")))));
 };

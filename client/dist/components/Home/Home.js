@@ -18,7 +18,8 @@ function Home() {
     const [isLoading, setIsLoading] = useState(true);
     function fetchCollabs() {
         return __awaiter(this, void 0, void 0, function* () {
-            const res = yield collabApiService.getCollabs();
+            const res = yield (collabApiService.getCollabs &&
+                collabApiService.getCollabs());
             setCollabs(res);
             setTimeout(() => {
                 setIsLoading(false);
@@ -35,7 +36,8 @@ function Home() {
             React.createElement("div", { className: "homeTitle" },
                 React.createElement("h3", null, "LATEST COLLABS")),
             React.createElement(CollabList, null, collabs.map((el) => {
-                return (React.createElement(ListedCollab, { owner: el.owner.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
+                var _a;
+                return (React.createElement(ListedCollab, { owner: (_a = el === null || el === void 0 ? void 0 : el.owner) === null || _a === void 0 ? void 0 : _a.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
             })))));
 }
 export default Home;

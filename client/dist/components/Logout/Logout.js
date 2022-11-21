@@ -17,7 +17,8 @@ function Logout() {
     let navigate = useNavigate();
     const handleClick = () => __awaiter(this, void 0, void 0, function* () {
         if (ctx.isAuthenticated) {
-            yield authApiService.logout();
+            if (authApiService.logout)
+                yield authApiService.logout();
             ctx.setIsAuthenticated(false);
             ctx.setUserId("");
             ctx.setUsername("");

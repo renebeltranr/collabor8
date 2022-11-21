@@ -1,3 +1,4 @@
+import React from "react";
 import "./Spinner.css";
 function Spinner() {
     return (React.createElement("div", { className: "spinnerContainer" },

@@ -4,6 +4,9 @@ import authWare from "../middlewares/auth";
 
 const router: any =Router();
 
+console.log('collab router')
+
+router.options('/newCollab', collabController.handleOptions)
 router.post("/newCollab", authWare, collabController.create);
 router.get("/getAll", collabController.getAll);
 router.get("/getUserCollabs/:id", collabController.getUserCollabs);

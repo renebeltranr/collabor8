@@ -29,16 +29,20 @@ function Login() {
         e.preventDefault();
         const { username, password } = state;
         const user = { username, password };
-        const res = yield authApiService.login(user);
-        if (res.error) {
-            alert(`${res.message}`);
-            setState(initialState);
-        }
-        else {
-            ctx.setIsAuthenticated(true);
-            ctx.setUserId(res._id);
-            ctx.setUsername(res.username);
-            navigate(`/profile/${username}`);
+        if (authApiService.login) {
+            const res = (yield authApiService.login(user));
+            if (res.status === 400) {
+                const errorResponse = res;
+                alert(`${errorResponse.message}`);
+                setState(initialState);
+            }
+            else {
+                const userResponse = res;
+                ctx.setIsAuthenticated(true);
+                ctx.setUserId(userResponse._id);
+                ctx.setUsername(userResponse.username);
+                navigate(`/profile/${username}`);
+            }
         }
     });
     const validateForm = () => {

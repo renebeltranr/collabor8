@@ -6,6 +6,7 @@ import db from "./models/index";
 import userRouter from "./router/user.router";
 import collabRouter from "./router/collab.router";
 import session from "express-session";
+import morgan from 'morgan';
 
 const PORT = 3001;
 const app = express();
@@ -15,6 +16,7 @@ const corsConfig = {
   credentials: true,
 };
 
+app.use(morgan('dev'));
 app.use(cors(corsConfig));
 app.use(express.json());
 
@@ -24,13 +26,14 @@ const sid = {
   saveUninitialized: false,
   resave: false,
   cookie: {
+    maxAge: 1000 * 60 * 60, // 1hr
     httpOnly: false,
+    sameSite: true,
     secure: false,
   },
 };
 
 app.use(session(sid));
-
 app.use(userRouter);
 app.use("/collab", collabRouter);
 

@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import collabApiService from "../../utilities/collabApiService";
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import ReactPlayer from "react-player/lazy";
@@ -19,6 +19,7 @@ const initialState = {
     tracks: [],
     user: {
         username: "",
+        _id: undefined,
     },
 };
 function Record() {
@@ -42,7 +43,8 @@ function Record() {
             setVideoDevices(devs.filter((d) => d.kind === "videoinput"));
         });
         const getCollab = () => __awaiter(this, void 0, void 0, function* () {
-            const collabInfo = yield collabApiService.getCollab(id);
+            const collabInfo = yield (collabApiService.getCollab
+                && collabApiService.getCollab(id));
             if (collabInfo) {
                 const { name, tracks } = collabInfo[0];
                 const user = collabInfo[0].owner;
@@ -86,7 +88,7 @@ function Record() {
             if (e.data.size > 0)
                 chunks.push(e.data);
         });
-        stopButton.addEventListener("click", function () {
+        stopButton === null || stopButton === void 0 ? void 0 : stopButton.addEventListener("click", function () {
             mediaRecorder.stop();
         });
         mediaRecorder.addEventListener("stop", function () {
@@ -101,12 +103,13 @@ function Record() {
             result
                 .then((data) => {
                 submitButton.disabled = true;
-                const ret = collabApiService.saveTrack({
-                    url: data.secure_url,
-                    cid: id,
-                    username: ctx.username,
-                });
-                ret.then((data) => {
+                const ret = (collabApiService.saveTrack &&
+                    collabApiService.saveTrack({
+                        url: data.secure_url,
+                        cid: id,
+                        username: ctx.username,
+                    }));
+                ret === null || ret === void 0 ? void 0 : ret.then((data) => {
                     navigate(`/collab/id/${id}`);
                 });
             })
@@ -131,7 +134,7 @@ function Record() {
                         : null),
                     React.createElement("select", { onChange: handleVideoSelection, name: "videodevices", id: "devices" }, videoDevices.length
                         ? videoDevices.map((d) => {
-                            return (React.createElement("option", { key: d.deviceId, value: d.devideId }, d.label));
+                            return (React.createElement("option", { key: d.deviceId, value: d.deviceId }, d.label));
                         })
                         : null)),
                 React.createElement("h5", null, "Play the video to start recording. Once you're done, press the Stop button to listen to the preview. If you're happy with it, press submit to upload it to your Collab!"),

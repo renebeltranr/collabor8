@@ -67,16 +67,16 @@ export type IError = {
 };
 
 export type ICollabApiService = {
-  getCollabs?: () => Promise<void | Response>;
-  newCollab?: (cb: ICollab) => Promise<void | Promise<Response>>;
-  getUserCollabs?: (id: string) => Promise<void | Response>;
-  getCollab?: (id: string | undefined) => Promise<void | Response>;
-  saveTrack?: (data: ISaveTrack) => Promise<Promise<Response>>;
-  saveSettings?: (data: any) => Promise<Response>;
-  acceptTrack?: (data) => Promise<Response>;
-  denyTrack?: (data) => Promise<Response>;
-  deleteTrack?: (data) => Promise<Response>;
-  deleteCollab?: (data) => Promise<Response>;
+  getCollabs: () => Promise<void | Response>;
+  newCollab: (cb: ICollab) => Promise<void | Promise<Response>>;
+  getUserCollabs: (id: string) => Promise<void | Response>;
+  getCollab: (id: string | undefined) => Promise<void | Response>;
+  saveTrack: (data: ISaveTrack) => Promise<Promise<Response>>;
+  saveSettings: (data: any) => Promise<Response>;
+  acceptTrack: (data) => Promise<Response>;
+  denyTrack: (data) => Promise<Response>;
+  deleteTrack: (data) => Promise<Response>;
+  deleteCollab: (data) => Promise<Response>;
 };
 
 export type ISaveTrack = {

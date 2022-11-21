@@ -10,16 +10,26 @@ const create = async (req: Request, res: Response) => {
       name: req.body.name,
       tracks: req.body.tracks,
     });
+    console.log('controller');
     const cb = await newCollab.save();
     const user = new User (await User.findById(req.session.uid) as IUser);
     user.owncollabs.push(cb._id);
     const result= await user.save();
-    res.status(201).send(cb);
+    console.log('Controller', result)
+    res.set({'Access-Control-Allow-Origin':'http://localhost:3000', 'Access-Control-Allow-Credentials':true, 'Access-Control-Allow-Headers': 'Accept'}).status(201).send(cb);
   } catch (error) {
     console.log(error);
     res.status(400).send({ error, message: "Could not create Collab" });
   }
 };
+
+const handleOptions =async (req:Request, res: Response) => {
+  try {
+    res.set('Access-Control-Allow-Origin','http://localhost:3000').set('Access-Control-Allow-Credentials','http://localhost:3000').status(201).send({msg: 'Allow cors'});
+  } catch (error) {
+    
+  }
+}
 
 const getAll = async (req: Request, res: Response) => {
   try {
@@ -201,4 +211,5 @@ export default {
   denyTrack,
   deleteTrack,
   saveSettings,
+  handleOptions
 };

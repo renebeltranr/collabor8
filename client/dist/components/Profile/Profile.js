@@ -29,21 +29,25 @@ function Profile() {
     const ctx = useContext(GlobalContext);
     useEffect(() => {
         const getProfile = () => __awaiter(this, void 0, void 0, function* () {
-            const userInfo = yield authApiService.profile(username);
-            if (userInfo) {
-                const { username, country, bio, _id } = userInfo;
-                setState((prevState) => {
-                    return Object.assign(Object.assign({}, prevState), { username,
-                        country,
-                        bio });
-                });
-                const test = yield collabApiService.getUserCollabs(_id);
-                setState((prevState) => {
-                    return Object.assign(Object.assign({}, prevState), { owncollabs: test });
-                });
-            }
-            else {
-                console.log(`Couldn't retrieve user info`);
+            if (authApiService.profile) {
+                const userInfo = (yield authApiService.profile(username));
+                if (userInfo) {
+                    const user = userInfo;
+                    const { username, country, bio, _id } = user;
+                    setState((prevState) => {
+                        return Object.assign(Object.assign({}, prevState), { username,
+                            country,
+                            bio });
+                    });
+                    const test = (yield (collabApiService.getUserCollabs &&
+                        collabApiService.getUserCollabs(_id)));
+                    setState((prevState) => {
+                        return Object.assign(Object.assign({}, prevState), { owncollabs: test });
+                    });
+                }
+                else {
+                    console.log(`Couldn't retrieve user info`);
+                }
             }
         });
         getProfile();
@@ -54,10 +58,11 @@ function Profile() {
     function handleCountryUpdate(e) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield authApiService.profileUpdate({
-                    _id: ctx.userId,
-                    country: e.target.innerText,
-                });
+                if (authApiService.profileUpdate)
+                    yield authApiService.profileUpdate({
+                        _id: ctx.userId,
+                        country: e.target.innerText,
+                    });
             }
             catch (error) {
                 console.log(error);
@@ -67,10 +72,11 @@ function Profile() {
     function handleBioUpdate(e) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield authApiService.profileUpdate({
-                    _id: ctx.userId,
-                    bio: e.target.innerText,
-                });
+                if (authApiService.profileUpdate)
+                    yield authApiService.profileUpdate({
+                        _id: ctx.userId,
+                        bio: e.target.innerText,
+                    });
             }
             catch (error) {
                 console.log(error);
@@ -94,6 +100,7 @@ function Profile() {
                         " Collabs"),
                     ctx.username === username ? (React.createElement("button", { onClick: goToNewCollab, className: "default-btn" }, "New Collab")) : ("")),
                 state.owncollabs.length > 0 ? (React.createElement(CollabList, null, state.owncollabs.map((el) => {
+                    el;
                     return (React.createElement(ListedCollab, { owner: username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
                 }))) : ("")))));
 }

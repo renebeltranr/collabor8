@@ -24,14 +24,16 @@ function NewCollab() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+    
     const cb: ICollab = {
       name: state.name,
       tracks: [state.URL],
     };
-    const res:(IError | Response) = (await (collabApiService.newCollab && collabApiService.newCollab(cb))) as (IError | Response);
-    if (res.status === 400) {
+    const res: any = await collabApiService.newCollab(cb) as any;
+      console.log('het')
+      if (res.status === 400) {
       const errorResponse = res as IError
       alert(`${errorResponse.message}`);
       setState(initialState);
