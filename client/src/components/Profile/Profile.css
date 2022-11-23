@@ -26,6 +26,10 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.myProfile h3{
+  color: #000000;
+}
+
 .mycollabs {
   width: 70vw;
   overflow: scroll;

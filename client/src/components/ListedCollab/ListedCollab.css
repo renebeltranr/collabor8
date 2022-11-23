@@ -1,3 +1,7 @@
+* {
+  overflow: hidden;
+}
+
 .listedCollab {
   background:rgba(86, 86, 86, 0.5);
   color: #f0f9ff;
@@ -49,4 +53,8 @@
   font-size: 0.8rem;
   font-weight: 300;
 
+}
+
+.explore-section h3,h4,h5,h6 {
+  color:white;
 }
