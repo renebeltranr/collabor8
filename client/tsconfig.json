@@ -8,7 +8,8 @@
     "jsx": "react", // use typescript to transpile jsx to js
     "target": "ES6", // specify ECMAScript target version
     "allowJs": true, // allow a partial TypeScript and JavaScript codebase
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["cypress", "node"]
   },
   "include": ["./src/"]
 }

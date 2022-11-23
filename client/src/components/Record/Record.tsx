@@ -42,6 +42,7 @@ function Record() {
       const collabInfo = await (
         collabApiService.getCollab
          && collabApiService.getCollab(id));
+       
       if (collabInfo) {
         const { name, tracks } = collabInfo[0];
         const user = collabInfo[0].owner;
@@ -126,12 +127,13 @@ function Record() {
   return (
     <div className="main">
       <div className="record">
+        
         {ctx.userId ? (
           <div className="recordArea">
             <div className="deviceSelect">
               <div className="collabName">
                 <h5>{state.name}</h5>
-                <h6>@{state.user.username}</h6>
+                <h6>by: @{state.user.username}</h6>
               </div>
               <h5>Select the devices to record with:</h5>
               <select

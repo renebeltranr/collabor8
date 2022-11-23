@@ -7,7 +7,6 @@ var express_1 = require("express");
 var collab_1 = __importDefault(require("../controllers/collab"));
 var auth_1 = __importDefault(require("../middlewares/auth"));
 var router = (0, express_1.Router)();
-console.log('collab router');
 router.post("/newCollab", auth_1.default, collab_1.default.create);
 router.get("/getAll", collab_1.default.getAll);
 router.get("/getUserCollabs/:id", collab_1.default.getUserCollabs);

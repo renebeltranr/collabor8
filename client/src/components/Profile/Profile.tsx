@@ -10,6 +10,7 @@ import { ICollab, IUser } from "../../utilities/types";
 
 const initialState: IUser = {
   username: "",
+  password:"",
   country: "",
   bio: "",
   owncollabs: [],
@@ -110,7 +111,7 @@ function Profile() {
           <div className="myCollabsHeader">
             <h3>@{state.username} Collabs</h3>
             {ctx.username === username ? (
-              <button onClick={goToNewCollab} className="default-btn">
+              <button onClick={goToNewCollab} className="default-btn" data-cy="new-collab">
                 New Collab
               </button>
             ) : (

@@ -30,7 +30,7 @@ function Home() {
     <div className="main">
       <div className="home">
         <div className="homeTitle">
-          <h3>LATEST COLLABS</h3>
+          <h3>LATEST COLLAB</h3>
         </div>
         <CollabList>
           {collabs.map((el: ICollab) => {

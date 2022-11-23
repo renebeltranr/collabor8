@@ -11,9 +11,9 @@ const authMiddleware: any = async (
   try {
     const { uid } = req.session;
     const user: IUser = await User.findOne({ _id: uid }) as IUser;
-    if (!user) console.log("User not authenticated");
+    if (!user) console.log("User not authenticated ");
     req.user = user;
-    console.log('Auth', req.method)
+    console.log('Auth: ', req.method)
     next();
   } catch (error) {
     console.log("Authentication Middleware error: ", error)

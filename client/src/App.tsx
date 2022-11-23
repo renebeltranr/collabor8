@@ -32,6 +32,7 @@ function App() {
     const getProfile = async () => {
       const userInfo: IUser = await  (authApiService.me && authApiService.me()) as any as IUser;
       if (userInfo !== undefined) {
+
         setIsAuthenticated(true);
         setUserId(userInfo._id as string);
         setUsername(userInfo.username);

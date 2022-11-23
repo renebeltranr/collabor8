@@ -17,6 +17,7 @@ import { GlobalContext } from "../../App";
 import "./Profile.css";
 const initialState = {
     username: "",
+    password: "",
     country: "",
     bio: "",
     owncollabs: [],
@@ -98,7 +99,7 @@ function Profile() {
                         "@",
                         state.username,
                         " Collabs"),
-                    ctx.username === username ? (React.createElement("button", { onClick: goToNewCollab, className: "default-btn" }, "New Collab")) : ("")),
+                    ctx.username === username ? (React.createElement("button", { onClick: goToNewCollab, className: "default-btn", "data-cy": "new-collab" }, "New Collab")) : ("")),
                 state.owncollabs.length > 0 ? (React.createElement(CollabList, null, state.owncollabs.map((el) => {
                     el;
                     return (React.createElement(ListedCollab, { owner: username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));

@@ -32,7 +32,6 @@ function NewCollab() {
       tracks: [state.URL],
     };
     const res: any = await collabApiService.newCollab(cb) as any;
-      console.log('het')
       if (res.status === 400) {
       const errorResponse = res as IError
       alert(`${errorResponse.message}`);
@@ -90,6 +89,7 @@ function NewCollab() {
             className="default-btn"
             type="submit"
             disabled={validateForm()}
+            data-cy="new-collab"
           >
             &nbsp;Create&nbsp;
           </button>

@@ -32,8 +32,7 @@ function NewCollab() {
             name: state.name,
             tracks: [state.URL],
         };
-        const res = (yield (collabApiService.newCollab
-            && collabApiService.newCollab(cb)));
+        const res = yield collabApiService.newCollab(cb);
         if (res.status === 400) {
             const errorResponse = res;
             alert(`${errorResponse.message}`);
@@ -63,7 +62,7 @@ function NewCollab() {
                             React.createElement("span", { className: "highlighted" }, "OS8taasZl8k"))),
                     React.createElement("input", { className: "default-input", type: "text", placeholder: "Youtube Video CODE", name: "URL", value: state.URL, onChange: handleChange }),
                     React.createElement("h5", null, "Once you see your Youtube Video embeded on the player, you're ready to create it!")),
-                React.createElement("button", { className: "default-btn", type: "submit", disabled: validateForm() }, "\u00A0Create\u00A0")),
+                React.createElement("button", { className: "default-btn", type: "submit", disabled: validateForm(), "data-cy": "new-collab" }, "\u00A0Create\u00A0")),
             React.createElement("div", { className: "videoDiv" },
                 React.createElement("iframe", { title: "test", width: "190", height: "110", src: "https://www.youtube-nocookie.com/embed/" + state.URL })))));
 }

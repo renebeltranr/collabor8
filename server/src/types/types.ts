@@ -15,6 +15,14 @@ export type Route = {
   handler: Handler;
 };
 
+
+export type ITrack = {
+  url: string,
+  cid: string,
+  username: string
+}
+
+
 export type IUser = {
   username: string;
   password: string | undefined;
@@ -39,8 +47,8 @@ declare module "express-session" {
 export type ICollab = {
   owner: Types.ObjectId;
   name: string;
-  tracks: any;
-  pendingtracks: any;
+  tracks: ITrack[];
+  pendingtracks: ITrack[];
   createdAt: string;
   updatedAt: string;
   _id: Types.ObjectId;

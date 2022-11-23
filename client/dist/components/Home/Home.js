@@ -34,7 +34,7 @@ function Home() {
     return (React.createElement("div", { className: "main" },
         React.createElement("div", { className: "home" },
             React.createElement("div", { className: "homeTitle" },
-                React.createElement("h3", null, "LATEST COLLABS")),
+                React.createElement("h3", null, "LATEST COLLAB")),
             React.createElement(CollabList, null, collabs.map((el) => {
                 var _a;
                 return (React.createElement(ListedCollab, { owner: (_a = el === null || el === void 0 ? void 0 : el.owner) === null || _a === void 0 ? void 0 : _a.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Collab from "../models/collab";
 import User from "../models/user";
-import { ICollab, IUser } from "../types/types";
+import { ICollab, IUser, ITrack } from "../types/types";
 
 const create = async (req: Request, res: Response) => {
   try {
@@ -10,15 +10,16 @@ const create = async (req: Request, res: Response) => {
       name: req.body.name,
       tracks: req.body.tracks,
     });
-    const cb = await newCollab.save();
-    const user = await User.findById(req.session.uid) as any;
-    user.owncollabs.push(cb._id);
-    const result= await user.save() as any;
+    
+    const collab = await newCollab.save();
+    
+    const user = await User.findById(req.session.uid);
+    user?.owncollabs.push(collab._id);
     res.set({'Access-Control-Allow-Origin':'http://localhost:3000', 
     'Access-Control-Allow-Credentials':true, 
     'Access-Control-Allow-Headers': 'Accept'})
     .status (201)
-    .send(cb);
+    .send(collab);
   } catch (error) {
     console.log('Controller Create error:', error);
     res.status(400)
@@ -28,8 +29,8 @@ const create = async (req: Request, res: Response) => {
 
 const getAll = async (req: Request, res: Response) => {
   try {
-    const cb = await Collab.find().sort({ createdAt: -1 }).populate("owner");
-    res.status(200).send(cb);
+    const collab = await Collab.find().sort({ createdAt: -1 }).populate("owner");
+    res.status(200).send(collab);
   } catch (error) {
     console.log('Controller getAll error:', error);
     res.status(400).send({ error, message: "Could not get all Collabs" });
@@ -51,7 +52,7 @@ const getCollab = async (req:Request, res: Response) => {
   try {
     const collabId = req.params;
     const collab = await Collab.find({ _id: collabId.id }).populate("owner");
-    (collab[0].owner as any as IUser).password="-";
+    (collab[0].owner as unknown as IUser).password="-";
     res.status(200).send(collab);
   } catch (error) {
     console.log('Controller getCollab error:', error);
@@ -62,27 +63,27 @@ const getCollab = async (req:Request, res: Response) => {
 const saveTrack = async (req: Request, res: Response) => {
   try {
     
-    const result: any = await Collab.findOne({ _id: req.body.cid });
+    const result = await Collab.findOne({ _id: req.body.cid });
         
-    if (result.owner.valueOf() === req.session.uid) {
-      result.tracks.push({
+    if (result?.owner.valueOf() === req.session.uid) {
+      result?.tracks.push({
         url: req.body.url,
         owner: req.session.uid,
         volume: 100,
         username: req.body.username,
       });
 
-      const saveresult = await result.save();
+      const saveresult = await result?.save();
       
       res.status(201).send(saveresult);
     } else {
-      result.pendingtracks.push({
+      result?.pendingtracks.push({
         url: req.body.url,
         owner: req.session.uid,
         volume: 100,
         username: req.body.username,
       });
-      const saveresult = await result.save();
+      const saveresult = await result?.save();
       res.status(201).send(saveresult);
     }
   } catch (error) {
@@ -93,10 +94,10 @@ const saveTrack = async (req: Request, res: Response) => {
 
 const saveSettings = async (req: Request, res: Response) => {
   try {
-    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
-    if (result.owner.valueOf() === req.session.uid) {
-      result.tracks = req.body.tracks;
-      const saveresult = await result.save();
+    const result = await Collab.findOne({ _id: req.params.id });
+    if (result?.owner.valueOf() === req.session.uid) {
+      result?.tracks ? result.tracks = req.body.tracks : null;
+      const saveresult = await result?.save();
       res.status(201).send(saveresult);
     }
   } catch (error) {
@@ -107,19 +108,25 @@ const saveSettings = async (req: Request, res: Response) => {
 
 const acceptTrack = async (req: Request, res: Response) => {
   try {
-    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
-    if (result.owner.valueOf() === req.session.uid) {
+    console.log("id params", req.params.id);
+    console.log("body url", req.body.url);
+    console.log("body id", req.body.cid);
+
+    const result = await Collab.findOne({ _id: req.params.id });
+    if (result?.owner.valueOf() === req.session.uid) {
       let trackToDelete: string;
-      result.pendingtracks.forEach((el: any) => {
-        if (el.url === req.body.url) {
-          result.tracks.push(el);
-          trackToDelete = el;
+      result?.pendingtracks.forEach((track: ITrack ) => {
+        if (track.url === req.body.url) {
+          result.tracks.push(track);
+          trackToDelete = track.cid;
         }
       });
-      result.pendingtracks = result.pendingtracks.filter(
-        (el: any) => el != trackToDelete
-      );
-      const savedResult = await result.save();
+      result?.pendingtracks ? result.pendingtracks=
+      result.pendingtracks.filter(
+        (removeTrack: string) => {removeTrack != trackToDelete
+        console.log("track to remove", removeTrack)
+        }): null;
+      const savedResult = await result?.save();
       res.status(201).send(savedResult);
     } else {
     }
@@ -131,18 +138,18 @@ const acceptTrack = async (req: Request, res: Response) => {
 
 const denyTrack = async (req: Request, res: Response) => {
   try {
-    const result = new Collab(await Collab.findOne({ _id: req.params.id }));
-    if (result.owner.valueOf() === req.session.uid) {
+    const result = await Collab.findOne({ _id: req.params.id });
+    if (result?.owner.valueOf() === req.session.uid) {
       let trackToDelete: string;
-      result.pendingtracks.forEach((el: any) => {
-        if (el.url === req.body.url) {
-          trackToDelete = el;
+      result?.pendingtracks.forEach((track: ITrack) => {
+        if (track.url === req.body.url) {
+          trackToDelete = track.cid;
         }
       });
-      result.pendingtracks = result.pendingtracks.filter(
-        (el: any) => el != trackToDelete
-      );
-      const savedResult = await result.save();
+      result?.pendingtracks ?  result.pendingtracks = result.pendingtracks.filter(
+        (track: ITrack) => track.cid != trackToDelete
+      ): null;
+      const savedResult = await result?.save();
       res.status(201).send(savedResult);
     } else {
     }
@@ -157,12 +164,12 @@ const deleteTrack = async (req: Request, res: Response) => {
     const result = new Collab(await Collab.findOne({ _id: req.params.id }));
     if (result.owner.valueOf() === req.session.uid) {
       let trackToDelete: string;
-      result.tracks.forEach((el:any) => {
-        if (el.url === req.body.url) {
-          trackToDelete = el;
+      result.tracks.forEach((track:ITrack) => {
+        if (track.url === req.body.url) {
+          trackToDelete = track.username;
         }
       });
-      result.tracks = result.tracks.filter((el:any) => el != trackToDelete);
+      result.tracks = result.tracks.filter((track:ITrack) => track.username != trackToDelete);
       const savedResult = await result.save();
       res.status(201).send(savedResult);
     } else {

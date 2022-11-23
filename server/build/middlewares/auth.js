@@ -51,9 +51,9 @@ var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0
             case 1:
                 user = _a.sent();
                 if (!user)
-                    console.log("User not authenticated");
+                    console.log("User not authenticated ");
                 req.user = user;
-                console.log('Auth', req.method);
+                console.log('Auth: ', req.method);
                 next();
                 return [3 /*break*/, 3];
             case 2:

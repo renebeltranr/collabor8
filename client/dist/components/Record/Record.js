@@ -124,7 +124,7 @@ function Record() {
                     React.createElement("div", { className: "collabName" },
                         React.createElement("h5", null, state.name),
                         React.createElement("h6", null,
-                            "@",
+                            "by: @",
                             state.user.username)),
                     React.createElement("h5", null, "Select the devices to record with:"),
                     React.createElement("select", { onChange: handleAudioSelection, name: "audiodevices", id: "devices" }, audioDevices.length

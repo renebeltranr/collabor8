@@ -62,7 +62,7 @@ const profileUpdate = async (req: Request, res: Response) => {
       if (req.body.bio) dataToUpdate.bio = req.body.bio;
       const result = await User.findOneAndUpdate({ _id: uid }, dataToUpdate, {
         new: true,
-      }) as any;
+      });
       if (result !== null) result.password = undefined;
       res.status(201).send(result);
     } else {

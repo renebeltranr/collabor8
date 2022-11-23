@@ -4,7 +4,7 @@ import {IUser} from '../types/types'
 
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
   {
     username: {
       type: String,
@@ -44,4 +44,4 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model<IUser>("User", UserSchema);

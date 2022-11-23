@@ -27,10 +27,10 @@ function Logout() {
         <div className="logoutFlex">
           <h4>Are you sure you want to log out?</h4>
           <div className="logoutButtons">
-            <button className="default-btn" onClick={() => handleClick()}>
+            <button className="default-btn"  data-cy="logout-yes" onClick={()=>handleClick()}>
               Yes
             </button>
-            <button onClick={goToMain} className="default-btn">
+            <button onClick={goToMain} data-cy="logout-no" className="default-btn">
               No
             </button>
           </div>

@@ -8,8 +8,7 @@ const collabApiService: ICollabApiService = {
       method: "GET",
       credentials: "include",
       mode: "cors",
-      headers: { "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json"},
     })
       .then((res) => res.json() as Promise<Response>)
       .catch((err) => console.log(err));
@@ -22,8 +21,7 @@ const collabApiService: ICollabApiService = {
         method: "POST",
         credentials: "include",
         mode: "cors",
-        headers: { "Content-Type": "application/json",
-        'Access-Control-Allow-Origin':'http://localhost:3000' },
+        headers:{"Content-Type": "application/json"},
         body: JSON.stringify(cb),
       });
       return await res.json();

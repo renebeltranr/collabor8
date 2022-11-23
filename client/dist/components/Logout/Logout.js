@@ -35,8 +35,8 @@ function Logout() {
             React.createElement("div", { className: "logoutFlex" },
                 React.createElement("h4", null, "Are you sure you want to log out?"),
                 React.createElement("div", { className: "logoutButtons" },
-                    React.createElement("button", { className: "default-btn", onClick: () => handleClick() }, "Yes"),
-                    React.createElement("button", { onClick: goToMain, className: "default-btn" }, "No"))))));
+                    React.createElement("button", { className: "default-btn", "data-cy": "logout-yes", onClick: () => handleClick() }, "Yes"),
+                    React.createElement("button", { onClick: goToMain, "data-cy": "logout-no", className: "default-btn" }, "No"))))));
 }
 export default Logout;
 //# sourceMappingURL=Logout.js.map

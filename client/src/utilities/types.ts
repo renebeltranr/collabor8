@@ -1,17 +1,17 @@
 export interface ICollab {
-  createdAt?: string;
-  name?: string;
+  _id?: string;
   owner?: IUser;
-  pendingtracks?: string[];
-  tracks?: Array<any>;
+  name?: string;
+  tracks?: ISaveTrack[] | string[];
+  pendingtracks?: ISaveTrack[]| string[];
+  createdAt?: string;
   updatedAt?: string;
   //__v: number;
-  _id?: string;
 }
 
 export type IUser = {
   username: string;
-  password?: string | undefined;
+  password: string | undefined;
   bio: string;
   country: string;
   createdAt?: string;
@@ -23,6 +23,7 @@ export type IUser = {
   //__v: number;
   _id?: string;
 };
+
 
 export interface IGlobalContext {
   isAuthenticated: boolean;

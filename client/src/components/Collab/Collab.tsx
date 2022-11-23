@@ -226,6 +226,7 @@ export const Collab = function () {
 
             {collab.pendingtracks.length > 0 && ctx.userId === collab.user._id
               ? collab.pendingtracks.map((el) => {
+                
                   if (el.url && el.url[0] === "h" && el.url[1] === "t")
                     return (
                       <div className="videoTrack">
