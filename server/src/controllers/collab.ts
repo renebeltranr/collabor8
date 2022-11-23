@@ -14,21 +14,17 @@ const create = async (req: Request, res: Response) => {
     const user = await User.findById(req.session.uid) as any;
     user.owncollabs.push(cb._id);
     const result= await user.save() as any;
-    res.set({'Access-Control-Allow-Origin':'http://localhost:3000', 'Access-Control-Allow-Credentials':true, 'Access-Control-Allow-Headers': 'Accept'}).status(201).send(cb);
+    res.set({'Access-Control-Allow-Origin':'http://localhost:3000', 
+    'Access-Control-Allow-Credentials':true, 
+    'Access-Control-Allow-Headers': 'Accept'})
+    .status (201)
+    .send(cb);
   } catch (error) {
     console.log('Controller Create error:', error);
-    res.status(400).send({ error, message: "Could not create Collab" });
+    res.status(400)
+    .send({ error, message: "Could not create Collab" });
   }
 };
-
-const handleOptions =async (req:Request, res: Response) => {
-  try {
-    res.set('Access-Control-Allow-Origin','http://localhost:3000').set('Access-Control-Allow-Credentials','http://localhost:3000').status(201).send({msg: 'Allow cors'});
-  } catch (error) {
-    console.log('Controller handleOptions error:', error);
-    
-  }
-}
 
 const getAll = async (req: Request, res: Response) => {
   try {
@@ -53,11 +49,10 @@ const getUserCollabs = async (req: Request, res: Response) => {
 
 const getCollab = async (req:Request, res: Response) => {
   try {
-    const cid = req.params;
-    const cb = await Collab.find({ _id: cid.id }).populate("owner");
-    const ownerUser = await User.findOne({ username: cb[0].owner }) as any;
-    ownerUser.password = undefined as any;
-    res.status(200).send(cb);
+    const collabId = req.params;
+    const collab = await Collab.find({ _id: collabId.id }).populate("owner");
+    (collab[0].owner as any as IUser).password="-";
+    res.status(200).send(collab);
   } catch (error) {
     console.log('Controller getCollab error:', error);
     res.status(400).send({ error, message: "Could not get the Collab" });
@@ -210,6 +205,5 @@ export default {
   acceptTrack,
   denyTrack,
   deleteTrack,
-  saveSettings,
-  handleOptions
+  saveSettings
 };

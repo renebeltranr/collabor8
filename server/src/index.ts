@@ -43,7 +43,7 @@ const notFound: Handler = (req, res) => {
 
 app.get("*", notFound);
 
-const serverDidntStart: any = (err: any) => {
+const serverDidntStart: any = (err: Error) => {
   if (err) {
     console.log(`Server couldn't start. Error: ${err}`);
   } else {

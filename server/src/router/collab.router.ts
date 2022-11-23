@@ -1,12 +1,11 @@
-import { Router } from "express";
+import { Router, RouterOptions } from "express";
 import collabController from "../controllers/collab";
 import authWare from "../middlewares/auth";
 
-const router: any =Router();
+const router: Router  =Router();
 
 console.log('collab router')
 
-router.options('/newCollab', collabController.handleOptions)
 router.post("/newCollab", authWare, collabController.create);
 router.get("/getAll", collabController.getAll);
 router.get("/getUserCollabs/:id", collabController.getUserCollabs);

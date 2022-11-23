@@ -3,15 +3,15 @@ import User from "../models/user";
 import { NextFunction, Response } from "express";
 import { SessionData } from "express-session";
 
-const authMiddleware = async (
+const authMiddleware: any = async (
   req: RequestWithUser,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { uid } = req.session;
-    const user: any = await User.findOne({ _id: uid }) as any;
-    if (!user) throw new Error("Error at authMiddleware");
+    const user: IUser = await User.findOne({ _id: uid }) as IUser;
+    if (!user) console.log("User not authenticated");
     req.user = user;
     console.log('Auth', req.method)
     next();
