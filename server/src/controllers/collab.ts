@@ -22,10 +22,18 @@ const create = async (req: Request, res: Response) => {
     .send(collab);
   } catch (error) {
     console.log('Controller Create error:', error);
-    res.status(400)
-    .send({ error, message: "Could not create Collab" });
+    res.status(400).send({ error, message: "Could not create Collab" });
   }
 };
+
+const handleOptions =async (req:Request, res: Response) => {
+  try {
+    res.set('Access-Control-Allow-Origin','http://localhost:3000').set('Access-Control-Allow-Credentials','http://localhost:3000').status(201).send({msg: 'Allow cors'});
+  } catch (error) {
+    console.log('Controller handleOptions error:', error);
+    
+  }
+}
 
 const getAll = async (req: Request, res: Response) => {
   try {
@@ -212,5 +220,6 @@ export default {
   acceptTrack,
   denyTrack,
   deleteTrack,
-  saveSettings
+  saveSettings,
+  handleOptions
 };

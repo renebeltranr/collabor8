@@ -10,14 +10,6 @@
   overflow-y: scroll;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
-}
 
 .newCollabForm {
   background: #f9f9f9;

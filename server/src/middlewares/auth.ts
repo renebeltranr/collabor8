@@ -3,7 +3,7 @@ import User from "../models/user";
 import { NextFunction, Response } from "express";
 import { SessionData } from "express-session";
 
-const authMiddleware: any = async (
+const authMiddleware = async (
   req: RequestWithUser,
   res: Response,
   next: NextFunction

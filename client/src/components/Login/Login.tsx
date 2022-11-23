@@ -48,37 +48,55 @@ function Login() {
   };
 
   return (
-    <div className="main">
+    <>
       <div className="login">
-        <div className="loginFlex">
-          <h2>Login</h2>
-          <form className="mainForm" onSubmit={handleSubmit}>
+        <div className="container-center">
+
+        <div className="form-heading">
+          <h2>Log In</h2>
+        </div>
+          
+          <form className="form" onSubmit={handleSubmit}>
+
+            <div className="textbox">
             <input
               type="text"
-              placeholder="username"
+              data-cy="username"
               name="username"
               value={state.username}
               onChange={handleChange}
+              required
             />
+            <label>User name</label>
+            <span className="material-symbols-outlined"> account_circle </span>
+            </div>
+
+            <div className="textbox">
             <input
               type="password"
-              placeholder="password"
+              data-cy="password"
               name="password"
               value={state.password}
               onChange={handleChange}
+              required
             />
+            <label>Password</label>
+            <span className="material-symbols-outlined"> key </span>
+            </div>
+
+
             <button
               id="login-btn"
-              className="default-btn"
               type="submit"
               disabled={validateForm()}
             >
               Login
             </button>
+
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

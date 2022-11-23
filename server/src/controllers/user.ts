@@ -91,7 +91,6 @@ const logout = (req: Request, res: Response) => {
         .status(500)
         .send({ error, message: "Could not log out, please try again" });
     } else {
-      
       res.clearCookie("sid");
       res.status(200).send({ message: "Logout successful" });
     }

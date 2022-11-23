@@ -47,7 +47,7 @@ function NewCollab() {
   };
 
   return (
-    <div className="main">
+    <>
       <div className="newCollab">
         <form className="newCollabForm" onSubmit={handleSubmit}>
           <h3>Create your New Collab</h3>
@@ -103,7 +103,7 @@ function NewCollab() {
           ></iframe>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

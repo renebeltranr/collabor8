@@ -1,8 +1,8 @@
-import { Router, RouterOptions } from "express";
+import { Router } from "express";
 import collabController from "../controllers/collab";
 import authWare from "../middlewares/auth";
 
-const router: Router  =Router();
+const router: any =Router();
 
 router.post("/newCollab", authWare, collabController.create);
 router.get("/getAll", collabController.getAll);

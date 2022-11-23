@@ -44,14 +44,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
-}
+
 .default-btn {
   appearance: button;
   backface-visibility: hidden;

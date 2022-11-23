@@ -11,5 +11,5 @@
     "allowSyntheticDefaultImports": true,
     "types": ["cypress", "node"]
   },
-  "include": ["./src/"]
+  "include": ["./src/", "./src/types/index.d.ts"]
 }
