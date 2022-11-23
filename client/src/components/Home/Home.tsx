@@ -41,11 +41,7 @@ function Home() {
       </div>
       <div className="explore-section">
         <div className="homeTitle">
-<<<<<<< HEAD
-          <h3>LATEST COLLAB</h3>
-=======
           <h3>Latest Collabs</h3>
->>>>>>> 7435bb27b935b3cc48d41b7753aec596af239744
         </div>
         <CollabList>
           {collabs.map((el: ICollab) => {
