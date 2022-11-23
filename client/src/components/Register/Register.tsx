@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Register.css";
 import { IError } from "../../utilities/types";
+import { Link } from "react-router-dom";
 
 const initialState = {
   username: "",
@@ -58,52 +59,85 @@ function Register() {
   };
 
   return (
-    <div className="main">
+    <>
       <div className="register">
-        <div className="registerFlex">
+        <div className="container-center">
+
+          <div className="form-heading">
           <h2>Register</h2>
-          <form className="mainForm" onSubmit={handleSubmit}>
-            <input
+          </div>
+
+
+       <form className="form" onSubmit={handleSubmit}>
+
+      <div className="textbox">
+          <input 
+              data-cy="username"
               type="text"
-              placeholder="username"
               name="username"
               minLength={4}
               value={state.username}
-              onChange={handleChange}
-            />
+              onChange={handleChange} 
+              required />
+          <label>User name</label>
+          <span className="material-symbols-outlined"> account_circle </span>
+        </div>
+
+          <div className="textbox">
             <input
+              data-cy="password"
               type="password"
-              placeholder="password"
               name="password"
               value={state.password}
               onChange={handleChange}
+              required
             />
+            <label>Password</label>
+            <span className="material-symbols-outlined"> key </span>
+          </div>
+
+          <div className="textbox">
             <input
+              data-cy="passwordConf"
               type="password"
-              placeholder="password confirmation"
               name="passwordConf"
               value={state.passwordConf}
               onChange={handleChange}
+              required
             />
+            <label>Confirm Password</label>
+            <span className="material-symbols-outlined"> key </span>
+            </div>
+
+            <div className="textbox">
             <input
+              data-cy="country"
               type="text"
-              placeholder="Spain"
               name="country"
               value={state.country}
               onChange={handleChange}
+              required
             />
+            <label htmlFor="country">Country</label>
+            <span className="material-symbols-outlined"> location_on </span>
+            </div>
+
+            <div className="navigation-link">
+            Signed up already? <Link id="link" to="/login"><p>Log in</p></Link>
+            </div>
+
             <button
               id="register-btn"
-              className="default-btn"
               type="submit"
               disabled={validateForm()}
             >
-              Register
+              Join
             </button>
+            
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

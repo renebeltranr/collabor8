@@ -84,7 +84,7 @@ function Profile() {
   }
 
   return (
-    <div className="main">
+    <>
       <div className="profile">
         <div className="myprofile">
           {ctx.username === username ? (
@@ -138,7 +138,7 @@ function Profile() {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

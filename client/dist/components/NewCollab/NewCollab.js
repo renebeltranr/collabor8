@@ -32,8 +32,8 @@ function NewCollab() {
             name: state.name,
             tracks: [state.URL],
         };
-        const res = (yield (collabApiService.newCollab
-            && collabApiService.newCollab(cb)));
+        const res = yield collabApiService.newCollab(cb);
+        console.log('het');
         if (res.status === 400) {
             const errorResponse = res;
             alert(`${errorResponse.message}`);
@@ -47,7 +47,7 @@ function NewCollab() {
     const validateForm = () => {
         return !state.name || !state.URL;
     };
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "newCollab" },
             React.createElement("form", { className: "newCollabForm", onSubmit: handleSubmit },
                 React.createElement("h3", null, "Create your New Collab"),

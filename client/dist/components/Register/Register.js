@@ -12,6 +12,7 @@ import authApiService from "../../utilities/authApiService";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Register.css";
+import { Link } from "react-router-dom";
 const initialState = {
     username: "",
     password: "",
@@ -53,15 +54,31 @@ function Register() {
             !state.country ||
             !state.passwordConf);
     };
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "register" },
-            React.createElement("div", { className: "registerFlex" },
+            React.createElement("div", { className: "container-center" },
                 React.createElement("h2", null, "Register"),
-                React.createElement("form", { className: "mainForm", onSubmit: handleSubmit },
-                    React.createElement("input", { type: "text", placeholder: "username", name: "username", minLength: 4, value: state.username, onChange: handleChange }),
-                    React.createElement("input", { type: "password", placeholder: "password", name: "password", value: state.password, onChange: handleChange }),
-                    React.createElement("input", { type: "password", placeholder: "password confirmation", name: "passwordConf", value: state.passwordConf, onChange: handleChange }),
-                    React.createElement("input", { type: "text", placeholder: "Spain", name: "country", value: state.country, onChange: handleChange }),
+                React.createElement("form", { className: "form", onSubmit: handleSubmit },
+                    React.createElement("div", { className: "textbox" },
+                        React.createElement("input", { "data-cy": "username", type: "text", name: "username", minLength: 4, value: state.username, onChange: handleChange, required: true }),
+                        React.createElement("label", null, "User name"),
+                        React.createElement("span", { className: "material-symbols-outlined" }, " account_circle ")),
+                    React.createElement("div", { className: "textbox" },
+                        React.createElement("label", { htmlFor: "username-input" }, "Username"),
+                        React.createElement("input", { "data-cy": "username", type: "text", name: "username", minLength: 4, value: state.username, onChange: handleChange })),
+                    React.createElement("div", { className: "textbox" },
+                        React.createElement("label", { htmlFor: "password-input" }, "Password"),
+                        React.createElement("input", { "data-cy": "password", type: "password", name: "password", value: state.password, onChange: handleChange })),
+                    React.createElement("div", { className: "textbox" },
+                        React.createElement("label", { htmlFor: "password-confirmation" }, "Password Confirmation"),
+                        React.createElement("input", { "data-cy": "passwordConf", type: "password", name: "passwordConf", value: state.passwordConf, onChange: handleChange })),
+                    React.createElement("div", { className: "textbox" },
+                        React.createElement("label", { htmlFor: "country" }, "Country"),
+                        React.createElement("input", { "data-cy": "country", type: "text", name: "country", value: state.country, onChange: handleChange })),
+                    React.createElement("p", null,
+                        "Signed up already? ",
+                        React.createElement(Link, { to: "/login" },
+                            React.createElement("p", null, "Log in"))),
                     React.createElement("button", { id: "register-btn", className: "default-btn", type: "submit", disabled: validateForm() }, "Register"))))));
 }
 export default Register;

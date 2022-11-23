@@ -16,27 +16,28 @@ function Logout() {
       ctx.setUsername("");
       navigate("/");
     } else console.log("User already logged out");
-  };
+  }
+
   function goToMain() {
     navigate("/");
   }
 
   return (
-    <div className="main">
+    <>
       <div className="logout">
         <div className="logoutFlex">
           <h4>Are you sure you want to log out?</h4>
           <div className="logoutButtons">
-            <button className="default-btn" onClick={() => handleClick()}>
+            <button className="default-btn" data-cy="logout-yes" onClick={() => handleClick()}>
               Yes
             </button>
-            <button onClick={goToMain} className="default-btn">
+            <button onClick={goToMain} className="default-btn" data-cy="logout-no">
               No
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

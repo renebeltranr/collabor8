@@ -83,7 +83,7 @@ function Profile() {
             }
         });
     }
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "profile" },
             React.createElement("div", { className: "myprofile" },
                 ctx.username === username ? (React.createElement("h6", null, "\u270F\uFE0F Click on the fields to edit \u270F\uFE0F")) : (""),

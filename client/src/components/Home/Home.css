@@ -1,27 +1,58 @@
 .home {
-  flex-direction: column;
-  justify-content: start;
-  display: flex;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
+  display: flex;
   padding: 1em;
-  height: 70vh;
-  width: 70vw;
-  overflow-y: scroll;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
-.homeTitle {
-  background: #f9f9f9;
-  color: #60a0c7;
-  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
-  -webkit-backdrop-filter: blur(9.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-.main {
+.title-section {
   display: flex;
+  flex-direction: column-reverse;
+  border-radius: 5%;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#page-title{
+  font-size: 3rem;
+  max-width: 700px;
+  text-align:left;
+}
+
+#heading{
+border-radius: 5%;
+  max-width: 600px;
+  min-width: 350px;
+}
+
+
+.explore-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 90vh;
+  width: 50%;
+}
+
+.collaborate{
+  background-color: #6b6cfb;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
 }

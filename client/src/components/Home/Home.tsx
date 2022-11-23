@@ -5,6 +5,8 @@ import collabApiService from "../../utilities/collabApiService";
 import Spinner from "../Spinner/Spinner";
 import "./Home.css";
 import { ICollab } from "../../utilities/types";
+import img from "../../assets/collab.png";
+import {Link} from 'react-router-dom';
 
 function Home() {
   const [collabs, setCollabs] = useState<ICollab[]>([]);
@@ -27,10 +29,19 @@ function Home() {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="main">
+    <>
       <div className="home">
+      <div className="title-section">
+        
+        <img id="heading" src={img} alt="musicians playing" /> 
+        <Link to="/register">
+        <button className="collaborate">Join</button>
+        </Link>
+        <h1 id="page-title">Play with fellow musicians around the world</h1>
+      </div>
+      <div className="explore-section">
         <div className="homeTitle">
-          <h3>LATEST COLLABS</h3>
+          <h3>Latest Collabs</h3>
         </div>
         <CollabList>
           {collabs.map((el: ICollab) => {
@@ -46,8 +57,9 @@ function Home() {
             );
           })}
         </CollabList>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import NavbarSide from "./components/NavbarSide/NavbarSide";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import authApiService from "./utilities/authApiService";
 
@@ -12,6 +13,7 @@ import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
 import { IGlobalContext, IUser } from "./utilities/types";
+import './index.css';
 
 
 export const GlobalContext = createContext<IGlobalContext>({
@@ -52,9 +54,10 @@ function App() {
   };
 
   return (
-    <div className="App">
       <Router>
         <GlobalContext.Provider value={ctx}>
+          <div className="main">
+          <NavbarSide />
           <Navbar />
           <Routes>
             <Route path="/register" element={<Register />} />
@@ -72,9 +75,9 @@ function App() {
               <></>
             )}
           </Routes>
+          </div>
         </GlobalContext.Provider>
       </Router>
-    </div>
   );
 }
 

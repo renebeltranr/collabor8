@@ -10,14 +10,6 @@
   width: 80vw;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
-}
 
 .collabName {
   display: flex;

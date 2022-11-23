@@ -13,6 +13,7 @@ import ListedCollab from "../ListedCollab/ListedCollab";
 import collabApiService from "../../utilities/collabApiService";
 import Spinner from "../Spinner/Spinner";
 import "./Home.css";
+import img from "../../assets/collab.png";
 function Home() {
     const [collabs, setCollabs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -31,14 +32,19 @@ function Home() {
     }, []);
     if (isLoading)
         return React.createElement(Spinner, null);
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "home" },
-            React.createElement("div", { className: "homeTitle" },
-                React.createElement("h3", null, "LATEST COLLABS")),
-            React.createElement(CollabList, null, collabs.map((el) => {
-                var _a;
-                return (React.createElement(ListedCollab, { owner: (_a = el === null || el === void 0 ? void 0 : el.owner) === null || _a === void 0 ? void 0 : _a.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
-            })))));
+            React.createElement("div", { className: "title-section" },
+                React.createElement("img", { id: "heading", src: img, alt: "musicians playing" }),
+                React.createElement("button", { className: "collaborate" }, "Join"),
+                React.createElement("h1", { id: "page-title" }, "Play with fellow musicians around the world")),
+            React.createElement("div", { className: "explore-section" },
+                React.createElement("div", { className: "homeTitle" },
+                    React.createElement("h3", null, "Latest Collabs")),
+                React.createElement(CollabList, null, collabs.map((el) => {
+                    var _a;
+                    return (React.createElement(ListedCollab, { owner: (_a = el === null || el === void 0 ? void 0 : el.owner) === null || _a === void 0 ? void 0 : _a.username, name: el.name, tracks: el.tracks, _id: el._id, key: el._id, createdAt: el.createdAt }));
+                }))))));
 }
 export default Home;
 //# sourceMappingURL=Home.js.map

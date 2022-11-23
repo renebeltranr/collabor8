@@ -124,7 +124,7 @@ function Record() {
   };
 
   return (
-    <div className="main">
+    <>
       <div className="record">
         {ctx.userId ? (
           <div className="recordArea">
@@ -214,7 +214,7 @@ function Record() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

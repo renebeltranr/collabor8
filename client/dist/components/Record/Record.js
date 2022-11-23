@@ -117,7 +117,7 @@ function Record() {
         });
         mediaRecorder.start();
     };
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "record" },
             ctx.userId ? (React.createElement("div", { className: "recordArea" },
                 React.createElement("div", { className: "deviceSelect" },

@@ -48,13 +48,13 @@ function Login() {
     const validateForm = () => {
         return !state.username || !state.password;
     };
-    return (React.createElement("div", { className: "main" },
+    return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "login" },
             React.createElement("div", { className: "loginFlex" },
                 React.createElement("h2", null, "Login"),
                 React.createElement("form", { className: "mainForm", onSubmit: handleSubmit },
-                    React.createElement("input", { type: "text", placeholder: "username", name: "username", value: state.username, onChange: handleChange }),
-                    React.createElement("input", { type: "password", placeholder: "password", name: "password", value: state.password, onChange: handleChange }),
+                    React.createElement("input", { type: "text", "data-cy": "username", placeholder: "username", name: "username", value: state.username, onChange: handleChange }),
+                    React.createElement("input", { type: "password", "data-cy": "password", placeholder: "password", name: "password", value: state.password, onChange: handleChange }),
                     React.createElement("button", { id: "login-btn", className: "default-btn", type: "submit", disabled: validateForm() }, "Login"))))));
 }
 export default Login;

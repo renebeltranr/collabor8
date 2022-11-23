@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import React, { useState, useEffect, createContext } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import NavbarSide from "./components/NavbarSide/NavbarSide";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import authApiService from "./utilities/authApiService";
 import Register from "./components/Register/Register";
@@ -19,6 +20,7 @@ import { Collab } from "./components/Collab/Collab";
 import NewCollab from "./components/NewCollab/NewCollab";
 import Logout from "./components/Logout/Logout";
 import Record from "./components/Record/Record";
+import './index.css';
 export const GlobalContext = createContext({
     isAuthenticated: false,
     setIsAuthenticated: () => { },
@@ -53,9 +55,10 @@ function App() {
         userId,
         username,
     };
-    return (React.createElement("div", { className: "App" },
-        React.createElement(Router, null,
-            React.createElement(GlobalContext.Provider, { value: ctx },
+    return (React.createElement(Router, null,
+        React.createElement(GlobalContext.Provider, { value: ctx },
+            React.createElement("div", { className: "main" },
+                React.createElement(NavbarSide, null),
                 React.createElement(Navbar, null),
                 React.createElement(Routes, null,
                     React.createElement(Route, { path: "/register", element: React.createElement(Register, null) }),

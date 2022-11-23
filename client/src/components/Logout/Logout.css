@@ -6,15 +6,6 @@
   justify-content: space-evenly;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  background: #6b6cfb;
-  height: 85vh;
-}
-
 .logoutButtons {
   display: flex;
   justify-content: space-evenly;
