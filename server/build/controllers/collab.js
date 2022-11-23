@@ -68,11 +68,21 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
             case 3:
                 error_1 = _a.sent();
                 console.log('Controller Create error:', error_1);
-                res.status(400)
-                    .send({ error: error_1, message: "Could not create Collab" });
+                res.status(400).send({ error: error_1, message: "Could not create Collab" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
+    });
+}); };
+var handleOptions = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        try {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000').set('Access-Control-Allow-Credentials', 'http://localhost:3000').status(201).send({ msg: 'Allow cors' });
+        }
+        catch (error) {
+            console.log('Controller handleOptions error:', error);
+        }
+        return [2 /*return*/];
     });
 }); };
 var getAll = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -350,5 +360,6 @@ exports.default = {
     acceptTrack: acceptTrack,
     denyTrack: denyTrack,
     deleteTrack: deleteTrack,
-    saveSettings: saveSettings
+    saveSettings: saveSettings,
+    handleOptions: handleOptions
 };
