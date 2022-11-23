@@ -1,10 +1,16 @@
 .profile {
-  display: flex;
+  
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  flex-direction: row;
   justify-content: center;
+  align-items: flex-start;
+  display: flex;
   padding: 1em;
-  height: 70vh;
-  width: 70vw;
-  overflow-y: scroll;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .myprofile {
