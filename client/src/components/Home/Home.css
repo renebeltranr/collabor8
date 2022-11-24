@@ -10,7 +10,8 @@
   padding: 1em;
   overflow: hidden;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
+  margin: 0px;
 }
 
 .title-section {
@@ -19,7 +20,7 @@
   border-radius: 5%;
   align-items: flex-start;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   box-sizing: border-box;
   gap: 2rem;
   flex-wrap: wrap;
@@ -27,8 +28,7 @@
 }
 
 .explore-title{
-  position: fixed;
-  overflow:auto;
+ height:auto;
 }
 
 #page-title{
@@ -41,7 +41,6 @@
 #heading{
 border-radius: 5%;
 width: 100%;
-
 min-width: 350px;
 }
 
@@ -50,10 +49,10 @@ min-width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  padding: 2rem;
+  /* align-items: flex-start; */
+  padding: 1rem;
   height: 100%;
-  width: 50%;
+  width: 55%;
   overflow: scroll;
 }
 

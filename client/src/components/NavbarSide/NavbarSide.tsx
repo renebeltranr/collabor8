@@ -7,6 +7,7 @@ import { FaHome, FaRegUser, FaPlusCircle } from "react-icons/fa";
 
 function Navbar() {
   const ctx = React.useContext(GlobalContext);
+  console.log(ctx.username);
 
   useEffect(() => {}, [ctx]);
 

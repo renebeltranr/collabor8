@@ -31,6 +31,7 @@ function Home() {
   return (
     <>
       <div className="home">
+
       <div className="title-section">
         
         <img id="heading" src={img} alt="musicians playing" /> 
@@ -39,10 +40,13 @@ function Home() {
         </Link>
         <h1 id="page-title">Play with fellow musicians around the world</h1>
       </div>
+
       <div className="explore-section">
+        
         <div className="explore-title">
           <h3>Latest Collabs</h3>
         </div>
+
         <CollabList>
           {collabs.map((el: ICollab) => {
             return (
@@ -58,6 +62,7 @@ function Home() {
           })}
         </CollabList>
         </div>
+
       </div>
     </>
   );

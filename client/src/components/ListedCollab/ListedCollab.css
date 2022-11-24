@@ -5,8 +5,8 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 200px;
+  width: 280px;
+  height: 180px;
   padding: 1em;
   box-sizing: border-box;
   align-items: flex-start;
@@ -16,6 +16,18 @@
 .newCollabName,
 .newCollabVid {
   margin: 0.5em;
+}
+
+.newCollabName .default-input{
+  background-color: white;
+  opacity: 10%;
+  border-radius: 5px;
+}
+
+.newCollabVid .default-input{
+  background-color: white;
+  opacity: 10%;
+  border-radius: 5px;
 }
 
 .collab-tracks {
@@ -62,4 +74,8 @@
 
 .explore-section h3,h4,h5,h6 {
   color:white;
+}
+
+.newCollabForm h5{
+  font-weight: 300;
 }

@@ -4,6 +4,7 @@ import { GlobalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import "./NewCollab.css";
 import { ICollab, IError } from "../../utilities/types";
+import { FaGuitar } from "react-icons/fa";
 
 function NewCollab() {
   const navigate = useNavigate();
@@ -49,10 +50,16 @@ function NewCollab() {
   return (
     <>
       <div className="newCollab">
-        <form className="newCollabForm" onSubmit={handleSubmit}>
-          <div>
 
+
+        <form className="newCollabForm" onSubmit={handleSubmit}>
+
+          <div className="header">
             <h3>Create your New Collab</h3>
+            
+          </div>
+
+          <div>
             <div className="newCollabName">
               <h5>Pick a cool Collab name. Other users will see it!</h5>
               <input
@@ -64,6 +71,7 @@ function NewCollab() {
                 onChange={handleChange}
               />
             </div>
+
             <div className="newCollabVid">
               <h5>
                 Paste the code you find in a Youtube's video URL that will serve
@@ -81,19 +89,19 @@ function NewCollab() {
                 value={state.URL}
                 onChange={handleChange}
               />
-
+            </div>
               <h5>
                 Once you see your Youtube Video embeded on the player, you're
                 ready to create it!
               </h5>
-            </div>
+           
             <button
-              className="default-btn"
+              className="create"
               type="submit"
               disabled={validateForm()}
               data-cy="new-collab"
             >
-              &nbsp;Create&nbsp;
+              Create
             </button>
           </div>
 
