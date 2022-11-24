@@ -40,7 +40,7 @@ function Home() {
         <h1 id="page-title">Play with fellow musicians around the world</h1>
       </div>
       <div className="explore-section">
-        <div className="homeTitle">
+        <div className="explore-title">
           <h3>Latest Collabs</h3>
         </div>
         <CollabList>

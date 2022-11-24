@@ -3,10 +3,12 @@ import authApiService from "../../utilities/authApiService";
 import collabApiService from "../../utilities/collabApiService";
 import CollabList from "../CollabList/CollabList";
 import ListedCollab from "../ListedCollab/ListedCollab";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { GlobalContext } from "../../App";
 import "./Profile.css";
 import { ICollab, IUser } from "../../utilities/types";
+import { FaPlusCircle, FaPen } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const initialState: IUser = {
   username: "",
@@ -17,7 +19,7 @@ const initialState: IUser = {
 };
 
 function Profile() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { username } = useParams();
   initialState.username = username as string;
   const [state, setState] = useState<IUser>(initialState);
@@ -56,9 +58,9 @@ function Profile() {
     getProfile();
   }, [username]);
 
-  function goToNewCollab() {
+/*   function goToNewCollab() {
     navigate("/collab/newCollab"); //is this needed?
-  }
+  } */
 
   async function handleCountryUpdate(e) {
     try {
@@ -87,37 +89,49 @@ function Profile() {
   return (
     <>
       <div className="profile">
+        <div className="left">
+          <div className="myCollabsHeader"><h2> Hi @{state.username}!</h2></div>
+        
+
         <div className="myprofile">
           {ctx.username === username ? (
-            <h6>✏️ Click on the fields to edit ✏️</h6>
+            <FaPen/>
           ) : (
             ""
           )}
-          <h4>@{state.username}</h4>
-          <h5
+          <p
             contentEditable={ctx.username === username}
             onBlur={handleCountryUpdate}
           >
             {state.country}
-          </h5>
-          <h5
+          </p>
+          <p
             contentEditable={ctx.username === username}
             onBlur={handleBioUpdate}
           >
             {state.bio}
-          </h5>
+          </p>
+            <h4>Click on the fields to edit</h4>
         </div>
-        <div className="mycollabs">
+      </div>
+
+      <div className="right">
+       
           <div className="myCollabsHeader">
-            <h3>@{state.username} Collabs</h3>
+            <h2>My Collabs</h2>
             {ctx.username === username ? (
-              <button onClick={goToNewCollab} className="default-btn" data-cy="new-collab">
-                New Collab
-              </button>
+
+               <Link to="/collab/newCollab" data-cy="new-collab" style={{pointerEvents: ctx.isAuthenticated ? 'auto' : 'none'}}>
+              <FaPlusCircle color="#6b6cfb" fontSize="2rem"/>
+              </Link>
+
+    
             ) : (
               ""
             )}
           </div>
+
+           <div className="mycollabs">
           {state.owncollabs.length > 0 ? (
             <CollabList>
               {(state.owncollabs as ICollab[]).map((el) => {
@@ -138,6 +152,8 @@ function Profile() {
             ""
           )}
         </div>
+      </div>
+
       </div>
     </>
   );

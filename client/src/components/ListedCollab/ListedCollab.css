@@ -1,5 +1,3 @@
-
-
 .listedCollab {
   background:rgba(86, 86, 86, 0.5);
   color: #f0f9ff;
@@ -7,17 +5,12 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  display: inline-block;
   width: 300px;
   height: 200px;
   padding: 1em;
-  margin-bottom: 1em;
-}
-
-.collabName {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5em;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .newCollabName,
@@ -25,7 +18,7 @@
   margin: 0.5em;
 }
 
-.collabTracks {
+.collab-tracks {
   margin-top: 1em;
   display: flex;
   flex-wrap: wrap;
@@ -33,24 +26,38 @@
   justify-content: center;
 }
 
-.listedPictures {
-  margin: 0.5em;
-  box-shadow: 1px 2px 2px 1px rgba(86, 86, 86, 0.5);
-}
-
-.createdAt {
-  align-self: flex-end;
-  font-style: italic;
+.collab-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
   color: rgb(93, 93, 93);
-  
-}
-
-.dateStyle {
   margin-top: 1.5em;
   padding: 0;
   font-size: 0.8rem;
   font-weight: 300;
+  gap: 0.5rem;
+}
 
+.collab-info h6 {
+  margin: 0px;
+  color: white;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.collab-info p {
+  margin: 0px;
+  color: white;
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.collab-info h2 {
+  margin: 0px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .explore-section h3,h4,h5,h6 {

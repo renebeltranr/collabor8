@@ -1,9 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-* {
-  overflow: hidden;
-}
 
 html, body, #root {
   margin: 0;
@@ -45,7 +42,6 @@ a {
 
 
 .logout,
-.profile,
 .newCollab,
 .record {
   display: flex;
@@ -82,19 +78,8 @@ a {
   align-self: center;
 }
 
-.mycollabs {
-  width: 70vw;
-  overflow: scroll;
-}
 
-h2,
 
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0.5em;
-}
 
 .newCollabName,
 .newCollabVid {

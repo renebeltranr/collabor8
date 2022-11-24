@@ -10,6 +10,7 @@
   padding: 1em;
   overflow: hidden;
   flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .title-section {
@@ -22,18 +23,26 @@
   box-sizing: border-box;
   gap: 2rem;
   flex-wrap: wrap;
+  width: 40%;
+}
+
+.explore-title{
+  position: fixed;
+  overflow:auto;
 }
 
 #page-title{
   font-size: 3rem;
   max-width: 700px;
   text-align:left;
+  color: white;
 }
 
 #heading{
 border-radius: 5%;
-  max-width: 600px;
-  min-width: 350px;
+width: 100%;
+
+min-width: 350px;
 }
 
 
@@ -42,8 +51,10 @@ border-radius: 5%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 90vh;
+  padding: 2rem;
+  height: 100%;
   width: 50%;
+  overflow: scroll;
 }
 
 .collaborate{

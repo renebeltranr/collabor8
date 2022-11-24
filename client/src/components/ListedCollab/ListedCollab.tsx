@@ -6,15 +6,15 @@ import "./ListedCollab.css";
 function ListedCollab({ owner, name, tracks, _id, createdAt }) {
   return (
     <div key={_id} className="listedCollab">
-      <div className="collabTracks">
+      <div className="collab-tracks">
         {tracks.map((el) => {
           if (el.url)
             return (
               <img
                 className="listedPictures"
                 key={el.url}
-                width="120"
-                height="120"
+                width="50"
+                height="50"
                 alt=""
                 src={
                   el.url[el.url.length - 1] === "m"
@@ -26,23 +26,23 @@ function ListedCollab({ owner, name, tracks, _id, createdAt }) {
           return null;
         })}
       </div>
-      <div className="collabOwner">
-        <Link to={"/profile/" + owner}>
-          <h6>@{owner}</h6>
+     
+
+     <div className="collab-info">
+        <Link to={"/collab/id/" + _id}>
+            <h2>{name}</h2>
         </Link>
-      </div>
-      <Link to={"/collab/id/" + _id}>
-        <div className="collabName">
-          <h3>{name}</h3>
-        </div>
-      </Link>
       
-      <div className="createdAt">
-        <h6 className="dateStyle">
-          {moment(createdAt).format("MMMM Do YYYY")}
+        <Link to={"/profile/" + owner}>
+          <p> created by @{owner}</p>
+        </Link>
+
+        <h6>
+          {moment(createdAt).format("MMM Do YY")}
         </h6>
-      </div>
     </div>
+
+  </div>
   );
 }
 
