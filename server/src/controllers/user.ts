@@ -19,6 +19,7 @@ const create = async (req: Request, res: Response) => {
     });
     const user = await newUser.save();
     req.session.uid = user._id;
+    
     res.status(201).send(user);
   } catch (error) {
     console.log('Controller create User error:', error);

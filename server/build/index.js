@@ -48,3 +48,4 @@ var serverDidntStart = function (err) {
     }
 };
 app.listen(PORT, serverDidntStart);
+module.exports = app;
