@@ -25,7 +25,7 @@ function Logout() {
   return (
     <>
       <div className="logout">
-        <div className="logoutFlex">
+        <div className="container-center">
           <h4>Are you sure you want to log out?</h4>
           <div className="logoutButtons">
             <button className="default-btn" data-cy="logout-yes" onClick={() => handleClick()}>

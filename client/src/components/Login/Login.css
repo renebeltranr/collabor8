@@ -16,6 +16,11 @@
   flex-wrap: wrap;
 }
 
+.login .container-center .form-heading h2{
+  color:white;
+}
+
+
 form {
   display: flex;
   flex-direction: column;

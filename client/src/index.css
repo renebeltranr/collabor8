@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+* {
+  overflow: hidden;
+}
+
 html, body, #root {
   margin: 0;
   width: 100vw;
@@ -39,17 +43,6 @@ a {
   color: black;
 }
 
-h1 {
-  font-weight: 700;
-  color: white;
-  font-size: 2rem;
-}
-
-h3 {
-  font-weight:600;
-  font-size: 1.5rem;
-  color: white;
-}
 
 .logout,
 .profile,
@@ -94,17 +87,6 @@ h3 {
   overflow: scroll;
 }
 
-.collabCard,
-.record,
-.logoutFlex {
-  background: #f9f9f9;
-  color: #60a0c7;
-  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
-  -webkit-backdrop-filter: blur(9.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
 h2,
 
 h4,
@@ -112,7 +94,6 @@ h5,
 h6 {
   margin: 0;
   padding: 0.5em;
-  color: white;
 }
 
 .newCollabName,

@@ -35,7 +35,7 @@
   width: 15rem;
 }
 
-input {
+input .newCollabForm{
   border-radius: 10px;
   border-style: solid;
   border-color: grey;
