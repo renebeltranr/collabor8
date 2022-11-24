@@ -42,5 +42,5 @@ var UserSchema = new Schema({
     },
 }, { timestamps: true });
 exports.default = mongoose_1.default.model("User", UserSchema);
-var users = mongoose_1.default.model("User", UserSchema);
-module.exports = users;
+var Users = mongoose_1.default.model("User", UserSchema);
+module.exports = Users;
