@@ -53,3 +53,4 @@ const serverDidntStart: any = (err: any) => {
 }
 
 app.listen(PORT, serverDidntStart);
+module.exports = app;

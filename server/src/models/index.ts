@@ -10,4 +10,5 @@ const db = () => {
   mongoose.connection.on("Error connecting to DB", console.error);
 };
 
+
 export default db;
