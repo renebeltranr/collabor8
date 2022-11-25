@@ -1,0 +1,61 @@
+
+.profile {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+  padding: 1em;
+  flex-wrap: nowrap;
+  color: white;
+}
+
+.myprofile {
+  width: 30vw;
+  padding: 2em;
+  align-self: start;
+  margin-right: 1em;
+  margin-top: 1em;
+  background: #3e3e3e;
+  color: white;
+  -webkit-backdrop-filter: blur(9.5px);
+  border-radius: 10px;
+}
+
+.mycollabs {
+  margin-top: 1em;
+  overflow-y: scroll;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+
+.left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.right {
+  margin-top: 2rem;
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.myCollabsHeader {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+  gap: 2.5rem;
+}
+

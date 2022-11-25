@@ -1,0 +1,59 @@
+.Navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #121212;
+  box-sizing: border-box;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  padding: 1rem;
+}
+
+
+
+
+.logoContainer {
+  height: auto;
+}
+
+.logo {
+  max-height: 10vh;
+  object-fit: fill;
+}
+
+.sessionButtons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+button {
+  background: transparent;
+  border-radius: 5px;
+  width: 10em;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 500;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.login-btn{
+  background-color: white;
+  color: black;
+}
+
+
+button:disabled {
+  cursor: default;
+}
+
+button:hover {
+  background-color: #6b6cfb;
+  color:white;
+}

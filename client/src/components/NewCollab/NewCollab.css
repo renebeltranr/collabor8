@@ -1,0 +1,97 @@
+.newCollab {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+  padding: 1em;
+  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.newCollab h3{
+  color: white;
+}
+
+.newCollabForm {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  justify-content: center;
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.newCollabName {
+  margin: 0.5em;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.default-input {
+  width: 15rem;
+}
+
+input .newCollabForm{
+  border-radius: 10px;
+  border-style: solid;
+  border-color: grey;
+  background: rgb(225, 225, 225);
+  opacity: 80%;
+}
+
+input::placeholder {
+  color: grey;
+  opacity: 100%;
+  text-align: center;
+}
+
+.newCollabForm button{
+  background-color: #6b6cfb;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  cursor:pointer;
+
+}
+
+.default-btn:disabled {
+  cursor: default;
+}
+
+.default-btn:hover {
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
+}
+
+.highlighted {
+  color: red;
+}
+
+.videoDiv {
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 10px;
+  align-self: center;
+}

@@ -1,0 +1,102 @@
+.Navbar-side {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end:3;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: hsl(0, 0%, 7%);
+  box-sizing: border-box;
+  gap: 1rem;
+  padding: 1rem;
+  margin:0px;
+}
+
+.icon-with-title{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  color: white;
+}
+
+.logoContainer {
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-height: 10vh;
+  object-fit: fill;
+}
+
+.sessionButtons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+button {
+  background: transparent;
+  border-radius: 5px;
+  width: 10em;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-family: 'Alexandria', sans-serif;
+  font-weight: 500;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.login-btn{
+  background-color: white;
+  color: black;
+}
+
+.default-btn {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #60a0c7;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.1) 0 2px 5px 0, rgba(0, 0, 0, 0.07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-size: 80%;
+  line-height: 1.15;
+  padding: 0.7em;
+  margin: 0.4em;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all 0.2s, box-shadow 0.08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.default-btn:disabled {
+  cursor: default;
+}
+
+.default-btn:hover {
+  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
+    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
+    rgba(50, 151, 211, 0.3) 0 0 0 4px;
+}
+
+.Navbar-side .logoContainer h1{
+  font-weight: 700;
+  color: white;
+  font-size: 2rem;
+}

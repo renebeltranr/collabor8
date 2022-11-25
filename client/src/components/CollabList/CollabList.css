@@ -1,0 +1,8 @@
+.collabList {
+  margin-top: 1em;
+  overflow-y: scroll;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
