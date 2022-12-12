@@ -14,7 +14,7 @@ Collabor8 is a Web App that allows musicians from around the world to record and
 To get started with Collabor8, fork this repo and run npm install both in the /server and the /client folders.
 Then, create a .env file for the Client folder, that holds your keys to connect to Cloudinary to save your collab tracks and track pictures, following this format:
 
-REACT_APP_CLOUDINARY_UPLOAD_URL = https://api.cloudinary.com/v1_1/XXXXXXXXX/upload
+REACT_APP_CLOUDINARY_UPLOAD_URL = https://api.cloudinary.com/v1_1/XXXXXXXXX/upload <br>
 REACT_APP_CLOUDINARY_PRESET = XXXXXXXX
 
 After that, go to the /src folder and run 'tsc', to run the Typescript compiler. Once it's finished, just head to the /build folder and run the index file either by typing node index.js or running nodemon to dynamicaly restart the server when there's changes.
