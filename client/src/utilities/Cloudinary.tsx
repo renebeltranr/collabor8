@@ -2,11 +2,11 @@ import {} from "cloudinary-react";
 import axios from "axios";
 
 export const upVideoToCloudinary = async (blob) => {
-  const url = "https://api.cloudinary.com/v1_1/dvyn9lzkf/upload";
+  const url = String(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL);
   let cloudinaryData = {};
   const formData = new FormData();
   formData.append("file", blob);
-  formData.append("upload_preset", "acgvtxok");
+  formData.append("upload_preset", String(process.env.REACT_APP_CLOUDINARY_PRESET));
   await axios.post(url, formData).then((response) => {
     cloudinaryData = response.data;
   });

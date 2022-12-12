@@ -116,10 +116,6 @@ const saveSettings = async (req: Request, res: Response) => {
 
 const acceptTrack = async (req: Request, res: Response) => {
   try {
-    console.log("id params", req.params.id);
-    console.log("body url", req.body.url);
-    console.log("body id", req.body.cid);
-
     const result = await Collab.findOne({ _id: req.params.id });
     if (result?.owner.valueOf() === req.session.uid) {
       let trackToDelete: string;
