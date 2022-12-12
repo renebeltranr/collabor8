@@ -45,15 +45,5 @@ describe('User endpoints', () => {
       expect(login.body.email).toEqual(registeredUser.email);
       expect(login.body.password).toEqual(registeredUser.password);
     });
-
-    // it('should not login user if email is not registered', async () => {
-    //   const user = mocks.user;
-    //   const login = await session
-    //     .post('/login')
-    //     .send({ username: 'notaUser', password: user.password });
-    //     console.log(JSON.stringify(login))
-    //     expect(login.status).toEqual(401);
-    //   expect(login.body.message).toEqual("Username or password is incorrect");
-    // });
   });
 });

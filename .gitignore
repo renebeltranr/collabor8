@@ -6,3 +6,4 @@ build/
 
 # Enviromental Variables
 .env
+.env.local

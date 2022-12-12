@@ -46,19 +46,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var bcrypt_1 = __importDefault(require("bcrypt"));
-var user_1 = __importDefault(require("../models/user"));
+exports.__esModule = true;
+var bcrypt_1 = require("bcrypt");
+var user_1 = require("../models/user");
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, username, password, user, hash, newUser, user_2, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.body, username = _a.username, password = _a.password;
-                return [4 /*yield*/, user_1.default.findOne({ username: username })];
+                return [4 /*yield*/, user_1["default"].findOne({ username: username })];
             case 1:
                 user = _b.sent();
                 if (user)
@@ -70,10 +67,10 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 _b.trys.push([2, 5, , 6]);
                 if (password === "")
                     throw new Error();
-                return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
+                return [4 /*yield*/, bcrypt_1["default"].hash(password, 10)];
             case 3:
                 hash = _b.sent();
-                newUser = new user_1.default(__assign(__assign({}, req.body), { password: hash }));
+                newUser = new user_1["default"](__assign(__assign({}, req.body), { password: hash }));
                 return [4 /*yield*/, newUser.save()];
             case 4:
                 user_2 = _b.sent();
@@ -96,11 +93,11 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
             case 0:
                 _b.trys.push([0, 4, , 5]);
                 _a = req.body, username = _a.username, password = _a.password;
-                return [4 /*yield*/, user_1.default.findOne({ username: username })];
+                return [4 /*yield*/, user_1["default"].findOne({ username: username })];
             case 1:
                 user = _b.sent();
                 if (!(user !== null)) return [3 /*break*/, 3];
-                return [4 /*yield*/, bcrypt_1.default.compare(password, user.password)];
+                return [4 /*yield*/, bcrypt_1["default"].compare(password, user.password)];
             case 2:
                 validatedPass = _b.sent();
                 if (!validatedPass)
@@ -128,7 +125,7 @@ var profile = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_1.default.findOne({ username: req.params.username })];
+                return [4 /*yield*/, user_1["default"].findOne({ username: req.params.username })];
             case 1:
                 user = _b.sent();
                 res.status(200).send(user);
@@ -154,8 +151,8 @@ var profileUpdate = function (req, res) { return __awaiter(void 0, void 0, void 
                     dataToUpdate.country = req.body.country;
                 if (req.body.bio)
                     dataToUpdate.bio = req.body.bio;
-                return [4 /*yield*/, user_1.default.findOneAndUpdate({ _id: uid }, dataToUpdate, {
-                        new: true,
+                return [4 /*yield*/, user_1["default"].findOneAndUpdate({ _id: uid }, dataToUpdate, {
+                        "new": true
                     })];
             case 1:
                 result = _a.sent();
@@ -201,4 +198,4 @@ var logout = function (req, res) {
         }
     });
 };
-exports.default = { create: create, login: login, profile: profile, me: me, logout: logout, profileUpdate: profileUpdate };
+exports["default"] = { create: create, login: login, profile: profile, me: me, logout: logout, profileUpdate: profileUpdate };

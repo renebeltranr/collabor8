@@ -35,11 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var user_1 = __importDefault(require("../models/user"));
+exports.__esModule = true;
+var user_1 = require("../models/user");
 var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var uid, user, error_1;
     return __generator(this, function (_a) {
@@ -47,12 +44,13 @@ var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 uid = req.session.uid;
-                return [4 /*yield*/, user_1.default.findOne({ _id: uid })];
+                return [4 /*yield*/, user_1["default"].findOne({ _id: uid })];
             case 1:
                 user = _a.sent();
                 if (!user)
                     console.log("User not authenticated ");
                 req.user = user;
+                console.log('Auth: ', req.method);
                 next();
                 return [3 /*break*/, 3];
             case 2:
@@ -63,4 +61,4 @@ var authMiddleware = function (req, res, next) { return __awaiter(void 0, void 0
         }
     });
 }); };
-exports.default = authMiddleware;
+exports["default"] = authMiddleware;

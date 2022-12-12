@@ -16,7 +16,6 @@ const collabApiService: ICollabApiService = {
   
   newCollab : async (cb: ICollab) => {
     try {
-      console.log(JSON.stringify(cb))
       const res = await fetch(`${URL}/collab/newCollab`, {
         method: "POST",
         credentials: "include",

@@ -35,27 +35,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var collab_1 = __importDefault(require("../models/collab"));
-var user_1 = __importDefault(require("../models/user"));
+exports.__esModule = true;
+var collab_1 = require("../models/collab");
+var user_1 = require("../models/user");
 var create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var newCollab, collab, user, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 3, , 4]);
-                newCollab = new collab_1.default({
+                newCollab = new collab_1["default"]({
                     owner: req.session.uid,
                     name: req.body.name,
-                    tracks: req.body.tracks,
+                    tracks: req.body.tracks
                 });
                 return [4 /*yield*/, newCollab.save()];
             case 1:
                 collab = _a.sent();
-                return [4 /*yield*/, user_1.default.findById(req.session.uid)];
+                return [4 /*yield*/, user_1["default"].findById(req.session.uid)];
             case 2:
                 user = _a.sent();
                 user === null || user === void 0 ? void 0 : user.owncollabs.push(collab._id);
@@ -91,7 +88,7 @@ var getAll = function (req, res) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, collab_1.default.find().sort({ createdAt: -1 }).populate("owner")];
+                return [4 /*yield*/, collab_1["default"].find().sort({ createdAt: -1 }).populate("owner")];
             case 1:
                 collab = _a.sent();
                 res.status(200).send(collab);
@@ -112,7 +109,7 @@ var getUserCollabs = function (req, res) { return __awaiter(void 0, void 0, void
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 uid = req.params.id;
-                return [4 /*yield*/, collab_1.default.find({ owner: uid })];
+                return [4 /*yield*/, collab_1["default"].find({ owner: uid })];
             case 1:
                 cb = _a.sent();
                 res.status(200).send(cb);
@@ -133,7 +130,7 @@ var getCollab = function (req, res) { return __awaiter(void 0, void 0, void 0, f
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 collabId = req.params;
-                return [4 /*yield*/, collab_1.default.find({ _id: collabId.id }).populate("owner")];
+                return [4 /*yield*/, collab_1["default"].find({ _id: collabId.id }).populate("owner")];
             case 1:
                 collab = _a.sent();
                 collab[0].owner.password = "-";
@@ -154,7 +151,7 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 6, , 7]);
-                return [4 /*yield*/, collab_1.default.findOne({ _id: req.body.cid })];
+                return [4 /*yield*/, collab_1["default"].findOne({ _id: req.body.cid })];
             case 1:
                 result = _a.sent();
                 if (!((result === null || result === void 0 ? void 0 : result.owner.valueOf()) === req.session.uid)) return [3 /*break*/, 3];
@@ -162,7 +159,7 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                     url: req.body.url,
                     owner: req.session.uid,
                     volume: 100,
-                    username: req.body.username,
+                    username: req.body.username
                 });
                 return [4 /*yield*/, (result === null || result === void 0 ? void 0 : result.save())];
             case 2:
@@ -174,7 +171,7 @@ var saveTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                     url: req.body.url,
                     owner: req.session.uid,
                     volume: 100,
-                    username: req.body.username,
+                    username: req.body.username
                 });
                 return [4 /*yield*/, (result === null || result === void 0 ? void 0 : result.save())];
             case 4:
@@ -197,7 +194,7 @@ var saveSettings = function (req, res) { return __awaiter(void 0, void 0, void 0
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
+                return [4 /*yield*/, collab_1["default"].findOne({ _id: req.params.id })];
             case 1:
                 result = _a.sent();
                 if (!((result === null || result === void 0 ? void 0 : result.owner.valueOf()) === req.session.uid)) return [3 /*break*/, 3];
@@ -223,7 +220,7 @@ var acceptTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
+                return [4 /*yield*/, collab_1["default"].findOne({ _id: req.params.id })];
             case 1:
                 result_1 = _a.sent();
                 if (!((result_1 === null || result_1 === void 0 ? void 0 : result_1.owner.valueOf()) === req.session.uid)) return [3 /*break*/, 3];
@@ -259,7 +256,7 @@ var denyTrack = function (req, res) { return __awaiter(void 0, void 0, void 0, f
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 4, , 5]);
-                return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
+                return [4 /*yield*/, collab_1["default"].findOne({ _id: req.params.id })];
             case 1:
                 result = _a.sent();
                 if (!((result === null || result === void 0 ? void 0 : result.owner.valueOf()) === req.session.uid)) return [3 /*break*/, 3];
@@ -290,10 +287,10 @@ var deleteTrack = function (req, res) { return __awaiter(void 0, void 0, void 0,
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 4, , 5]);
-                _a = collab_1.default.bind;
-                return [4 /*yield*/, collab_1.default.findOne({ _id: req.params.id })];
+                _a = collab_1["default"].bind;
+                return [4 /*yield*/, collab_1["default"].findOne({ _id: req.params.id })];
             case 1:
-                result = new (_a.apply(collab_1.default, [void 0, _b.sent()]))();
+                result = new (_a.apply(collab_1["default"], [void 0, _b.sent()]))();
                 if (!(result.owner.valueOf() === req.session.uid)) return [3 /*break*/, 3];
                 result.tracks.forEach(function (track) {
                     if (track.url === req.body.url) {
@@ -323,15 +320,14 @@ var deleteCollab = function (req, res) { return __awaiter(void 0, void 0, void 0
             case 0:
                 _a.trys.push([0, 6, , 7]);
                 if (!(req.body.uid === req.session.uid)) return [3 /*break*/, 4];
-                return [4 /*yield*/, collab_1.default.deleteOne({ _id: req.params.cid })];
+                return [4 /*yield*/, collab_1["default"].deleteOne({ _id: req.params.cid })];
             case 1:
                 result = _a.sent();
                 if (!(result.deletedCount === 1)) return [3 /*break*/, 3];
-                return [4 /*yield*/, user_1.default.update({ _id: req.body.uid }, { $pull: { owncollabs: req.params.cid } })];
+                return [4 /*yield*/, user_1["default"].update({ _id: req.body.uid }, { $pull: { owncollabs: req.params.cid } })];
             case 2:
                 result2 = _a.sent();
                 if (result2.modifiedCount === 1)
-                    console.log("Collab successfully deleted");
                 _a.label = 3;
             case 3: return [3 /*break*/, 5];
             case 4: throw new Error("Not authorized");
@@ -347,7 +343,7 @@ var deleteCollab = function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
-exports.default = {
+exports["default"] = {
     create: create,
     getAll: getAll,
     getUserCollabs: getUserCollabs,

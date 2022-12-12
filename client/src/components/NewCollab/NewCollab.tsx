@@ -17,8 +17,6 @@ function NewCollab() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("name", name)
-    console.log("value", value)
     setState((prevState) => ({
       ...prevState,
       [name]: value,
@@ -38,7 +36,6 @@ function NewCollab() {
       alert(`${errorResponse.message}`);
       setState(initialState);
     } else {
-      console.log("collab created successfully: ", cb);
       navigate(`/profile/${ctx.username}`);
     }
   };
