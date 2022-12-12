@@ -29,11 +29,9 @@ To get started with Collabor8, fork this repo and run
 both in the /server and the /client folders.
 
 Then, create a .env file for the Client folder, that holds your keys to connect to Cloudinary to save your collab tracks and track pictures, following this format:
-
 <br>
 <br>
-
-```REACT_APP_CLOUDINARY_UPLOAD_URL = https://api.cloudinary.com/v1_1/XXXXXXXXX/upload```
+```REACT_APP_CLOUDINARY_UPLOAD_URL = https://api.cloudinary.com/v1_1/XXXXXXXXX/upload```<br>
 ```REACT_APP_CLOUDINARY_PRESET = XXXXXXXX```
 <br>
 <br>
