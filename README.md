@@ -14,8 +14,8 @@ On top of that it uses Cloudinary to store media, so if you want to run it you'l
 ## Alpha views, subject to change
 
 <p>
-  <img src="client/public/home.png" width="50%">
-  <img src="client/public/collab.png" width="50%">
+  <img src="client/public/home.png" width="70%">
+  <img src="client/public/collab.png" width="70%">
 </p>
 
 ## Getting Started
