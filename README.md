@@ -2,7 +2,16 @@
 
 Collabor8 is a Web App that allows musicians from around the world to record and share tracks, creating a platform for collaboration and creating new music. With Collabor8, users can record their own tracks and add them to existing tracks to create covers or original collaborations.
 
-*Alpha views, subject to change
+## Tech Stack
+
+The project uses: 
+Express with Typescript
+MongoDB with Mongoose
+React with Typescript 
+
+On top of that it uses Cloudinary to store media, so if you want to run it you'll have to register and place the keys on the .env files
+
+## Alpha views, subject to change
 
 <p>
   <img src="client/public/home.png" width="50%">
