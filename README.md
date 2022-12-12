@@ -4,10 +4,10 @@ Collabor8 is a Web App that allows musicians from around the world to record and
 
 ## Tech Stack
 
-The project uses: 
-Express with Typescript
-MongoDB with Mongoose
-React with Typescript 
+The project uses: <br>
+Express with Typescript <br>
+MongoDB with Mongoose <br>
+React with Typescript <br>
 
 On top of that it uses Cloudinary to store media, so if you want to run it you'll have to register and place the keys on the .env files
 
