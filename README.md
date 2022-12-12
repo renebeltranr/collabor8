@@ -5,8 +5,8 @@ Collabor8 is a Web App that allows musicians from around the world to record and
 *Alpha views, subject to change
 
 <p>
-  <img src="client/public/home.png" width="65%">
-  <img src="client/public/collab.png" width="65%">
+  <img src="client/public/home.png" width="50%">
+  <img src="client/public/collab.png" width="50%">
 </p>
 
 ## Getting Started
