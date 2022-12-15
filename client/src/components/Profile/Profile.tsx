@@ -92,7 +92,6 @@ function Profile() {
         <div className="left">
           <div className="myCollabsHeader"><h2> Hi @{state.username}!</h2></div>
         
-
         <div className="myprofile">
           {ctx.username === username ? (
             <FaPen/>
