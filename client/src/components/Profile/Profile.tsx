@@ -12,14 +12,13 @@ import { Link } from "react-router-dom";
 
 const initialState: IUser = {
   username: "",
-  password:"",
+  password: "",
   country: "",
   bio: "",
   owncollabs: [],
 };
 
 function Profile() {
-  //const navigate = useNavigate();
   const { username } = useParams();
   initialState.username = username as string;
   const [state, setState] = useState<IUser>(initialState);
@@ -58,9 +57,9 @@ function Profile() {
     getProfile();
   }, [username]);
 
-/*   function goToNewCollab() {
-    navigate("/collab/newCollab"); //is this needed?
-  } */
+  /*   function goToNewCollab() {
+      navigate("/collab/newCollab"); //is this needed?
+    } */
 
   async function handleCountryUpdate(e) {
     try {
@@ -91,67 +90,67 @@ function Profile() {
       <div className="profile">
         <div className="left">
           <div className="myCollabsHeader"><h2> Hi @{state.username}!</h2></div>
-        
-        <div className="myprofile">
-          {ctx.username === username ? (
-            <FaPen/>
-          ) : (
-            ""
-          )}
-          <p
-            contentEditable={ctx.username === username}
-            onBlur={handleCountryUpdate}
-          >
-            {state.country}
-          </p>
-          <p
-            contentEditable={ctx.username === username}
-            onBlur={handleBioUpdate}
-          >
-            {state.bio}
-          </p>
-            <h4>Click on the fields to edit</h4>
-        </div>
-      </div>
 
-      <div className="right">
-       
+          <div className="myprofile">
+            {ctx.username === username ? (
+              <FaPen />
+            ) : (
+              ""
+            )}
+            <p
+              contentEditable={ctx.username === username}
+              onBlur={handleCountryUpdate}
+            >
+              {state.country}
+            </p>
+            <p
+              contentEditable={ctx.username === username}
+              onBlur={handleBioUpdate}
+            >
+              {state.bio}
+            </p>
+            <h4>Click on the fields to edit</h4>
+          </div>
+        </div>
+
+        <div className="right">
+
           <div className="myCollabsHeader">
             <h2>My Collabs</h2>
             {ctx.username === username ? (
 
-               <Link to="/collab/newCollab" data-cy="new-collab" style={{pointerEvents: ctx.isAuthenticated ? 'auto' : 'none'}}>
-              <FaPlusCircle color="#6b6cfb" fontSize="2rem"/>
+              <Link to="/collab/newCollab" data-cy="new-collab" style={{ pointerEvents: ctx.isAuthenticated ? 'auto' : 'none' }}>
+                <FaPlusCircle color="#6b6cfb" fontSize="2rem" />
               </Link>
 
-    
+
             ) : (
               ""
             )}
           </div>
 
-           <div className="mycollabs">
-          {state.owncollabs.length > 0 ? (
-            <CollabList>
-              {(state.owncollabs as ICollab[]).map((el) => {
-                el as any as ICollab;
-                return (
-                  <ListedCollab
-                    owner={username}
-                    name={el.name}
-                    tracks={el.tracks}
-                    _id={el._id}
-                    key={el._id}
-                    createdAt={el.createdAt}
-                  />
-                );
-              })}
-            </CollabList>
-          ) : (
-            ""
-          )}
+          <div className="mycollabs">
+            {state.owncollabs.length > 0 ? (
+              <CollabList>
+                {(state.owncollabs as ICollab[]).map((el) => {
+                  el as any as ICollab;
+                  return (
+                    <ListedCollab
+                      owner={username}
+                      name={el.name}
+                      tracks={el.tracks}
+                      _id={el._id}
+                      key={el._id}
+                      createdAt={el.createdAt}
+                    />
+                  );
+                })}
+              </CollabList>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      </div>
 
       </div>
     </>
