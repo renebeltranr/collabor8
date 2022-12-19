@@ -52,7 +52,7 @@ function NewCollab() {
         <form className="newCollabForm" onSubmit={handleSubmit}>
 
           <div className="header">
-            <h3>Create your New Collab</h3>
+            <h3>Create a new Collab</h3>
             
           </div>
 
@@ -72,7 +72,8 @@ function NewCollab() {
             <div className="newCollabVid">
               <h5>
                 Paste the code you find in a Youtube's video URL that will serve
-                as a base track for your Collab. Example:{" "}
+                as a base track for your Collab.
+                 Example:{" "}
                 <p>
                   https://www.youtube.com/watch?v=
                   <span className="highlighted">OS8taasZl8k</span>
@@ -87,11 +88,11 @@ function NewCollab() {
                 onChange={handleChange}
               />
             </div>
+            <div className="newCollabConfirm">
               <h5>
                 Once you see your Youtube Video embeded on the player, you're
                 ready to create it!
               </h5>
-           
             <button
               className="create"
               type="submit"
@@ -100,17 +101,16 @@ function NewCollab() {
             >
               Create
             </button>
+            </div>
           </div>
 
-          <div>
             <div className="videoDiv">
               <iframe
                 title="test"
-                width="190"
-                height="110"
+                width="288"
+                height="162"
                 src={"https://www.youtube-nocookie.com/embed/" + state.URL}
               ></iframe>
-            </div>
           </div>
         </form>
       </div>

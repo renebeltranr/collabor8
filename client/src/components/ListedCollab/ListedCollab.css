@@ -5,7 +5,8 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 100%;
+  min-width: 300px;
   height: 180px;
   padding: 1em;
   box-sizing: border-box;
@@ -13,22 +14,8 @@
   justify-content: flex-end;
 }
 
-.newCollabName,
-.newCollabVid {
-  margin: 0.5em;
-}
 
-.newCollabName .default-input{
-  background-color: white;
-  opacity: 10%;
-  border-radius: 5px;
-}
 
-.newCollabVid .default-input{
-  background-color: white;
-  opacity: 10%;
-  border-radius: 5px;
-}
 
 .collab-tracks {
   margin-top: 1em;
@@ -76,6 +63,3 @@
   color:white;
 }
 
-.newCollabForm h5{
-  font-weight: 300;
-}
