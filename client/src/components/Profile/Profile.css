@@ -5,16 +5,17 @@
   grid-row-start: 2;
   grid-row-end: 3;
   flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
   display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
   padding: 1em;
   flex-wrap: nowrap;
   color: white;
+  height:100%;
 }
 
 .myprofile {
-  width: 30vw;
+  min-width: 30vw;
   padding: 2em;
   align-self: start;
   margin-right: 1em;
@@ -36,6 +37,9 @@
 
 .left {
   width: 40%;
+  height: 80%;
+
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
