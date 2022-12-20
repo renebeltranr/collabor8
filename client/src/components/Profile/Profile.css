@@ -38,7 +38,6 @@
 .left {
   width: 40%;
   height: 80%;
-
   min-width: 300px;
   display: flex;
   flex-direction: column;
