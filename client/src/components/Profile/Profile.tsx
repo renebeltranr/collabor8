@@ -23,6 +23,7 @@ function Profile() {
   initialState.username = username as string;
   const [state, setState] = useState<IUser>(initialState);
   const ctx = useContext(GlobalContext);
+  //
 
   useEffect(() => {
     const getProfile = async () => {
