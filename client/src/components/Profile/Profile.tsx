@@ -51,7 +51,6 @@ function Profile() {
           });
         } else {
           console.log(`Couldn't retrieve user info`);
-          //
         }
       }
     };
