@@ -11,13 +11,6 @@ React with Typescript <br>
 
 On top of that it uses Cloudinary to store media, so if you want to run it you'll have to register and place the keys on the .env files
 
-## Alpha views, subject to change
-
-<p>
-  <img src="client/public/home.png" width="70%">
-  <img src="client/public/collab.png" width="70%">
-</p>
-
 ## Getting Started
 
 To get started with Collabor8, fork this repo and run 
